@@ -6,13 +6,17 @@ import Work from "@/components/Work";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import BuiltForTeams from "@/components/BuiltForTeams";
+import Pricing from "@/components/Pricing";
+import WhoWeAre from "@/components/who-we-are";
 
 export default function Home() {
   return (
     <>
       <Hero />
        <About />
-      <Stats />
+       <Pricing />
+      {/* <Stats /> */}
+      <WhoWeAre />
       <Services />
       <Work />
       <Testimonials />

@@ -1,6 +1,12 @@
 "use client";
 
 import { Star } from "lucide-react";
+import { Playfair_Display } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["700"],
+});
 
 const testimonials = [
   {
@@ -98,7 +104,7 @@ function TestimonialCard({
         <div>
           <div
             className="text-white font-bold text-sm"
-            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            style={{ fontFamily: playfair.style.fontFamily }}
           >
             {t.name}
           </div>
@@ -136,6 +142,28 @@ export default function Testimonials() {
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#080c14] to-transparent z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#080c14] to-transparent z-10 pointer-events-none" />
 
+      {/* Scroll animations via global CSS — no @import needed */}
+      <style>{`
+        @keyframes scrollDown {
+          0%   { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
+        }
+        @keyframes scrollUp {
+          0%   { transform: translateY(-50%); }
+          100% { transform: translateY(0); }
+        }
+        .animate-scroll-down {
+          animation: scrollDown 18s linear infinite;
+        }
+        .animate-scroll-up {
+          animation: scrollUp 18s linear infinite;
+        }
+        .animate-scroll-down:hover,
+        .animate-scroll-up:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
       <div className="relative max-w-screen-2xl mx-auto px-6 lg:px-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
@@ -169,7 +197,7 @@ export default function Testimonials() {
                   <h2
                     className="font-bold text-white leading-[1.08]"
                     style={{
-                      fontFamily: "'Playfair Display', Georgia, serif",
+                      fontFamily: playfair.style.fontFamily,
                       fontSize: "clamp(2.4rem, 4vw, 3.5rem)",
                     }}
                   >
@@ -208,7 +236,7 @@ export default function Testimonials() {
                   <div
                     className="font-bold tracking-tight bg-clip-text text-transparent leading-none mb-1"
                     style={{
-                      fontFamily: "'Playfair Display', Georgia, serif",
+                      fontFamily: playfair.style.fontFamily,
                       fontSize: "clamp(1.5rem, 2.2vw, 2rem)",
                       backgroundImage:
                         "linear-gradient(135deg, #ffffff 30%, #2563eb 100%)",
@@ -253,28 +281,6 @@ export default function Testimonials() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
-        @keyframes scrollDown {
-          0%   { transform: translateY(0); }
-          100% { transform: translateY(-50%); }
-        }
-        @keyframes scrollUp {
-          0%   { transform: translateY(-50%); }
-          100% { transform: translateY(0); }
-        }
-        .animate-scroll-down {
-          animation: scrollDown 18s linear infinite;
-        }
-        .animate-scroll-up {
-          animation: scrollUp 18s linear infinite;
-        }
-        .animate-scroll-down:hover,
-        .animate-scroll-up:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   );
 }

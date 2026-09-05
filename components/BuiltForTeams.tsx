@@ -1,6 +1,17 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { Playfair_Display, DM_Sans } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
 
 const features = [
   {
@@ -188,7 +199,9 @@ function AnimatedCard({
       </div>
       <div className="bft-card-footer">
         <div className="bft-card-text">
-          <h3 className="bft-card-title">{feature.title}</h3>
+          <h3 className="bft-card-title" style={{ fontFamily: playfair.style.fontFamily }}>
+            {feature.title}
+          </h3>
           <p className={`bft-card-desc ${expanded ? "bft-card-desc--open" : ""}`}>
             {feature.description}
           </p>
@@ -209,12 +222,9 @@ export default function BuiltForTeams() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap');
-
         /* ── Outer wrapper — provides the side padding so the black box floats ── */
         .bft-outer {
           padding: 0 42px;
-          font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
         }
 
         /* ── The black section itself — now has border-radius ── */
@@ -237,7 +247,6 @@ export default function BuiltForTeams() {
         }
 
         .bft-heading {
-          font-family: 'Playfair Display', Georgia, serif;
           font-size: clamp(2rem, 4vw, 3.4rem);
           font-weight: 800;
           line-height: 1.1;
@@ -330,7 +339,6 @@ export default function BuiltForTeams() {
         .bft-card-text { flex: 1; }
 
         .bft-card-title {
-          font-family: 'Playfair Display', Georgia, serif;
           font-size: 1rem;
           font-weight: 700;
           color: #f0f0f0;
@@ -490,11 +498,11 @@ export default function BuiltForTeams() {
       `}</style>
 
       {/* Outer wrapper adds side padding so black section floats with rounded corners */}
-      <div className="bft-outer">
+      <div className="bft-outer" style={{ fontFamily: dmSans.style.fontFamily }}>
         <section className="bft-section">
           {/* Header */}
           <div className="bft-header">
-            <h2 className="bft-heading">
+            <h2 className="bft-heading" style={{ fontFamily: playfair.style.fontFamily }}>
               Built for Fast Moving<br />
               <span className="bft-heading-accent">Teams That Need Results.</span>
             </h2>
