@@ -16,6 +16,8 @@ import {
   FaUser,
 } from "react-icons/fa";
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 /* ---------- Small reusable pieces ---------- */
 
 function Badge({
@@ -31,15 +33,15 @@ function Badge({
 }) {
   return (
     <div
-      className={`absolute z-10 flex items-center gap-2 bg-white/95 backdrop-blur rounded-full pl-2 pr-4 py-1.5 shadow-lg ${className}`}
+      className={`absolute z-10 flex items-center gap-2.5 rounded-full bg-white/80 py-1.5 pl-1.5 pr-4 shadow-[0_8px_24px_-8px_rgba(15,23,42,0.25)] ring-1 ring-black/5 backdrop-blur-md ${className}`}
     >
-      <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-blue-600 text-xs">
+      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[11px] text-blue-600">
         {icon}
       </div>
       <div className="leading-tight">
         <div className="text-[11px] font-semibold text-slate-800">{title}</div>
         {subtitle && (
-          <div className="text-[10px] text-slate-500 -mt-0.5">{subtitle}</div>
+          <div className="-mt-0.5 text-[10px] text-slate-500">{subtitle}</div>
         )}
       </div>
     </div>
@@ -49,7 +51,7 @@ function Badge({
 function IconChip({ icon, className = "" }: { icon: React.ReactNode; className?: string }) {
   return (
     <div
-      className={`absolute z-10 w-9 h-9 rounded-full flex items-center justify-center shadow-lg ${className}`}
+      className={`absolute z-10 flex h-9 w-9 items-center justify-center rounded-full shadow-lg ring-1 ring-white/10 ${className}`}
     >
       {icon}
     </div>
@@ -69,10 +71,18 @@ function StatOverlay({
 }) {
   return (
     <div className={`absolute z-10 ${className}`}>
-      <div className={`text-2xl font-bold ${dark ? "text-white" : "text-slate-900"}`}>
+      <div
+        className={`text-2xl font-semibold tracking-tight tabular-nums ${
+          dark ? "text-white" : "text-slate-900"
+        }`}
+      >
         {value}
       </div>
-      <div className={`text-xs ${dark ? "text-white/80" : "text-slate-600"}`}>
+      <div
+        className={`text-[11px] font-medium uppercase tracking-[0.12em] ${
+          dark ? "text-white/75" : "text-slate-500"
+        }`}
+      >
         {label}
       </div>
     </div>
@@ -93,13 +103,54 @@ function Tile({
   overlay?: boolean;
 }) {
   return (
-    <div className={`relative rounded-3xl overflow-hidden ${className}`}>
-      <Image src={src} alt={alt} fill className="object-cover" />
+    <div
+      className={`group relative overflow-hidden rounded-2xl ring-1 ring-slate-200/60 ${className}`}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+      />
       {overlay && (
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent" />
       )}
       {children}
     </div>
+  );
+}
+
+/* ---------- Floating element ---------- */
+
+function Floater({
+  className = "",
+  animate,
+  duration,
+  delay = 0,
+  children,
+}: {
+  className?: string;
+  animate: Record<string, number[]>;
+  duration: number;
+  delay?: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: EASE, delay }}
+      className={`absolute z-20 ${className}`}
+    >
+      <motion.div
+        animate={animate}
+        transition={{ duration, repeat: Infinity, ease: "easeInOut" }}
+        className="rounded-2xl bg-white/90 p-4 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70 backdrop-blur"
+      >
+        {children}
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -107,38 +158,48 @@ function Tile({
 
 export default function HeroVisual() {
   return (
-    <div className="relative w-full min-h-screen flex items-center justify-center p-8">
+    <div className="relative flex w-full items-center justify-center px-2 py-6 sm:p-8 lg:min-h-screen">
       <div className="relative w-full max-w-7xl">
-        <div className="absolute inset-0 border-4 border-blue-500/30 rounded-[48px] pointer-events-none" />
+        {/* Ambient glow behind the frame */}
+        <div className="pointer-events-none absolute -inset-x-10 -top-20 bottom-0 -z-10">
+          <div className="absolute left-[10%] top-0 h-72 w-72 rounded-full bg-blue-400/25 blur-[120px]" />
+          <div className="absolute right-[8%] top-24 h-80 w-80 rounded-full bg-cyan-300/20 blur-[120px]" />
+          <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-indigo-400/15 blur-[110px]" />
+        </div>
 
-        <div className="bg-white rounded-[40px] overflow-hidden border shadow-2xl relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.9, ease: EASE }}
+          className="relative z-10 overflow-hidden rounded-[32px] border border-slate-200/70 bg-white shadow-[0_40px_120px_-30px_rgba(15,23,42,0.4)]"
+        >
           {/* Browser Header */}
-          <div className="h-16 border-b flex items-center px-6">
+          <div className="flex h-12 items-center border-b border-slate-100 px-4 sm:h-14 sm:px-5">
             <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-blue-400" />
-              <div className="w-3 h-3 rounded-full bg-blue-600" />
-              <div className="w-3 h-3 rounded-full bg-blue-900" />
+              <div className="h-2.5 w-2.5 rounded-full bg-slate-200 sm:h-3 sm:w-3" />
+              <div className="h-2.5 w-2.5 rounded-full bg-slate-200 sm:h-3 sm:w-3" />
+              <div className="h-2.5 w-2.5 rounded-full bg-slate-200 sm:h-3 sm:w-3" />
             </div>
-            <div className="mx-auto flex items-center gap-2 bg-slate-100 px-8 py-2 rounded-full text-slate-500 text-sm">
-              <div className="w-2 h-2 rounded-full bg-green-500" />
-              https://youragency.com
+            <div className="mx-auto flex items-center gap-2 rounded-full bg-slate-50 px-5 py-1.5 text-xs text-slate-400 ring-1 ring-slate-100 sm:px-8 sm:text-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              youragency.com
             </div>
           </div>
 
           {/* Bento Grid */}
-          <div className="p-5">
-            <div className="grid grid-cols-12 gap-4">
+          <div className="p-3 sm:p-5">
+            <div className="grid grid-cols-12 gap-3 sm:gap-4">
               {/* LEFT: tall hero tile */}
-              <div className="relative col-span-12 lg:col-span-5 flex flex-col gap-4">
-                <Tile src="/images/team.jpg" alt="Team" className="h-[463px]">
+              <div className="relative col-span-12 flex flex-col gap-3 sm:gap-4 lg:col-span-5">
+                <Tile src="/images/team.jpg" alt="Team" className="h-[340px] sm:h-[463px]">
                   <Badge
                     icon={<FaBrain />}
                     title="AI-Driven"
                     subtitle="Innovation"
-                    className="top-4 left-4"
+                    className="left-4 top-4"
                   />
-                  <div className="absolute top-4 right-4 z-10 bg-black/40 backdrop-blur text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                  <div className="absolute right-4 top-4 z-10 flex items-center gap-1.5 rounded-full bg-slate-950/40 px-3 py-1.5 text-xs text-white ring-1 ring-white/10 backdrop-blur">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                     Est. 2014
                   </div>
                   <StatOverlay
@@ -148,16 +209,21 @@ export default function HeroVisual() {
                   />
                 </Tile>
 
-                <Tile src="/images/office.jpg" alt="Office" className="h-[180px]" overlay={false} />
+                <Tile
+                  src="/images/office.jpg"
+                  alt="Office"
+                  className="h-[130px] sm:h-[180px]"
+                  overlay={false}
+                />
 
-                {/* Floating avatar-stack badge, overlapping bottom-left of the stack */}
-                <div className="absolute -bottom-3 -left-3 z-20 flex items-center gap-2 bg-white shadow-lg rounded-full pl-1.5 pr-4 py-1.5">
+                {/* Floating avatar-stack badge */}
+                <div className="absolute -bottom-3 z-20 flex items-center gap-2 rounded-full bg-white/90 py-1.5 pl-1.5 pr-4 shadow-[0_12px_32px_-10px_rgba(15,23,42,0.3)] ring-1 ring-slate-200/70 backdrop-blur">
                   <div className="flex -space-x-2">
-                    {["bg-green-700", "bg-slate-700", "bg-blue-900", "bg-slate-400"].map(
+                    {["bg-slate-800", "bg-slate-600", "bg-blue-700", "bg-blue-500"].map(
                       (c, i) => (
                         <div
                           key={i}
-                          className={`w-6 h-6 rounded-full ${c} border-2 border-white flex items-center justify-center text-white`}
+                          className={`flex h-6 w-6 items-center justify-center rounded-full ${c} border-2 border-white text-white`}
                         >
                           <FaUser className="h-3 w-3" />
                         </div>
@@ -168,39 +234,46 @@ export default function HeroVisual() {
                     <div className="text-[11px] font-semibold text-slate-800">
                       100+ Team
                     </div>
-                    <div className="text-[10px] text-slate-500 -mt-0.5">Engineers</div>
+                    <div className="-mt-0.5 text-[10px] text-slate-500">Engineers</div>
                   </div>
                 </div>
               </div>
 
               {/* RIGHT SIDE */}
-              <div className="col-span-12 lg:col-span-7 flex flex-col gap-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <Tile src="/images/code.jpg" alt="Code" className="h-56">
+              <div className="col-span-12 flex flex-col gap-3 sm:gap-4 lg:col-span-7">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <Tile src="/images/code.jpg" alt="Code" className="h-44 sm:h-56">
                     <Badge
                       icon={<FaGlobe />}
                       title="Global Reach"
-                      className="top-4 left-4"
+                      className="left-4 top-4"
                     />
                     <StatOverlay
                       value="30+"
-                      label="Gov &amp; Health Partners"
+                      label="Gov & Health Partners"
                       className="bottom-3 left-4"
                     />
                   </Tile>
 
-                  <div className="relative h-56 rounded-3xl overflow-hidden bg-slate-900">
+                  <div className="relative h-44 overflow-hidden rounded-2xl bg-slate-950 ring-1 ring-slate-800 sm:h-56">
+                    <div
+                      className="absolute inset-0 opacity-40"
+                      style={{
+                        backgroundImage:
+                          "radial-gradient(circle at 30% 20%, rgba(59,130,246,0.35), transparent 55%)",
+                      }}
+                    />
                     <IconChip
-                      icon={<FaAward className="text-slate-300" />}
-                      className="top-4 right-4 bg-slate-800"
+                      icon={<FaAward className="text-blue-300" />}
+                      className="right-4 top-4 bg-slate-800"
                     />
                     <StatOverlay
                       value="50+"
                       label="Platforms Delivered"
                       className="bottom-3 left-4"
                     />
-                    <div className="absolute -right-3 bottom-8 z-10 bg-white/95 backdrop-blur rounded-full pl-2 pr-4 py-1.5 shadow-lg flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 text-xs">
+                    <div className="absolute -right-3 bottom-8 z-10 flex items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2 pr-4 shadow-lg ring-1 ring-slate-200/70 backdrop-blur">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-xs text-blue-600">
                         <FaShieldAlt />
                       </div>
                       <span className="text-[11px] font-semibold text-slate-800">
@@ -210,18 +283,19 @@ export default function HeroVisual() {
                   </div>
                 </div>
 
-                <div className="relative h-56 rounded-3xl overflow-hidden bg-gradient-to-br from-slate-950 to-blue-900">
+                <div className="relative h-44 overflow-hidden rounded-2xl bg-gradient-to-br from-slate-950 to-blue-950 ring-1 ring-slate-800 sm:h-56">
                   <Image
                     src="/images/workspace.jpg"
                     alt="Workspace"
                     fill
-                    className="object-cover opacity-60 mix-blend-overlay"
+                    className="object-cover opacity-40 mix-blend-luminosity"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
                   <Badge
-                    icon={<FaBrain className="text-black" />}
+                    icon={<FaBrain />}
                     title="AI-Driven"
                     subtitle="Engineering"
-                    className="top-4 left-4 bg-slate-900/80 [&>div:first-child]:!text-black [&>div>div:first-child]:!text-white [&>div>div:last-child]:!text-slate-300"
+                    className="left-4 top-4"
                   />
                   <StatOverlay
                     value="100+"
@@ -230,68 +304,81 @@ export default function HeroVisual() {
                   />
                 </div>
 
-                <div className="grid grid-cols-3 gap-4">
-                  <Tile src="/images/laptop.jpg" alt="Laptop" className="h-44" />
-                  <Tile src="/images/programming.jpg" alt="Programming" className="h-44" />
-                  <div className="relative h-44 rounded-3xl overflow-hidden bg-gradient-to-b ">
+                <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                  <Tile src="/images/laptop.jpg" alt="Laptop" className="h-28 sm:h-44" />
+                  <Tile src="/images/programming.jpg" alt="Programming" className="h-28 sm:h-44" />
+                  <div className="relative h-28 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200/60 sm:h-44">
                     <Image
                       src="/images/server.jpg"
                       alt="Server"
                       fill
-                      className="object-cover opacity-70"
+                      className="object-cover opacity-80"
                     />
-                    <div className="absolute top-3 right-3 z-10 w-7 h-7 rounded-full bg-white/80 flex items-center justify-center text-slate-600 text-xs">
+                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+                    <div className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-xs text-slate-600 ring-1 ring-slate-200/70">
                       <FaPalette />
                     </div>
                     <div className="absolute bottom-3 left-3 z-10">
-                      <div className="text-[10px] tracking-wide text-slate-700 font-medium">
+                      <div className="text-[10px] font-medium uppercase tracking-[0.12em] text-slate-500">
                         Design-first
                       </div>
-                      <div className="text-lg font-bold text-slate-900 -mt-0.5">UI/UX</div>
+                      <div className="-mt-0.5 text-lg font-bold text-slate-900">
+                        UI/UX
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Floating elements outside the main card */}
-        <div className="hidden xl:block absolute -left-24 top-44 z-20">
-          <TerminalCard />
-        </div>
-
         <motion.div
-          animate={{ y: [0, -12, 0], rotate: [0, 10, 0, -20, 0] }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="absolute -right-36 top-1 bg-white shadow-xl rounded-3xl p-5 z-20 border border-blue-100"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
+          className="absolute -left-24 top-44 z-20 hidden xl:block"
+        >
+          <TerminalCard />
+        </motion.div>
+
+        <Floater
+          className="-right-20 top-1 hidden xl:block 2xl:-right-36"
+          animate={{ y: [0, -12, 0], rotate: [0, 6, 0, -6, 0] }}
+          duration={6}
+          delay={0.2}
         >
           <FaReact className="text-4xl text-blue-500" />
-        </motion.div>
+        </Floater>
 
-        <motion.div
-          animate={{ y: [0, 15, 0] }}
-          transition={{ duration: 5, repeat: Infinity }}
-          className="absolute -right-10 top-60 bg-green-500 shadow-xl rounded-3xl p-5 z-20"
+        <Floater
+          className="-right-6 top-60 hidden xl:block 2xl:-right-10"
+          animate={{ y: [0, 14, 0] }}
+          duration={5}
+          delay={0.35}
         >
-          <FaShieldAlt className="text-2xl text-white" />
-        </motion.div>
+          <FaShieldAlt className="text-2xl text-blue-600" />
+        </Floater>
 
-        <motion.div
-          animate={{ y: [0, -10, 0], rotate: [0, 10, 0, -10, 0] }}
-          transition={{ duration: 3.5, repeat: Infinity }}
-          className="absolute -left-10 bottom-40 bg-slate-700 shadow-xl rounded-3xl p-5 z-20"
+        <Floater
+          className="-left-6 bottom-40 hidden xl:block 2xl:-left-10"
+          animate={{ y: [0, -10, 0], rotate: [0, 8, 0, -8, 0] }}
+          duration={5.5}
+          delay={0.5}
         >
-          <FaServer className="text-3xl text-white" />
-        </motion.div>
+          <FaServer className="text-3xl text-slate-700" />
+        </Floater>
 
-        <motion.div
+        <Floater
+          className="right-8 -bottom-6 hidden xl:block 2xl:right-20"
           animate={{ y: [0, 12, 0] }}
-          transition={{ duration: 4.5, repeat: Infinity }}
-          className="absolute right-20 bg-white shadow-xl rounded-3xl p-5 z-20 border border-red-100"
+          duration={4.5}
+          delay={0.45}
         >
-          <FaCode className="text-3xl text-red-600" />
-        </motion.div>
+          <FaCode className="text-3xl text-slate-900" />
+        </Floater>
       </div>
     </div>
   );

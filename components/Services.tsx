@@ -364,7 +364,7 @@ function ServiceCard({ svc, index }: { svc: Service; index: number }) {
             >
               <Icon className="w-5 h-5" style={{ color: iconColor }} />
             </div>
-            <span className="font-mono text-xs tracking-[0.22em] transition-colors duration-300" style={{ color: numColor }}>
+            <span className="font-num text-xs tracking-[0.22em] transition-colors duration-300" style={{ color: numColor }}>
               {svc.number}
             </span>
           </div>
@@ -372,7 +372,6 @@ function ServiceCard({ svc, index }: { svc: Service; index: number }) {
           {/* Title */}
           <h3
             className={`font-bold text-white/90 leading-tight tracking-tight mb-3 ${isLarge ? "text-3xl" : isWide ? "text-2xl" : "text-xl"}`}
-            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             {svc.title}
           </h3>
@@ -393,8 +392,8 @@ function ServiceCard({ svc, index }: { svc: Service; index: number }) {
             <div className="flex gap-6 mb-4 pt-3 border-t" style={{ borderColor: ac ? `${svc.accent}22` : "rgba(255,255,255,0.06)" }}>
               {svc.stats.map((s, i) => (
                 <div key={i}>
-                  <div className="text-xl font-bold transition-colors duration-300"
-                    style={{ color: statColor, fontFamily: "'Playfair Display', Georgia, serif" }}>
+                  <div className="font-num text-xl font-bold transition-colors duration-300"
+                    style={{ color: statColor }}>
                     {s.label}
                   </div>
                   <div className="text-[10px] tracking-widest uppercase mt-0.5" style={{ color: "rgba(255,255,255,0.28)" }}>
@@ -469,8 +468,7 @@ export default function Services() {
             <span className="text-[10px] tracking-[0.35em] uppercase text-white/30 font-medium">Mission-Critical Domains</span>
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-end">
-            <h2 className="text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+            <h2 className="text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight">
               Sector<br/>
               <em className="not-italic" style={{
                 background: "linear-gradient(135deg,#fff 0%,#fff 40%,#fff 100%)",
@@ -489,7 +487,7 @@ export default function Services() {
                   { val: "4Y+", sub: "Experience" },
                 ].map(({ val, sub }) => (
                   <div key={sub} className="flex flex-col gap-1">
-                    <span className="text-2xl font-bold text-white/90" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>{val}</span>
+                    <span className="font-num text-2xl font-bold text-white/90">{val}</span>
                     <span className="text-[10px] tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.28)" }}>{sub}</span>
                   </div>
                 ))}
@@ -522,7 +520,6 @@ export default function Services() {
       </div>
 
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
         .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1),transform 0.8s cubic-bezier(0.4,0,0.2,1); }
         .reveal.visible { opacity:1; transform:translateY(0); }
       `}</style>

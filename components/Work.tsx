@@ -3,7 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useSpring,
+  useScroll,
+  useTransform,
+  animate,
+} from "framer-motion";
 
 interface Project {
   title: string;
@@ -13,11 +21,12 @@ interface Project {
   tech: string[];
   metric: string;
   image: string;
-  featured?: boolean;
+  accent: string;
 }
 
 interface Metric {
-  value: string;
+  value: number;
+  suffix: string;
   label: string;
 }
 
@@ -26,312 +35,360 @@ const projects: Project[] = [
     title: "Orbit Design System",
     client: "Stripe",
     category: "Product · Design Systems",
-    desc: "Built a unified component library and design token system adopted across 14 product teams, cutting UI build time by 60% and eliminating visual inconsistencies at scale.",
+    desc: "A unified component library and design-token pipeline adopted across 14 product teams — cutting UI build time by 60% and eliminating visual drift at scale.",
     tech: ["React", "TypeScript", "Storybook", "Figma API"],
     metric: "60% faster builds",
     image: "/images/project-1.jpg",
-    featured: true,
+    accent: "#6366f1",
   },
   {
     title: "Pulse Analytics",
     client: "Shopify",
     category: "Data · Dashboard",
-    desc: "Real-time merchant analytics platform surfacing revenue signals and inventory risk across 1M+ active stores.",
+    desc: "Real-time merchant analytics surfacing revenue signals and inventory risk across 1M+ active stores.",
     tech: ["Next.js", "D3.js", "Kafka"],
     metric: "1M+ stores",
     image: "/images/project-2.jpg",
+    accent: "#0ea5e9",
   },
   {
     title: "ClearPath AI",
     client: "Waymo",
     category: "AI · Mobility",
-    desc: "Route optimisation engine using reinforcement learning to reduce autonomous vehicle decision latency by 40ms.",
+    desc: "A reinforcement-learning route engine that shaved 40ms off autonomous-vehicle decision latency, keeping the fleet reactive in dense urban traffic.",
     tech: ["Python", "PyTorch", "Rust"],
     metric: "40ms faster",
     image: "/images/project-3.jpg",
+    accent: "#10b981",
   },
   {
     title: "Vault Security",
     client: "Coinbase",
     category: "Crypto · Infrastructure",
-    desc: "Zero-knowledge custody architecture protecting $8B+ in digital assets with multi-party computation signing.",
+    desc: "Zero-knowledge custody with multi-party-computation signing, protecting $8B+ in digital assets without a single point of key compromise.",
     tech: ["Go", "Solidity", "AWS HSM"],
     metric: "$8B+ secured",
     image: "/images/project-4.jpg",
+    accent: "#f59e0b",
   },
 ];
 
 const metrics: Metric[] = [
-  { value: "99.9%", label: "Uptime SLA" },
-  { value: "500M+", label: "Users served" },
-  { value: "50+", label: "Enterprise clients" },
+  { value: 99.9, suffix: "%", label: "Uptime SLA" },
+  { value: 500, suffix: "M+", label: "Users served" },
+  { value: 50, suffix: "+", label: "Enterprise clients" },
 ];
 
-const trustedBy = ["Microsoft", "Google", "Amazon", "Meta", "Netflix"];
+const trustedBy = ["Microsoft", "Google", "Amazon", "Meta", "Netflix", "Airbnb"];
 
-/* ─── Card ─────────────────────────────────────────────── */
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/* ─── Animated counter ─────────────────────────────────── */
+function Counter({ value, suffix }: { value: number; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
+  const [display, setDisplay] = useState("0");
+  const decimals = value % 1 !== 0 ? 1 : 0;
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, value, {
+      duration: 1.4,
+      ease: EASE,
+      onUpdate: (v) => setDisplay(v.toFixed(decimals)),
+    });
+    return () => controls.stop();
+  }, [inView, value, decimals]);
+
+  return (
+    <span ref={ref}>
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+/* ─── Project card (Orbit style) ───────────────────────── */
 function ProjectCard({
   project,
   index,
+  total,
 }: {
   project: Project;
   index: number;
+  total: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -80px 0px" });
-
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 56 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.7,
-        ease: [0.22, 1, 0.36, 1],
-        delay: index * 0.1,
-      }}
-      className={[
-        "group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white",
-        "transition-shadow duration-300 hover:shadow-xl hover:shadow-slate-200/60",
-        project.featured ? "col-span-2 grid grid-cols-2" : "flex flex-col",
-      ].join(" ")}
-    >
-      {/* Image */}
+    <article className="group relative grid w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-[0_24px_60px_-24px_rgba(15,23,42,0.25)] lg:grid-cols-[1.05fr_1fr]">
+      {/* Accent glow */}
       <div
-        className={[
-          "relative overflow-hidden bg-slate-100",
-          project.featured ? "min-h-72 h-full" : "h-52 w-full",
-        ].join(" ")}
-      >
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-          sizes={project.featured ? "50vw" : "(max-width: 768px) 100vw, 25vw"}
-        />
-        {/* subtle overlay on hover */}
-        <div className="absolute inset-0 bg-slate-900/0 transition-colors duration-300 group-hover:bg-slate-900/5" />
-      </div>
+        className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full opacity-60 blur-3xl"
+        style={{ background: project.accent }}
+      />
 
-      {/* Content */}
-      <div
-        className={[
-          "flex flex-col justify-between",
-          project.featured ? "p-8 min-h-72" : "p-6 flex-1",
-        ].join(" ")}
-      >
+      {/* Text side */}
+      <div className="relative z-10 flex flex-col justify-between gap-8 p-8 sm:p-10 lg:p-12">
         <div>
-          <div className="mb-3 flex items-start justify-between gap-2">
-            <span className="text-[10px] font-medium uppercase tracking-widest text-slate-400">
-              {project.category}
+          <div className="mb-6 flex items-center gap-3">
+            <span className="font-num text-[11px] font-semibold tracking-[0.2em] text-slate-500">
+              {String(index + 1).padStart(2, "0")}
+              <span className="text-slate-400"> / {String(total).padStart(2, "0")}</span>
             </span>
-            <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-300 transition-all duration-200 group-hover:border-slate-900 group-hover:bg-slate-900 group-hover:text-white">
-              <ArrowUpRight className="h-3.5 w-3.5" />
+            <span className="h-3 w-px bg-slate-300" />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+              {project.category}
             </span>
           </div>
 
-          <h3
-            className={[
-              "font-sans font-semibold leading-tight tracking-tight text-slate-900",
-              project.featured ? "mb-2 text-2xl" : "mb-1.5 text-lg",
-            ].join(" ")}
-          >
+          <h3 className="text-3xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-4xl">
             {project.title}
           </h3>
-
-          <p className="mb-3 text-[12px] font-medium text-slate-400">
-            {project.client}
+          <p className="mt-2 text-[13px] font-medium text-slate-500">
+            for {project.client}
           </p>
 
-          <p className="text-[13px] font-light leading-relaxed text-slate-500">
+          <p className="mt-5 max-w-md text-[14px] font-light leading-relaxed text-slate-600">
             {project.desc}
           </p>
         </div>
 
-        <div className="mt-5 flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
-          <div className="flex flex-wrap gap-1.5">
+        <div className="space-y-5">
+          <div className="flex flex-wrap gap-2">
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[10px] text-slate-500"
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] text-slate-600"
               >
                 {t}
               </span>
             ))}
           </div>
-          <span className="flex-shrink-0 rounded-full bg-slate-900 px-3 py-1 text-[11px] font-medium text-white">
-            {project.metric}
-          </span>
+
+          <div className="flex items-center justify-between border-t border-slate-100 pt-5">
+            <span className="rounded-full border border-slate-200 bg-slate-100 px-3.5 py-1.5 text-[12px] font-semibold text-slate-600">
+              {project.metric}
+            </span>
+            <a
+              href="/work"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-slate-900 transition-colors hover:text-slate-500"
+            >
+              View case study
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </div>
         </div>
       </div>
-    </motion.div>
+
+      {/* Image side */}
+      <div className="relative min-h-[280px] overflow-hidden lg:min-h-[440px]">
+        <Image
+          src={project.image}
+          alt={`${project.title} — ${project.client}`}
+          fill
+          className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+          sizes="(max-width: 1024px) 100vw, 40vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-transparent lg:bg-gradient-to-l" />
+      </div>
+    </article>
   );
 }
 
-/* ─── Section ───────────────────────────────────────────── */
+/* ─── Sticky stacking wrapper ─────────────────────────── */
+function StackCard({
+  project,
+  index,
+  total,
+}: {
+  project: Project;
+  index: number;
+  total: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "start start"],
+  });
+
+  // Cards further down the stack settle to a slightly smaller scale as they get buried.
+  const targetScale = 1 - (total - 1 - index) * 0.04;
+  const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
+
+  return (
+    <div
+      ref={ref}
+      className="sticky top-[120px] flex min-h-[66vh] items-start justify-center pt-3 md:min-h-[78vh] md:items-center md:pt-0"
+    >
+      <motion.div
+        style={{ scale, top: `${index * 24}px` }}
+        className="relative w-full origin-top"
+      >
+        <ProjectCard project={project} index={index} total={total} />
+      </motion.div>
+    </div>
+  );
+}
+
+/* ─── Section ──────────────────────────────────────────── */
 export default function Work() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [mouse, setMouse] = useState({ x: -999, y: -999 });
+  const sectionRef = useRef<HTMLElement>(null);
 
-  /* neon bubble */
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const onMove = (e: MouseEvent) => {
-      const r = section.getBoundingClientRect();
-      setMouse({ x: e.clientX - r.left, y: e.clientY - r.top });
-    };
-    const onLeave = () => setMouse({ x: -999, y: -999 });
-    section.addEventListener("mousemove", onMove);
-    section.addEventListener("mouseleave", onLeave);
-    return () => {
-      section.removeEventListener("mousemove", onMove);
-      section.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
+  const mouseX = useMotionValue(-999);
+  const mouseY = useMotionValue(-999);
+  const springX = useSpring(mouseX, { stiffness: 300, damping: 40 });
+  const springY = useSpring(mouseY, { stiffness: 300, damping: 40 });
 
-  /* ── refs for staggered header reveals ── */
+  const handleMove = (e: React.MouseEvent<HTMLElement>) => {
+    const r = sectionRef.current?.getBoundingClientRect();
+    if (!r) return;
+    mouseX.set(e.clientX - r.left);
+    mouseY.set(e.clientY - r.top);
+  };
+  const handleLeave = () => {
+    mouseX.set(-999);
+    mouseY.set(-999);
+  };
+
   const headerRef = useRef<HTMLDivElement>(null);
   const metricsRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const headerInView = useInView(headerRef, { once: true, margin: "0px 0px -60px 0px" });
-  const metricsInView = useInView(metricsRef, { once: true, margin: "0px 0px -60px 0px" });
   const ctaInView = useInView(ctaRef, { once: true, margin: "0px 0px -60px 0px" });
 
   return (
     <section
       id="work"
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#84ceff04] py-24 md:py-32"
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className="relative bg-[#84ceff04] py-24 md:py-32"
     >
-      {/* Hero-matching gradient backdrop */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-[#00405310] pointer-events-none" />
-
-      {/* Dot grid */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage: "radial-gradient(circle, #94a3b8 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-          maskImage:
-            "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)",
-          opacity: 0.3,
-        }}
-      />
-
-      {/* Mouse neon bubble */}
-      <div
-        className="pointer-events-none absolute z-0 rounded-full"
-        style={{
-          width: 520,
-          height: 520,
-          left: mouse.x - 260,
-          top: mouse.y - 260,
-          background:
-            "radial-gradient(circle, rgba(0,92,246,0.55) 0%, rgba(59,130,246,0.18) 40%, transparent 70%)",
-          filter: "blur(80px)",
-          transition: "left 0.08s ease, top 0.08s ease",
-        }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-8">
-
-        {/* ── Header ── */}
+      {/* Decorative layers (clipped so they never break the sticky stack) */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-white to-[#00405310]" />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, #94a3b8 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+            maskImage:
+              "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)",
+            opacity: 0.3,
+          }}
+        />
         <motion.div
-          ref={headerRef}
-          initial={{ opacity: 0, y: 24 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-14"
-        >
-          {/* Badge — matches Hero "Now accepting projects" pill */}
-          <span
-            className="mb-6 inline-flex items-center gap-2 rounded-full border bg-white px-4 py-1.5 text-[11px] font-medium uppercase tracking-widest text-slate-600 shadow-sm"
+          className="absolute z-0 hidden rounded-full md:block"
+          style={{
+            width: 520,
+            height: 520,
+            x: springX,
+            y: springY,
+            translateX: "-50%",
+            translateY: "-50%",
+            background:
+              "radial-gradient(circle, rgba(0,92,246,0.5) 0%, rgba(59,130,246,0.16) 40%, transparent 70%)",
+            filter: "blur(80px)",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-14">
+          {/* ── Sticky info column — stays visible while the cards stack ── */}
+          <motion.div
+            ref={headerRef}
+            initial={{ opacity: 0, y: 24 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="lg:sticky lg:top-[120px] lg:h-fit lg:w-[35%] lg:flex-shrink-0 lg:self-start"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
-            Featured projects
-          </span>
-
-          <h2 className="text-5xl font-bold leading-[1.1] tracking-tight text-slate-900 md:text-6xl">
-            Building products
-            <br />
-            <span className="font-normal text-slate-400">
-              that scale globally
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-600 shadow-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+              Selected work
             </span>
-          </h2>
 
-          <p className="mt-4 max-w-md text-[15px] font-light leading-relaxed text-slate-500">
-            From government platforms to AI-powered enterprise systems —
-            trusted by millions worldwide.
-          </p>
-        </motion.div>
+            <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl">
+              Building products
+              <br />
+              <span className="font-normal text-slate-400">that scale globally</span>
+            </h2>
 
-        {/* ── Metrics ── */}
-        <motion.div
-          ref={metricsRef}
-          initial={{ opacity: 0, y: 20 }}
-          animate={metricsInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          className="mb-14"
-        >
-          <div className="inline-flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-            {metrics.map((m, i) => (
-              <div
-                key={m.label}
-                className={[
-                  "px-7 py-4 text-center",
-                  i < metrics.length - 1 ? "border-r border-slate-200" : "",
-                ].join(" ")}
-              >
-                <span className="block text-xl font-bold text-slate-900">
-                  {m.value}
-                </span>
-                <span className="mt-0.5 block text-[11px] text-slate-400">
-                  {m.label}
-                </span>
-              </div>
+            <p className="mt-4 max-w-sm text-[15px] font-light leading-relaxed text-slate-500">
+              From government platforms to AI-powered enterprise systems —
+              trusted by millions worldwide.
+            </p>
+
+            {/* Metrics */}
+            <div
+              ref={metricsRef}
+              className="mt-8 max-w-sm divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+            >
+              {metrics.map((m) => (
+                <div
+                  key={m.label}
+                  className="flex items-baseline justify-between px-5 py-4"
+                >
+                  <span className="font-num text-xl font-bold tracking-tight text-slate-900">
+                    <Counter value={m.value} suffix={m.suffix} />
+                  </span>
+                  <span className="text-[11px] uppercase tracking-[0.14em] text-slate-400">
+                    {m.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="/work"
+              className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-[13px] font-medium text-white transition-all duration-200 hover:bg-slate-700"
+            >
+              All projects
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </motion.div>
+
+          {/* ── Stacking project cards ── */}
+          <div className="relative flex-1">
+            {projects.map((p, i) => (
+              <StackCard key={p.title} project={p} index={i} total={projects.length} />
             ))}
           </div>
-        </motion.div>
-
-        {/* ── Cards grid — each animates up from bottom ── */}
-        <div className="grid grid-cols-2 gap-5">
-          {projects.map((p, i) => (
-            <ProjectCard key={p.title} project={p} index={i} />
-          ))}
         </div>
 
-        {/* ── CTA + Trust ── */}
+        {/* ── Trust strip ── */}
         <motion.div
           ref={ctaRef}
           initial={{ opacity: 0, y: 20 }}
           animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-14 flex items-center justify-between border-t border-slate-100 pt-10"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mt-16 flex flex-col items-start gap-3 border-t border-slate-100 pt-10 sm:flex-row sm:items-center sm:gap-8"
         >
-          <div className="flex flex-wrap items-center gap-5">
-            <span className="text-[10px] font-medium uppercase tracking-widest text-slate-700">
-              Trusted by
-            </span>
-            {trustedBy.map((name) => (
-              <span
-                key={name}
-                className="text-[13px] font-medium text-slate-500 transition-colors hover:text-blue-600"
-              >
-                {name}
-              </span>
-            ))}
+          <span className="flex-shrink-0 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-700">
+            Trusted by
+          </span>
+          <div className="relative w-full overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]">
+            <div className="flex w-max animate-[work-marquee_22s_linear_infinite] gap-10">
+              {[...trustedBy, ...trustedBy].map((name, i) => (
+                <span
+                  key={`${name}-${i}`}
+                  className="text-[14px] font-medium text-slate-500"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
           </div>
-
-          {/* Button — matches Hero "Start Project" style */}
-          <button className="group flex items-center gap-2 rounded-xl bg-black px-6 py-3 text-[13px] font-medium text-white transition-all duration-200 hover:bg-slate-700">
-            All projects
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </button>
         </motion.div>
-
       </div>
+
+      <style jsx>{`
+        @keyframes work-marquee {
+          to {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </section>
   );
 }

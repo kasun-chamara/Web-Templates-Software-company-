@@ -16,21 +16,21 @@ const team = [
 export default function AboutPage() {
   return (
     <>
-      <section className="pt-40 pb-16 text-center bg-white">
+      <section className="pt-32 sm:pt-40 pb-12 sm:pb-16 text-center bg-white">
         <div className="max-w-3xl mx-auto px-6">
           <span className="section-tag mb-6">About Us</span>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 mt-4 leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+          <h1 className="text-[38px] sm:text-5xl md:text-7xl font-extrabold text-slate-900 mt-4 leading-[1.08]">
             Engineers Who<span className="gradient-text block">Give a Damn</span>
           </h1>
-          <p className="text-slate-500 text-lg mt-6 leading-relaxed">40+ engineers, designers, and strategists obsessed with building digital systems that stand the test of time.</p>
+          <p className="text-slate-500 text-base sm:text-lg mt-6 leading-relaxed">40+ engineers, designers, and strategists obsessed with building digital systems that stand the test of time.</p>
         </div>
       </section>
       <About />
-      <section className="py-20 bg-white">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-14">
+          <div className="text-center mb-12 sm:mb-14">
             <span className="section-tag mb-4">The Team</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mt-4" style={{ fontFamily: "var(--font-display)" }}>People Behind the Code</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mt-4">People Behind the Code</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {team.map((m, i) => (

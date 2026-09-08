@@ -1,17 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Playfair_Display, DM_Sans } from "next/font/google";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["700", "800"],
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-});
 
 const features = [
   {
@@ -199,7 +188,7 @@ function AnimatedCard({
       </div>
       <div className="bft-card-footer">
         <div className="bft-card-text">
-          <h3 className="bft-card-title" style={{ fontFamily: playfair.style.fontFamily }}>
+          <h3 className="bft-card-title">
             {feature.title}
           </h3>
           <p className={`bft-card-desc ${expanded ? "bft-card-desc--open" : ""}`}>
@@ -498,11 +487,11 @@ export default function BuiltForTeams() {
       `}</style>
 
       {/* Outer wrapper adds side padding so black section floats with rounded corners */}
-      <div className="bft-outer" style={{ fontFamily: dmSans.style.fontFamily }}>
+      <div className="bft-outer">
         <section className="bft-section">
           {/* Header */}
           <div className="bft-header">
-            <h2 className="bft-heading" style={{ fontFamily: playfair.style.fontFamily }}>
+            <h2 className="bft-heading">
               Built for Fast Moving<br />
               <span className="bft-heading-accent">Teams That Need Results.</span>
             </h2>

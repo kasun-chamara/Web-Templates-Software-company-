@@ -1,8 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ── Typography system ──────────────────────────────────────
+   Display family (Syne)  → all headings + numeric figures
+   Body family (DM Sans)  → everything else
+   Fonts are loaded via <link> in app/layout.tsx.            */
+@layer base {
+  body {
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  /* Numbers, counters, stats — match the heading family */
+  .font-num {
+    font-family: var(--font-display);
+    font-feature-settings: "tnum" 1;
+    font-variant-numeric: tabular-nums;
+  }
+}
 
 :root {
   --white: #FFFFFF;
@@ -18,8 +40,8 @@
   --blue-600: #0284C7;
   --blue-700: #0369A1;
   --cyan-400: #22D3EE;
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

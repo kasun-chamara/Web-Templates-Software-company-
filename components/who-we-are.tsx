@@ -8,13 +8,7 @@ import {
   useSpring,
   animate,
 } from "framer-motion";
-import { DM_Sans } from "next/font/google";
 import { ArrowUp } from "lucide-react";
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
-});
 
 const stats = [
   { value: 6, suffix: "+", label: "YEARS ACTIVE" },
@@ -56,7 +50,6 @@ export default function WhoWeAre() {
       ref={sectionRef}
       id="who-we-are"
       className="relative min-h-screen overflow-hidden bg-neutral-950"
-      style={{ fontFamily: dmSans.style.fontFamily }}
     >
       {/* Background photo + dark overlay — swap the URL for the real asset */}
       <div className="absolute inset-0">
@@ -205,7 +198,7 @@ function Stat({
 
   return (
     <div>
-      <div className="text-[30px] font-extrabold text-white sm:text-[34px]">
+      <div className="font-num text-[30px] font-extrabold text-white sm:text-[34px]">
         {display}
         {stat.suffix}
       </div>

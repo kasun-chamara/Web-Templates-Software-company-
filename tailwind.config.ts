@@ -26,8 +26,11 @@ const config: Config = {
           500: "#06B6D4",
         },
       },
-       fontFamily: {
-      sans: ["Inter", "sans-serif"]},
+      fontFamily: {
+        sans: ["var(--font-body)", "DM Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Syne", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "monospace"],
+      },
       animation: {
         "float": "float 6s ease-in-out infinite",
         "glow-pulse": "glowPulse 3s ease-in-out infinite",

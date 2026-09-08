@@ -118,7 +118,7 @@ export default function Stats() {
     <div key={i} className="text-center group cursor-pointer">
       
       <div
-        className={`text-3xl font-bold bg-gradient-to-r ${stat.from} ${stat.to} bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-110`}
+        className={`font-num text-3xl font-bold bg-gradient-to-r ${stat.from} ${stat.to} bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-110`}
       >
         {stat.number}
       </div>

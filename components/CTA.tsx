@@ -165,7 +165,7 @@ function MeteorCanvas() {
 
 export default function CTA() {
   return (
-    <section className="relative py-40 overflow-hidden bg-white">
+    <section className="relative py-24 overflow-hidden bg-white sm:py-32 md:py-40">
 
       {/* Meteor shower */}
       <MeteorCanvas />
@@ -224,12 +224,12 @@ export default function CTA() {
         </div>
 
         {/* Headline — all black */}
-        <h2 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6">
+        <h2 className="text-[40px] sm:text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6">
           <WordReveal line1="Let's Build Something" line2="That Lasts" />
         </h2>
 
         {/* Subtext */}
-        <p className="text-slate-500 text-lg max-w-lg mx-auto leading-relaxed mb-14">
+        <p className="text-slate-500 text-base sm:text-lg max-w-lg mx-auto leading-relaxed mb-10 sm:mb-14">
           Whether you&apos;re an early-stage startup or an enterprise team,
           we&apos;re ready to engineer your next breakthrough.
         </p>
@@ -261,7 +261,7 @@ export default function CTA() {
         </div>
 
         {/* Divider + footnote */}
-        <div className="mt-20 flex flex-col items-center gap-4">
+        <div className="mt-14 sm:mt-20 flex flex-col items-center gap-4">
           <div
             className="w-32 h-px"
             style={{

@@ -1,12 +1,6 @@
 "use client";
 
 import { Star } from "lucide-react";
-import { Playfair_Display } from "next/font/google";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["700"],
-});
 
 const testimonials = [
   {
@@ -102,10 +96,7 @@ function TestimonialCard({
           {t.avatar}
         </div>
         <div>
-          <div
-            className="text-white font-bold text-sm"
-            style={{ fontFamily: playfair.style.fontFamily }}
-          >
+          <div className="font-display text-white font-bold text-sm">
             {t.name}
           </div>
           <div className="text-slate-500 text-xs mt-0.5">{t.role}</div>
@@ -117,7 +108,7 @@ function TestimonialCard({
 
 export default function Testimonials() {
   return (
-    <section className="relative py-24 bg-[#080c14] overflow-hidden">
+    <section className="relative py-20 bg-[#080c14] overflow-hidden sm:py-24">
       {/* Grid bg */}
       <div
         className="absolute inset-0 opacity-20"
@@ -165,7 +156,7 @@ export default function Testimonials() {
       `}</style>
 
       <div className="relative max-w-screen-2xl mx-auto px-6 lg:px-28">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* LEFT */}
           <div className="relative z-20 flex flex-col gap-8">
@@ -196,10 +187,7 @@ export default function Testimonials() {
                   </p>
                   <h2
                     className="font-bold text-white leading-[1.08]"
-                    style={{
-                      fontFamily: playfair.style.fontFamily,
-                      fontSize: "clamp(2.4rem, 4vw, 3.5rem)",
-                    }}
+                    style={{ fontSize: "clamp(2.4rem, 4vw, 3.5rem)" }}
                   >
                     Built for Teams
                     <br />
@@ -234,9 +222,8 @@ export default function Testimonials() {
                   <div className="absolute top-0 right-0 w-6 h-6 border-t border-r border-blue-500/30 rounded-tr-xl" />
                   <div className="text-slate-600 text-xs font-mono mb-2">{s.icon}</div>
                   <div
-                    className="font-bold tracking-tight bg-clip-text text-transparent leading-none mb-1"
+                    className="font-num font-bold tracking-tight bg-clip-text text-transparent leading-none mb-1"
                     style={{
-                      fontFamily: playfair.style.fontFamily,
                       fontSize: "clamp(1.5rem, 2.2vw, 2rem)",
                       backgroundImage:
                         "linear-gradient(135deg, #ffffff 30%, #2563eb 100%)",
@@ -263,15 +250,15 @@ export default function Testimonials() {
           </div>
 
           {/* RIGHT — scroll columns */}
-          <div className="relative h-[550px] overflow-hidden flex gap-5">
-            <div className="flex-1 overflow-hidden relative">
+          <div className="relative flex h-[460px] gap-4 overflow-hidden sm:h-[550px] sm:gap-5">
+            <div className="relative flex-1 overflow-hidden">
               <div className="animate-scroll-down">
                 {col1.map((t, i) => (
                   <TestimonialCard key={`c1-${i}`} t={t} index={i} />
                 ))}
               </div>
             </div>
-            <div className="flex-1 overflow-hidden relative">
+            <div className="relative hidden flex-1 overflow-hidden sm:block">
               <div className="animate-scroll-up">
                 {col2.map((t, i) => (
                   <TestimonialCard key={`c2-${i}`} t={t} index={i + 3} />

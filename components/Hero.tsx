@@ -6,7 +6,7 @@ import HeroVisual from "./HeroVisual";
 export default function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#84ceff04]">
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-[#00405310]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white to-[#f4f9ff]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
         <div className="text-center mb-10 sm:mb-14">
@@ -14,7 +14,7 @@ export default function Hero() {
             Now accepting projects
           </span>
 
-          <h1 className="mt-6 sm:mt-8 max-w-5xl mx-auto text-5xl sm:text-6xl md:text-8xl font-bold text-slate-900 leading-tight">
+          <h1 className="mt-6 sm:mt-8 max-w-5xl mx-auto text-[38px] sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 leading-[1.08]">
             Building Digital
             <br />
             <span className="neon-text">Systems That Work</span>
