@@ -36,7 +36,7 @@ export default function Hero() {
             Now accepting projects
           </span>
 
-          <h1 className="mt-6 sm:mt-8 max-w-5xl mx-auto text-[38px] sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 leading-[1.08]">
+          <h1 className="mt-6 sm:mt-8 max-w-5xl mx-auto text-[46px] sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 leading-[1.08]">
             Building Digital
             <br />
             <span className="neon-text">Systems That Work</span>
@@ -53,7 +53,10 @@ export default function Hero() {
               <ArrowRight size={18} />
             </button>
 
-            <button className="border px-6 py-3 rounded-xl bg-white w-full sm:w-auto">
+            <button
+              className="border px-6 py-3 rounded-xl bg-white w-full sm:w-auto font-semibold transition-colors duration-200 hover:bg-[#FF2B00] hover:text-white hover:border-[#FF2B00]"
+              style={{ borderColor: "#FF2B00", color: "#FF2B00" }}
+            >
               View Work
             </button>
           </div>
