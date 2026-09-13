@@ -53,10 +53,7 @@ export default function Hero() {
               <ArrowRight size={18} />
             </button>
 
-            <button
-              className="border px-6 py-3 rounded-xl bg-white w-full sm:w-auto font-semibold transition-colors duration-200 hover:bg-[#FF2B00] hover:text-white hover:border-[#FF2B00]"
-              style={{ borderColor: "#FF2B00", color: "#FF2B00" }}
-            >
+            <button className="border border-[#FF2B00] px-6 py-3 rounded-xl bg-white text-[#FF2B00] w-full sm:w-auto font-semibold transition-colors duration-200 hover:bg-[#FF2B00] hover:text-white">
               View Work
             </button>
           </div>
