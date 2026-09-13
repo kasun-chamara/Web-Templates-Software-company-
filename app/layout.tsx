@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import WelcomeModal from "@/components/WelcomeModal";
 
 export const metadata: Metadata = {
   title: "NexaLab — Building Digital Systems of Tomorrow",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="relative z-10">{children}</main>
         <Footer />
         <FloatingActions />
+        <WelcomeModal />
       </body>
     </html>
   );

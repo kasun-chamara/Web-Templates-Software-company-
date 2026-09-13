@@ -10,8 +10,8 @@ const features = [
     title: "Custom-Built Solutions, Tuned to Your Business",
     description:
       "We architect software that fits your exact workflow — not the other way around. Every system we build is designed with your team, your data, and your scale in mind.",
-    tags: ["Web Apps", "APIs", "SaaS"],
     visual: "dashboard",
+    chromeLabel: "workflow.build",
     accent: "#FF2B00",
   },
   {
@@ -20,6 +20,7 @@ const features = [
     description:
       "From sprint planning to deployment, our process is transparent and fast. CI/CD pipelines, automated testing, and agile iteration keep your project moving.",
     visual: "pipeline",
+    chromeLabel: "deploy.pipeline",
     accent: "#D12300",
   },
   {
@@ -28,37 +29,113 @@ const features = [
     description:
       "Every line of code is reviewed, tested, and auditable. We follow best practices for security and compliance so you can ship with confidence.",
     visual: "shield",
+    chromeLabel: "security.audit",
     accent: "#751400",
+  },
+  {
+    id: 4,
+    title: "Cloud Infrastructure That Scales With You",
+    description:
+      "We design cloud-native architecture on AWS, GCP, or Azure — auto-scaling, multi-region failover, and infrastructure as code from day one.",
+    visual: "cloud",
+    chromeLabel: "infra.scale",
+    accent: "#FF7A3D",
+  },
+  {
+    id: 5,
+    title: "Dedicated Team, Direct Communication",
+    description:
+      "A named team, not a ticket queue. Weekly demos, a shared Slack channel, and a live project board — you always know exactly where things stand.",
+    visual: "team",
+    chromeLabel: "team.sync",
+    accent: "#FF2B00",
+  },
+  {
+    id: 6,
+    title: "24/7 Support & Continuous Optimization",
+    description:
+      "Post-launch isn't the finish line. We monitor uptime, ship performance improvements, and stay on call for critical fixes long after go-live.",
+    visual: "support",
+    chromeLabel: "uptime.monitor",
+    accent: "#A31B00",
   },
 ];
 
 // ---------- Visuals ----------
 
-function DashboardVisual() {
+function ListVisual({
+  items,
+  desc,
+  tags,
+  prefix = "",
+}: {
+  items: { label: string; time: string; color: string }[];
+  desc: string;
+  tags: string[];
+  prefix?: string;
+}) {
   return (
-    <div className="visual-dashboard">
-      {[
-        { label: "UI/UX Design", time: "2d", color: "#FF2B00" },
-        { label: "API Integration", time: "5d", color: "#FF7A3D" },
-        { label: "Deployment", time: "1d", color: "#FF2B00" },
-      ].map((item, i) => (
+    <div className="list-visual">
+      {items.map((item, i) => (
         <div key={i} className="dash-row" style={{ animationDelay: `${i * 0.15}s` }}>
           <span className="dash-dot" style={{ background: item.color }} />
           <span className="dash-label">{item.label}</span>
           <span className="dash-badge" style={{ borderColor: item.color, color: item.color }}>
-            ⏱ {item.time}
+            {prefix}
+            {item.time}
           </span>
         </div>
       ))}
-      <div className="dash-desc">
-        Builds scalable, maintainable systems using modern frameworks and cloud-native architecture.
-      </div>
+      <div className="dash-desc">{desc}</div>
       <div className="dash-tags">
-        {["React", "Node.js", "AWS"].map((t) => (
+        {tags.map((t) => (
           <span key={t} className="dash-tag">{t}</span>
         ))}
       </div>
     </div>
+  );
+}
+
+function DashboardVisual() {
+  return (
+    <ListVisual
+      prefix="⏱ "
+      items={[
+        { label: "UI/UX Design", time: "2d", color: "#FF2B00" },
+        { label: "API Integration", time: "5d", color: "#FF7A3D" },
+        { label: "Deployment", time: "1d", color: "#FF2B00" },
+      ]}
+      desc="Builds scalable, maintainable systems using modern frameworks and cloud-native architecture."
+      tags={["React", "Node.js", "AWS"]}
+    />
+  );
+}
+
+function CloudVisual() {
+  return (
+    <ListVisual
+      items={[
+        { label: "Auto-Scaling", time: "Live", color: "#FF7A3D" },
+        { label: "Multi-Region Failover", time: "Live", color: "#FF2B00" },
+        { label: "Infra as Code", time: "CI/CD", color: "#FF7A3D" },
+      ]}
+      desc="Terraform-managed infrastructure with zero-downtime deploys and real-time monitoring."
+      tags={["AWS", "Terraform", "Kubernetes"]}
+    />
+  );
+}
+
+function TeamVisual() {
+  return (
+    <ListVisual
+      items={[
+        { label: "Slack Channel", time: "Live", color: "#FF2B00" },
+        { label: "Weekly Demo", time: "Fri", color: "#FF7A3D" },
+        { label: "Project Board", time: "Live", color: "#FF2B00" },
+      ]}
+      desc="Direct access to your engineers — no account managers, no ticket queue in between."
+      tags={["Slack", "Linear", "Notion"]}
+    />
   );
 }
 
@@ -72,19 +149,18 @@ function PipelineVisual() {
   ];
   return (
     <div className="visual-pipeline">
-      <div className="pipeline-title">Release Pipeline</div>
       {steps.map((s, i) => (
         <div key={i} className="pipe-row" style={{ animationDelay: `${i * 0.1}s` }}>
           <span
             className="pipe-icon"
             style={{
               background: s.done ? "#FF2B00" : s.active ? "#FF7A3D" : "transparent",
-              border: s.done || s.active ? "none" : "1.5px solid #444",
+              border: s.done || s.active ? "none" : "1.5px solid #CBD5E1",
             }}
           >
             {s.done ? "✓" : s.active ? "●" : ""}
           </span>
-          <span className="pipe-label" style={{ color: s.done ? "#FFC9A8" : s.active ? "#FFD9BB" : "#555" }}>
+          <span className="pipe-label" style={{ color: s.done ? "#0f172a" : s.active ? "#D12300" : "#94A3B8" }}>
             {s.label}
           </span>
           <span className="pipe-time">{`${(i + 1) * 10}s`}</span>
@@ -96,47 +172,76 @@ function PipelineVisual() {
 
 function ShieldVisual() {
   return (
-    <div className="visual-shield">
-      <div className="shield-wrap">
-        <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="shield-svg">
-          <defs>
-            <linearGradient id="shieldGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#FF2B00" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#751400" stopOpacity="0.08" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M60 8 L108 28 L108 72 C108 98 86 118 60 130 C34 118 12 98 12 72 L12 28 Z"
-            fill="url(#shieldGrad)"
-            stroke="#FF2B00"
-            strokeWidth="2"
-            strokeOpacity="0.5"
-          />
-          <path
-            d="M60 22 L96 38 L96 70 C96 90 80 106 60 116 C40 106 24 90 24 70 L24 38 Z"
+    <div className="shield-wrap">
+      <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="shield-svg">
+        <defs>
+          <linearGradient id="shieldGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FF2B00" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="#751400" stopOpacity="0.08" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M60 8 L108 28 L108 72 C108 98 86 118 60 130 C34 118 12 98 12 72 L12 28 Z"
+          fill="url(#shieldGrad)"
+          stroke="#FF2B00"
+          strokeWidth="2"
+          strokeOpacity="0.5"
+        />
+        <path
+          d="M60 22 L96 38 L96 70 C96 90 80 106 60 116 C40 106 24 90 24 70 L24 38 Z"
+          fill="none"
+          stroke="#FF2B00"
+          strokeWidth="1.5"
+          strokeOpacity="0.3"
+        />
+        {[30, 37, 44, 51, 58, 65, 72].map((r, i) => (
+          <circle
+            key={i}
+            cx="60"
+            cy="72"
+            r={r - 20}
             fill="none"
             stroke="#FF2B00"
-            strokeWidth="1.5"
-            strokeOpacity="0.3"
+            strokeWidth="1.2"
+            strokeOpacity={0.15 + i * 0.07}
+            strokeDasharray={i % 2 === 0 ? "none" : "4 3"}
           />
-          {[30, 37, 44, 51, 58, 65, 72].map((r, i) => (
-            <circle
-              key={i}
-              cx="60"
-              cy="72"
-              r={r - 20}
-              fill="none"
-              stroke="#FF2B00"
-              strokeWidth="1.2"
-              strokeOpacity={0.15 + i * 0.07}
-              strokeDasharray={i % 2 === 0 ? "none" : "4 3"}
-            />
-          ))}
-          <circle cx="60" cy="72" r="6" fill="#FF2B00" fillOpacity="0.6" />
-        </svg>
-        <div className="shield-label">SOC 2 Ready</div>
-        <div className="shield-sublabel">Fully auditable · Zero trust architecture</div>
-      </div>
+        ))}
+        <circle cx="60" cy="72" r="6" fill="#FF2B00" fillOpacity="0.6" />
+      </svg>
+      <div className="shield-label">SOC 2 Ready</div>
+      <div className="shield-sublabel">Fully auditable · Zero trust architecture</div>
+    </div>
+  );
+}
+
+function SupportVisual() {
+  const radius = 48;
+  const circumference = 2 * Math.PI * radius;
+  return (
+    <div className="shield-wrap">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="shield-svg">
+        <circle cx="60" cy="60" r={radius} stroke="#E2E8F0" strokeWidth="8" />
+        <circle
+          cx="60"
+          cy="60"
+          r={radius}
+          stroke="#A31B00"
+          strokeWidth="8"
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          strokeDashoffset={circumference * 0.02}
+          transform="rotate(-90 60 60)"
+        />
+        <text x="60" y="56" textAnchor="middle" fontSize="19" fontWeight="700" fill="#0f172a">
+          99.98%
+        </text>
+        <text x="60" y="74" textAnchor="middle" fontSize="9" fill="#94A3B8" letterSpacing="0.05em">
+          UPTIME
+        </text>
+      </svg>
+      <div className="shield-label">Uptime SLA</div>
+      <div className="shield-sublabel">24/7 monitoring · &lt;1hr response time</div>
     </div>
   );
 }
@@ -144,7 +249,10 @@ function ShieldVisual() {
 function CardVisual({ type }: { type: string }) {
   if (type === "dashboard") return <DashboardVisual />;
   if (type === "pipeline") return <PipelineVisual />;
-  return <ShieldVisual />;
+  if (type === "shield") return <ShieldVisual />;
+  if (type === "cloud") return <CloudVisual />;
+  if (type === "team") return <TeamVisual />;
+  return <SupportVisual />;
 }
 
 // ---------- Animated Card ----------
@@ -186,7 +294,20 @@ function AnimatedCard({
       style={{ "--accent": feature.accent } as React.CSSProperties}
     >
       <div className="bft-card-visual">
-        <CardVisual type={feature.visual} />
+        <div className="visual-frame">
+          <div className="visual-chrome">
+            <div className="chrome-dots">
+              <span className="chrome-dot" style={{ background: "#FF5F57" }} />
+              <span className="chrome-dot" style={{ background: "#FEBC2E" }} />
+              <span className="chrome-dot" style={{ background: "#28C840" }} />
+            </div>
+            <span className="chrome-title">{feature.chromeLabel}</span>
+            <span className="chrome-index">{String(index + 1).padStart(2, "0")}</span>
+          </div>
+          <div className="visual-body">
+            <CardVisual type={feature.visual} />
+          </div>
+        </div>
       </div>
       <div className="bft-card-footer">
         <div className="bft-card-text">
@@ -214,31 +335,32 @@ export default function BuiltForTeams() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
-        /* Outer wrapper - provides the side padding so the dark box floats.
-           Background matches the dark sections above/below so the padding gaps
-           do not show the page background between them. */
+        /* Outer wrapper - provides the side padding so the section floats.
+           Background matches the page background so the padding gaps
+           do not show anything unexpected between them. */
         .bft-outer {
           padding: 0 42px;
-          background: #1A0400;
+          background: #fff;
         }
 
-        /* ── The dark section itself — now has border-radius ── */
+        /* ── The section itself — now has border-radius ── */
         .bft-section {
           position: relative;
           overflow: hidden;
-          background: #0a0400;
+          background: #fff;
           padding: 96px 48px;
           min-height: 100vh;
-          color: #fff;
+          color: #0f172a;
           border-radius: 40px;
+          border: 1px solid #F1F5F9;
         }
 
         /* Dot-grid texture — distinct from Testimonials' line grid */
         .bft-dots {
           position: absolute;
           inset: 0;
-          opacity: 0.12;
-          background-image: radial-gradient(circle, rgba(255,122,61,0.8) 1.4px, transparent 1.4px);
+          opacity: 0.3;
+          background-image: radial-gradient(circle, rgba(255,43,0,0.35) 1.4px, transparent 1.4px);
           background-size: 26px 26px;
           -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 90%);
           mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 90%);
@@ -250,10 +372,16 @@ export default function BuiltForTeams() {
           z-index: 5;
           display: flex;
           justify-content: space-between;
-          align-items: flex-start;
+          align-items: flex-end;
           gap: 48px;
           max-width: 1200px;
           margin: 0 auto 72px auto;
+        }
+
+        .bft-header-left {
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
         }
 
         .bft-heading {
@@ -261,21 +389,22 @@ export default function BuiltForTeams() {
           font-weight: 800;
           line-height: 1.1;
           letter-spacing: -0.01em;
-          color: #fff;
+          color: #0f172a;
           margin: 0;
           max-width: 520px;
         }
 
         .bft-heading-accent {
-          color: #d1d5db;
+          color: #94a3b8;
         }
 
         .bft-subtext {
           font-size: 1rem;
-          color: #6b7280;
+          color: #64748b;
           line-height: 1.75;
-          max-width: 400px;
-          margin: 6px 0 0 0;
+          max-width: 380px;
+          margin: 0 0 6px 0;
+          text-align: right;
         }
 
         /* Grid */
@@ -292,26 +421,30 @@ export default function BuiltForTeams() {
         @media (max-width: 900px) {
           .bft-outer { padding: 0 16px; }
           .bft-grid { grid-template-columns: 1fr; }
-          .bft-header { flex-direction: column; }
+          .bft-header { flex-direction: column; align-items: flex-start; }
+          .bft-subtext { text-align: left; }
           .bft-section { padding: 64px 24px; border-radius: 24px; }
         }
 
         /* Card */
         .bft-card {
-          background: #131313;
-          border: 1px solid #1f1f1f;
-          border-radius: 16px;
+          position: relative;
+          background: #fff;
+          border: 1px solid #E2E8F0;
+          border-radius: 22px;
           overflow: hidden;
           display: flex;
           flex-direction: column;
           cursor: default;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 
           opacity: 0;
           transform: translateY(60px);
           transition:
             opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
             transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-            border-color 0.3s ease;
+            border-color 0.3s ease,
+            box-shadow 0.4s ease;
         }
 
         .bft-card--visible {
@@ -319,8 +452,30 @@ export default function BuiltForTeams() {
           transform: translateY(0);
         }
 
+        .bft-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, transparent, var(--accent), transparent);
+          transform: scaleX(0);
+          transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+          z-index: 2;
+        }
+
+        .bft-card:hover::before,
+        .bft-card--open::before {
+          transform: scaleX(1);
+        }
+
         .bft-card:hover {
           border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+          transform: translateY(-6px);
+          box-shadow: 0 24px 50px -12px rgba(15, 23, 42, 0.12);
+        }
+
+        .bft-card--visible.bft-card:hover {
+          transform: translateY(-6px);
         }
 
         .bft-card--open {
@@ -329,19 +484,60 @@ export default function BuiltForTeams() {
 
         /* Visual area */
         .bft-card-visual {
-          padding: 32px 24px 24px;
+          padding: 20px 20px 0 20px;
           flex: 1;
-          min-height: 240px;
+          min-height: 232px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--accent) 6%, transparent) 0%, transparent 70%);
+        }
+
+        .visual-frame {
+          width: 100%;
+          border-radius: 14px;
+          border: 1px solid #E2E8F0;
+          overflow: hidden;
+          background: #fff;
+        }
+
+        .visual-chrome {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 9px 12px;
+          background: #F8FAFC;
+          border-bottom: 1px solid #EDF1F5;
+        }
+
+        .chrome-dots { display: flex; gap: 5px; }
+        .chrome-dot { width: 7px; height: 7px; border-radius: 50%; opacity: 0.85; }
+
+        .chrome-title {
+          font-size: 0.68rem;
+          color: #94A3B8;
+          letter-spacing: 0.03em;
+        }
+
+        .chrome-index {
+          margin-left: auto;
+          font-size: 0.65rem;
+          font-weight: 600;
+          color: #CBD5E1;
+          font-variant-numeric: tabular-nums;
+        }
+
+        .visual-body {
+          padding: 20px;
+          min-height: 172px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--accent) 7%, transparent) 0%, transparent 75%);
         }
 
         /* Footer */
         .bft-card-footer {
           padding: 20px 24px 24px;
-          border-top: 1px solid #1f1f1f;
           display: flex;
           align-items: flex-start;
           justify-content: space-between;
@@ -353,14 +549,14 @@ export default function BuiltForTeams() {
         .bft-card-title {
           font-size: 1rem;
           font-weight: 700;
-          color: #f0f0f0;
+          color: #0f172a;
           margin: 0;
           line-height: 1.45;
         }
 
         .bft-card-desc {
           font-size: 0.875rem;
-          color: #6b7280;
+          color: #64748b;
           line-height: 1.6;
           margin: 10px 0 0 0;
           max-height: 0;
@@ -376,24 +572,31 @@ export default function BuiltForTeams() {
 
         /* Plus button */
         .bft-plus {
-          background: #1e1e1e;
-          border: 1px solid #2a2a2a;
+          background: #fff;
+          border: 1.5px solid #E2E8F0;
           border-radius: 50%;
-          width: 32px;
-          height: 32px;
-          min-width: 32px;
+          width: 34px;
+          height: 34px;
+          min-width: 34px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #888;
+          color: #94A3B8;
           font-size: 1.25rem;
           cursor: pointer;
-          transition: background 0.2s, color 0.2s;
+          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
           line-height: 1;
           padding: 0;
+          flex-shrink: 0;
         }
 
-        .bft-plus:hover { background: #2a2a2a; color: #fff; }
+        .bft-plus:hover,
+        .bft-card--open .bft-plus {
+          background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 65%, #1A0400));
+          border-color: transparent;
+          color: #fff;
+          transform: scale(1.08);
+        }
 
         .bft-plus span {
           display: inline-block;
@@ -402,13 +605,9 @@ export default function BuiltForTeams() {
 
         .bft-plus--x { transform: rotate(45deg); }
 
-        /* ---- Dashboard visual ---- */
-        .visual-dashboard {
+        /* ---- List visual (dashboard / cloud / team) ---- */
+        .list-visual {
           width: 100%;
-          background: #0f0f0f;
-          border: 1px solid #222;
-          border-radius: 12px;
-          padding: 20px;
           display: flex;
           flex-direction: column;
           gap: 10px;
@@ -419,7 +618,8 @@ export default function BuiltForTeams() {
           align-items: center;
           gap: 10px;
           padding: 8px 10px;
-          background: #161616;
+          background: #F8FAFC;
+          border: 1px solid #EDF1F5;
           border-radius: 8px;
           animation: slideIn 0.4s ease both;
         }
@@ -430,7 +630,7 @@ export default function BuiltForTeams() {
         }
 
         .dash-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-        .dash-label { font-size: 0.8rem; color: #ccc; flex: 1; }
+        .dash-label { font-size: 0.8rem; color: #334155; flex: 1; }
         .dash-badge {
           font-size: 0.7rem;
           border: 1px solid;
@@ -438,32 +638,20 @@ export default function BuiltForTeams() {
           padding: 2px 8px;
           white-space: nowrap;
         }
-        .dash-desc { font-size: 0.72rem; color: #444; line-height: 1.5; padding: 4px 2px; }
+        .dash-desc { font-size: 0.72rem; color: #94A3B8; line-height: 1.5; padding: 4px 2px; }
         .dash-tags { display: flex; gap: 6px; flex-wrap: wrap; }
         .dash-tag {
           font-size: 0.7rem;
-          background: #1e1e1e;
-          border: 1px solid #2a2a2a;
+          background: #fff;
+          border: 1px solid #E2E8F0;
           border-radius: 6px;
           padding: 3px 10px;
-          color: #777;
+          color: #64748B;
         }
 
         /* ---- Pipeline visual ---- */
         .visual-pipeline {
           width: 100%;
-          background: #0f0f0f;
-          border: 1px solid #222;
-          border-radius: 12px;
-          padding: 20px;
-        }
-
-        .pipeline-title {
-          font-size: 0.75rem;
-          color: #555;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          margin-bottom: 14px;
         }
 
         .pipe-row {
@@ -482,20 +670,15 @@ export default function BuiltForTeams() {
         }
 
         .pipe-label { font-size: 0.8rem; flex: 1; }
-        .pipe-time { font-size: 0.7rem; color: #3a3a3a; }
+        .pipe-time { font-size: 0.7rem; color: #CBD5E1; }
 
-        /* ---- Shield visual ---- */
-        .visual-shield {
-          display: flex; align-items: center; justify-content: center;
-          width: 100%; padding: 12px 0;
-        }
-
+        /* ---- Shield / ring visual ---- */
         .shield-wrap {
           display: flex; flex-direction: column; align-items: center; gap: 12px;
         }
 
         .shield-svg {
-          width: 120px; height: 140px;
+          width: 108px; height: 126px;
           filter: drop-shadow(0 0 24px rgba(255,43,0,0.25));
           animation: shieldPulse 3s ease-in-out infinite;
         }
@@ -505,22 +688,25 @@ export default function BuiltForTeams() {
           50%       { filter: drop-shadow(0 0 32px rgba(255,43,0,0.4)); }
         }
 
-        .shield-label { font-size: 0.85rem; font-weight: 600; color: #FFB088; letter-spacing: 0.02em; }
-        .shield-sublabel { font-size: 0.72rem; color: #555; text-align: center; }
+        .shield-label { font-size: 0.85rem; font-weight: 600; color: #D12300; letter-spacing: 0.02em; }
+        .shield-sublabel { font-size: 0.72rem; color: #94A3B8; text-align: center; }
       ` }} />
 
       {/* Outer wrapper adds side padding so black section floats with rounded corners */}
       <div className="bft-outer">
         <section className="bft-section" onMouseMove={handleMove} onMouseLeave={handleLeave}>
           <div className="bft-dots" />
-          <MouseGlow x={x} y={y} color="rgba(255,122,61,0.5)" midColor="rgba(255,43,0,0.18)" />
+          <MouseGlow x={x} y={y} color="rgba(255,43,0,0.3)" midColor="rgba(255,43,0,0.08)" />
 
           {/* Header */}
           <div className="bft-header">
-            <h2 className="bft-heading">
-              Built for Fast Moving<br />
-              <span className="bft-heading-accent">Teams That Need Results.</span>
-            </h2>
+            <div className="bft-header-left">
+              <span className="section-tag">WHY TEAMS CHOOSE US</span>
+              <h2 className="bft-heading">
+                Built for Fast Moving<br />
+                <span className="bft-heading-accent">Teams That Need Results.</span>
+              </h2>
+            </div>
             <p className="bft-subtext">
               We embed with your team, ship production-ready software, and maintain full transparency
               at every step. Every decision is traceable. Every outcome is owned.

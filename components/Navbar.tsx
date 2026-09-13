@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Zap, ChevronDown } from "lucide-react";
 
 const navLinks = [
@@ -63,6 +64,7 @@ function TailwindThumb() {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
@@ -102,7 +104,13 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <li key={link.label}>
-              <Link href={link.href} className="animated-link text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors duration-200" style={{ fontFamily: "var(--font-display)" }}>
+              <Link
+                href={link.href}
+                className={`animated-link text-sm transition-colors duration-200 ${
+                  pathname === link.href ? "font-bold text-[#FF2B00]" : "font-medium text-slate-500 hover:text-slate-900"
+                }`}
+                style={{ fontFamily: "var(--font-display)" }}
+              >
                 {link.label}
               </Link>
             </li>
@@ -171,7 +179,9 @@ export default function Navbar() {
         <div className="bg-white border-t border-slate-100 px-6 py-6 flex flex-col gap-4 shadow-lg">
           {navLinks.map((link) => (
             <Link key={link.label} href={link.href} onClick={() => setOpen(false)}
-              className="text-slate-600 hover:text-blue-500 transition-colors font-medium py-2 border-b border-slate-100"
+              className={`transition-colors py-2 border-b border-slate-100 ${
+                pathname === link.href ? "font-bold text-[#FF2B00]" : "font-medium text-slate-600 hover:text-[#FF2B00]"
+              }`}
               style={{ fontFamily: "var(--font-display)" }}>
               {link.label}
             </Link>
@@ -181,7 +191,7 @@ export default function Navbar() {
             <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">Products</p>
             {products.map((product) => (
               <Link key={product.name} href={product.href} onClick={() => setOpen(false)}
-                className="text-slate-600 hover:text-blue-500 transition-colors font-medium py-1.5 block">
+                className="text-slate-600 hover:text-[#FF2B00] transition-colors font-medium py-1.5 block">
                 {product.name}
               </Link>
             ))}

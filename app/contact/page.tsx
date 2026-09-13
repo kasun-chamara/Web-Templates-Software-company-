@@ -31,8 +31,8 @@ export default function ContactPage() {
           <div className="lg:col-span-2 space-y-8">
             {info.map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-5 h-5 text-blue-500" />
+                <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-5 h-5 text-[#FF2B00]" />
                 </div>
                 <div>
                   <div className="text-slate-400 text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "var(--font-display)" }}>{label}</div>
@@ -41,11 +41,11 @@ export default function ContactPage() {
               </div>
             ))}
             <div className="glass-card rounded-2xl p-6 mt-8">
-              <div className="text-blue-500 font-bold mb-3" style={{ fontFamily: "var(--font-display)" }}>Our Process</div>
+              <div className="text-[#FF2B00] font-bold mb-3" style={{ fontFamily: "var(--font-display)" }}>Our Process</div>
               <ul className="space-y-3 text-slate-500 text-sm">
                 {["Discovery call (30 min)", "Proposal & scope in 3 days", "Kickoff within 2 weeks", "Weekly progress updates"].map((step, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <span className="w-5 h-5 rounded-full bg-blue-50 text-blue-500 text-xs flex items-center justify-center font-bold flex-shrink-0 border border-blue-100" style={{ fontFamily: "var(--font-display)" }}>{i + 1}</span>{step}
+                    <span className="w-5 h-5 rounded-full bg-orange-50 text-[#FF2B00] text-xs flex items-center justify-center font-bold flex-shrink-0 border border-orange-100" style={{ fontFamily: "var(--font-display)" }}>{i + 1}</span>{step}
                   </li>
                 ))}
               </ul>
@@ -70,13 +70,13 @@ export default function ContactPage() {
                     <div key={f.name}>
                       <label className="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-widest" style={{ fontFamily: "var(--font-display)" }}>{f.label}</label>
                       <input type={f.type} name={f.name} value={(form as Record<string, string>)[f.name]} onChange={handle} placeholder={f.placeholder}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50 transition-all" />
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#FF2B00] focus:ring-2 focus:ring-orange-50 transition-all" />
                     </div>
                   ))}
                   <div>
                     <label className="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-widest" style={{ fontFamily: "var(--font-display)" }}>Budget Range</label>
                     <select name="budget" value={form.budget} onChange={handle}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50 transition-all">
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-[#FF2B00] focus:ring-2 focus:ring-orange-50 transition-all">
                       <option value="">Select range...</option>
                       <option>$10k – $25k</option>
                       <option>$25k – $50k</option>
@@ -89,7 +89,7 @@ export default function ContactPage() {
                   <label className="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-widest" style={{ fontFamily: "var(--font-display)" }}>Tell us about your project</label>
                   <textarea name="message" value={form.message} onChange={handle} required rows={5}
                     placeholder="What are you building? What's the challenge? What does success look like?"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50 transition-all resize-none" />
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#FF2B00] focus:ring-2 focus:ring-orange-50 transition-all resize-none" />
                 </div>
                 <button type="submit" className="btn-primary w-full justify-center">
                   Send Message <Send className="w-4 h-4" />
