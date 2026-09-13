@@ -13,6 +13,8 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import React from "react";
+import MouseGlow from "./MouseGlow";
+import { useMouseGlow } from "./useMouseGlow";
 
 const values = [
   "Engineering excellence over quick fixes",
@@ -140,12 +142,19 @@ export default function About() {
   const activeItem =
     activeIndex !== null ? projectCategories[activeIndex] : projectCategories[0];
 
+  const { x: glowX, y: glowY, handleMove, handleLeave } = useMouseGlow();
+
   return (
-    <div className="px-4 sm:px-[42px]">
+    <div className="px-3 sm:px-6">
       <section
         id="about"
-        className="relative rounded-[32px] bg-slate-950 py-24 sm:rounded-[40px] sm:py-32"
+        className="relative rounded-[32px] py-24 sm:rounded-[40px] sm:py-32"
+        style={{ background: "linear-gradient(135deg, #751400 0%, #1A0400 65%)" }}
+        onMouseMove={handleMove}
+        onMouseLeave={handleLeave}
       >
+        <MouseGlow x={glowX} y={glowY} color="rgba(255,122,61,0.5)" midColor="rgba(255,43,0,0.18)" />
+
         {/* Mesh gradient + squiggle background */}
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[32px] sm:rounded-[40px]">
           <div className="absolute -top-40 left-1/4 h-[400px] w-[600px] rounded-full bg-blue-600/10 blur-[130px]" />
@@ -200,7 +209,7 @@ export default function About() {
           </svg>
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 lg:px-6">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
             <motion.div
               ref={leftRef}
@@ -210,7 +219,7 @@ export default function About() {
               className="relative z-10 w-full flex-shrink-0 p-6 lg:sticky lg:top-24 lg:h-fit lg:w-[440px] lg:p-10"
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-300 backdrop-blur-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-400" />
                 What we do
               </span>
 

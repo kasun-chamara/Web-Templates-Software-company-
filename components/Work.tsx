@@ -39,7 +39,7 @@ const projects: Project[] = [
     tech: ["React", "TypeScript", "Storybook", "Figma API"],
     metric: "60% faster builds",
     image: "/images/project-1.jpg",
-    accent: "#6366f1",
+    accent: "#FF2B00",
   },
   {
     title: "Pulse Analytics",
@@ -49,7 +49,7 @@ const projects: Project[] = [
     tech: ["Next.js", "D3.js", "Kafka"],
     metric: "1M+ stores",
     image: "/images/project-2.jpg",
-    accent: "#0ea5e9",
+    accent: "#FF7A45",
   },
   {
     title: "ClearPath AI",
@@ -59,7 +59,7 @@ const projects: Project[] = [
     tech: ["Python", "PyTorch", "Rust"],
     metric: "40ms faster",
     image: "/images/project-3.jpg",
-    accent: "#10b981",
+    accent: "#B91C1C",
   },
   {
     title: "Vault Security",
@@ -69,7 +69,7 @@ const projects: Project[] = [
     tech: ["Go", "Solidity", "AWS HSM"],
     metric: "$8B+ secured",
     image: "/images/project-4.jpg",
-    accent: "#f59e0b",
+    accent: "#7A1600",
   },
 ];
 
@@ -119,13 +119,9 @@ function ProjectCard({
   total: number;
 }) {
   return (
-    <article className="group relative grid w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-[0_24px_60px_-24px_rgba(15,23,42,0.25)] lg:grid-cols-[1.05fr_1fr]">
-      {/* Accent glow */}
-      <div
-        className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full opacity-60 blur-3xl"
-        style={{ background: project.accent }}
-      />
-
+    <article
+      className="group relative grid w-full overflow-hidden rounded-3xl bg-white/85 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)] backdrop-blur-2xl lg:grid-cols-[1.05fr_1fr]"
+    >
       {/* Text side */}
       <div className="relative z-10 flex flex-col justify-between gap-8 p-8 sm:p-10 lg:p-12">
         <div>
@@ -157,15 +153,15 @@ function ProjectCard({
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] text-slate-600"
+                className="rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-[11px] text-slate-600 backdrop-blur-sm"
               >
                 {t}
               </span>
             ))}
           </div>
 
-          <div className="flex items-center justify-between border-t border-slate-100 pt-5">
-            <span className="rounded-full border border-slate-200 bg-slate-100 px-3.5 py-1.5 text-[12px] font-semibold text-slate-600">
+          <div className="flex items-center justify-between border-t border-slate-200 pt-5">
+            <span className="rounded-full border border-slate-200 bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-slate-600 backdrop-blur-sm">
               {project.metric}
             </span>
             <a
@@ -188,7 +184,7 @@ function ProjectCard({
           className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
           sizes="(max-width: 1024px) 100vw, 40vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-transparent lg:bg-gradient-to-l" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-l" />
       </div>
     </article>
   );
@@ -256,21 +252,23 @@ export default function Work() {
   const ctaInView = useInView(ctaRef, { once: true, margin: "0px 0px -60px 0px" });
 
   return (
+    <div className="px-3 sm:px-6">
     <section
       id="work"
       ref={sectionRef}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="relative bg-[#84ceff04] py-24 md:py-32"
+      className="relative rounded-[32px] py-24 sm:rounded-[40px] md:py-32"
+      style={{ background: "#0d0100" }}
     >
       {/* Decorative layers (clipped so they never break the sticky stack) */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-white to-[#00405310]" />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[32px] sm:rounded-[40px]">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A0400] to-[#0d0100]" />
         <div
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(circle, #94a3b8 1px, transparent 1px)",
+              "radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px)",
             backgroundSize: "28px 28px",
             maskImage:
               "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)",
@@ -287,7 +285,7 @@ export default function Work() {
             translateX: "-50%",
             translateY: "-50%",
             background:
-              "radial-gradient(circle, rgba(0,92,246,0.5) 0%, rgba(59,130,246,0.16) 40%, transparent 70%)",
+              "radial-gradient(circle, rgba(255,43,0,0.5) 0%, rgba(255,43,0,0.16) 40%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -303,18 +301,18 @@ export default function Work() {
             transition={{ duration: 0.7, ease: EASE }}
             className="lg:sticky lg:top-[120px] lg:h-fit lg:w-[35%] lg:flex-shrink-0 lg:self-start"
           >
-            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-600 shadow-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/70 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#FF2B00" }} />
               Selected work
             </span>
 
-            <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl">
+            <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
               Building products
               <br />
-              <span className="font-normal text-slate-400">that scale globally</span>
+              <span className="font-normal text-white/40">that scale globally</span>
             </h2>
 
-            <p className="mt-4 max-w-sm text-[15px] font-light leading-relaxed text-slate-500">
+            <p className="mt-4 max-w-sm text-[15px] font-light leading-relaxed text-white/55">
               From government platforms to AI-powered enterprise systems —
               trusted by millions worldwide.
             </p>
@@ -322,17 +320,17 @@ export default function Work() {
             {/* Metrics */}
             <div
               ref={metricsRef}
-              className="mt-8 max-w-sm divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+              className="mt-8 max-w-sm divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm"
             >
               {metrics.map((m) => (
                 <div
                   key={m.label}
                   className="flex items-baseline justify-between px-5 py-4"
                 >
-                  <span className="font-num text-xl font-bold tracking-tight text-slate-900">
+                  <span className="font-num text-xl font-bold tracking-tight text-white">
                     <Counter value={m.value} suffix={m.suffix} />
                   </span>
-                  <span className="text-[11px] uppercase tracking-[0.14em] text-slate-400">
+                  <span className="text-[11px] uppercase tracking-[0.14em] text-white/40">
                     {m.label}
                   </span>
                 </div>
@@ -341,7 +339,7 @@ export default function Work() {
 
             <a
               href="/work"
-              className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-[13px] font-medium text-white transition-all duration-200 hover:bg-slate-700"
+              className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-[13px] font-medium text-slate-900 transition-all duration-200 hover:-translate-y-0.5"
             >
               All projects
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -362,9 +360,9 @@ export default function Work() {
           initial={{ opacity: 0, y: 20 }}
           animate={ctaInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: EASE }}
-          className="mt-16 flex flex-col items-start gap-3 border-t border-slate-100 pt-10 sm:flex-row sm:items-center sm:gap-8"
+          className="mt-16 flex flex-col items-start gap-3 border-t border-white/10 pt-10 sm:flex-row sm:items-center sm:gap-8"
         >
-          <span className="flex-shrink-0 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-700">
+          <span className="flex-shrink-0 text-[10px] font-medium uppercase tracking-[0.18em] text-white/60">
             Trusted by
           </span>
           <div className="relative w-full overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]">
@@ -372,7 +370,7 @@ export default function Work() {
               {[...trustedBy, ...trustedBy].map((name, i) => (
                 <span
                   key={`${name}-${i}`}
-                  className="text-[14px] font-medium text-slate-500"
+                  className="text-[14px] font-medium text-white/45"
                 >
                   {name}
                 </span>
@@ -390,5 +388,6 @@ export default function Work() {
         }
       `}</style>
     </section>
+    </div>
   );
 }

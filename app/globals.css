@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 /* ── Typography system ──────────────────────────────────────
-   Display family (Syne)  → all headings + numeric figures
-   Body family (DM Sans)  → everything else
+   Inter → the single family used for everything, headings included.
    Fonts are loaded via <link> in app/layout.tsx.            */
 @layer base {
   body {
@@ -40,8 +39,8 @@
   --blue-600: #0284C7;
   --blue-700: #0369A1;
   --cyan-400: #22D3EE;
-  --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -57,11 +56,11 @@ body {
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #F1F5F9; }
-::-webkit-scrollbar-thumb { background: #0EA5E9; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #0284C7; }
+::-webkit-scrollbar-thumb { background: #FF2B00; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #D12300; }
 
 /* Selection */
-::selection { background: rgba(14, 165, 233, 0.15); color: #0369A1; }
+::selection { background: rgba(255, 43, 0, 0.15); color: #D12300; }
 
 /* Subtle dot grid */
 .grid-bg {

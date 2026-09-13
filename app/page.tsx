@@ -5,9 +5,12 @@ import About from "@/components/About";
 import Work from "@/components/Work";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
+import GrowthCTA from "@/components/GrowthCTA";
 import BuiltForTeams from "@/components/BuiltForTeams";
 import Pricing from "@/components/Pricing";
 import WhoWeAre from "@/components/who-we-are";
+import GlobalReach from "@/components/GlobalReach";
+import RemoteSupport from "@/components/RemoteSupport";
 
 export default function Home() {
   return (
@@ -15,13 +18,16 @@ export default function Home() {
       <Hero />
        <About />
        <Pricing />
-      {/* <Stats /> */}
+      <Stats />
+      <Services />
       <WhoWeAre />
-      {/* <Services /> */}
+       <CTA />
       <Work />
+       <GrowthCTA />
+      {/* <BuiltForTeams />      */}
       <Testimonials />
-      <CTA />
-      <BuiltForTeams />
+      <GlobalReach />
+      <RemoteSupport />
     </>
   );
 }

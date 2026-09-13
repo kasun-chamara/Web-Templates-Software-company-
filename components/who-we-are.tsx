@@ -8,7 +8,8 @@ import {
   useSpring,
   animate,
 } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import MouseGlow from "./MouseGlow";
+import { useMouseGlow } from "./useMouseGlow";
 
 const stats = [
   { value: 6, suffix: "+", label: "YEARS ACTIVE" },
@@ -37,19 +38,15 @@ const rise = {
 export default function WhoWeAre() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [showTop, setShowTop] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 500);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { x: glowX, y: glowY, handleMove, handleLeave } = useMouseGlow();
 
   return (
     <section
       ref={sectionRef}
       id="who-we-are"
       className="relative min-h-screen overflow-hidden bg-neutral-950"
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
     >
       {/* Background photo + dark overlay — swap the URL for the real asset */}
       <div className="absolute inset-0">
@@ -58,9 +55,14 @@ export default function WhoWeAre() {
           alt=""
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/70" />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(90deg, rgba(26,4,0,0.88) 0%, rgba(26,4,0,0.6) 55%, rgba(255,43,0,0.35) 100%)" }}
+        />
         <div className="absolute inset-0 bg-black/25" />
       </div>
+
+      <MouseGlow x={glowX} y={glowY} color="rgba(255,43,0,0.45)" midColor="rgba(255,43,0,0.15)" />
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-28 lg:px-10">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
@@ -72,10 +74,11 @@ export default function WhoWeAre() {
           >
             <motion.div
               variants={rise}
-              className="mb-8 inline-flex items-center gap-2 rounded-full border border-rose-200/25 bg-white/5 px-4 py-2 backdrop-blur-sm"
+              className="mb-8 inline-flex items-center gap-2 rounded-full border bg-white/5 px-4 py-2 backdrop-blur-sm"
+              style={{ borderColor: "rgba(255,43,0,0.35)" }}
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-rose-300" />
-              <span className="text-[11px] font-semibold tracking-[0.18em] text-rose-200/90">
+              <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#FF2B00" }} />
+              <span className="text-[11px] font-semibold tracking-[0.18em]" style={{ color: "#FF7A45" }}>
                 WHO WE ARE
               </span>
             </motion.div>
@@ -86,14 +89,13 @@ export default function WhoWeAre() {
             >
               We fuel the
               <br />
-              <span className="relative inline-block text-rose-300">
+              <span className="relative inline-block" style={{ color: "#FF2B00 " }}>
                 digital revolution
                 <motion.span
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  style={{ originX: 0 }}
-                  className="absolute -bottom-2 left-0 h-[3px] w-full bg-rose-300/70"
+                  className="absolute -bottom-2 left-0 h-[3px] w-full"
                 />
               </span>
               <br />
@@ -121,7 +123,11 @@ export default function WhoWeAre() {
             </p>
 
             <p className="mt-6 text-[15px] leading-relaxed text-white/60">
-              Founded in 2020, Kapingar began with a mission to make
+              Founded in 2020,{" "}
+              <span className="text-[19px] font-bold" style={{ color: "#FF2B00" }}>
+                Kapingar
+              </span>{" "}
+              began with a mission to make
               everyday services simpler to find and easier to trust. Today we
               power{" "}
               <span className="font-semibold text-white/85">
@@ -141,7 +147,8 @@ export default function WhoWeAre() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.9 + i * 0.08 }}
-                  className="rounded-full border border-white/15 px-4 py-2 text-[12.5px] font-medium text-white/80"
+                  className="rounded-full border px-4 py-2 text-[12.5px] font-medium"
+                  style={{ borderColor: "rgba(255,43,0,0.5)", color: "#FF2B00" }}
                 >
                   {tag}
                 </motion.span>
@@ -150,21 +157,6 @@ export default function WhoWeAre() {
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll to top */}
-      <motion.button
-        aria-label="Scroll to top"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        initial={{ opacity: 0, scale: 0.7 }}
-        animate={showTop ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.7 }}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.92 }}
-        transition={{ type: "spring", stiffness: 260, damping: 18 }}
-        className="fixed bottom-8 right-8 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-rose-300/90 text-neutral-900 shadow-lg"
-        style={{ pointerEvents: showTop ? "auto" : "none" }}
-      >
-        <ArrowUp className="h-5 w-5" />
-      </motion.button>
     </section>
   );
 }

@@ -2,11 +2,33 @@
 
 import { ArrowRight } from "lucide-react";
 import HeroVisual from "./HeroVisual";
+import MouseGlow from "./MouseGlow";
+import { useMouseGlow } from "./useMouseGlow";
 
 export default function Hero() {
+  const { x, y, handleMove, handleLeave } = useMouseGlow();
+
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#84ceff04]">
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-[#f4f9ff]" />
+    <section
+      className="relative min-h-screen overflow-hidden"
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+    >
+      <MouseGlow x={x} y={y} />
+
+      {/* Mesh net pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(40,23,42,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.06) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          maskImage:
+            "radial-gradient(ellipse 70% 65% at 50% 35%, black 20%, transparent 90%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 65% at 50% 35%, black 20%, transparent 90%)",
+        }}
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
         <div className="text-center mb-10 sm:mb-14">
@@ -44,11 +66,11 @@ export default function Hero() {
        .neon-text {
     background: linear-gradient(
       90deg,
-      #1F2733,
-      #FD1D1D,
-      #3E4856,
-      #1F2733,
-      #111729
+      #1A0400,
+      #FF2B00,
+      #7A1600,
+      #1A0400,
+      #FF2B00
     );
 
     background-size: 300% auto;
@@ -58,7 +80,7 @@ export default function Hero() {
 
     animation: neonMove 30s linear infinite;
 
-    text-shadow: 0 0 20px rgba(100, 130, 160, 0.3);
+    text-shadow: 0 0 20px rgba(255, 43, 0, 0.3);
   }
 
         @keyframes neonMove {

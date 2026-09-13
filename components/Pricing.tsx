@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Rocket, TrendingUp, Crown, Check, ArrowUpRight } from "lucide-react";
+import MouseGlow from "./MouseGlow";
+import { useMouseGlow } from "./useMouseGlow";
 
 const plans = [
   {
@@ -20,7 +22,7 @@ const plans = [
     ],
     note: "Free forever with active booking widget",
     cta: "Get started free",
-    accent: "#10b981",
+    accent: "#FB923C",
     popular: false,
   },
   {
@@ -39,7 +41,7 @@ const plans = [
     ],
     note: null,
     cta: "Choose Grow Local",
-    accent: "#f59e0b",
+    accent: "#FF2B00",
     popular: true,
   },
   {
@@ -58,7 +60,7 @@ const plans = [
     ],
     note: null,
     cta: "Choose Dominate",
-    accent: "#6366f1",
+    accent: "#7A1600",
     popular: false,
   },
 ];
@@ -68,12 +70,17 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export default function Pricing() {
   const headerRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
+  const { x, y, handleMove, handleLeave } = useMouseGlow();
 
   return (
     <section
       id="pricing"
       className="relative overflow-hidden bg-white py-28 md:py-32"
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
     >
+      <MouseGlow x={x} y={y} color="rgba(255,43,0,0.3)" midColor="rgba(255,43,0,0.08)" />
+
       {/* Ambient background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50" />
@@ -81,15 +88,15 @@ export default function Pricing() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(circle, #94a3b8 1px, transparent 1px)",
+              "radial-gradient(circle, #FF2B00 1px, transparent 1px)",
             backgroundSize: "30px 30px",
             maskImage:
               "radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 100%)",
             opacity: 0.25,
           }}
         />
-        <div className="absolute -top-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-amber-200/25 blur-[130px]" />
-        <div className="absolute bottom-0 right-10 h-64 w-80 rounded-full bg-indigo-200/25 blur-[120px]" />
+        <div className="absolute -top-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-orange-300/25 blur-[130px]" />
+        <div className="absolute bottom-0 right-10 h-64 w-80 rounded-full bg-[#1A0400]/20 blur-[120px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
@@ -102,13 +109,16 @@ export default function Pricing() {
           className="mx-auto mb-16 max-w-2xl text-center"
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-600 shadow-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+            <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#FF2B00" }} />
             Pricing
           </span>
 
           <h2 className="mt-6 text-[40px] leading-[1.05] tracking-tight text-slate-900 sm:text-[54px]">
             Choose your{" "}
-            <span className="text-transparent [background-clip:text] [-webkit-background-clip:text] bg-gradient-to-r from-amber-500 to-indigo-600">
+            <span
+              className="text-transparent [background-clip:text] [-webkit-background-clip:text]"
+              style={{ backgroundImage: "linear-gradient(90deg, #FF2B00, #1A0400)" }}
+            >
               growth plan
             </span>
           </h2>
@@ -125,7 +135,7 @@ export default function Pricing() {
           ))}
         </div>
 
-        <p className="mt-10 text-center text-[13px] text-slate-400">
+        <p className="mt-10 text-center text-[13px] font-medium" style={{ color: "#FF2B00" }}>
           All plans include SSL, mobile-first design, and no long-term contract.
         </p>
       </div>
@@ -156,9 +166,10 @@ function PricingCard({
       <div
         className={`relative flex h-full flex-col overflow-hidden rounded-3xl border p-8 transition-transform duration-500 hover:-translate-y-1.5 ${
           dark
-            ? "border-slate-800 bg-slate-950 text-white shadow-[0_40px_100px_-30px_rgba(15,23,42,0.6)] lg:p-9"
+            ? "border-transparent text-white shadow-[0_40px_100px_-30px_rgba(26,4,0,0.6)] lg:p-9"
             : "border-slate-200 bg-white shadow-[0_20px_50px_-24px_rgba(15,23,42,0.25)]"
         }`}
+        style={dark ? { background: "linear-gradient(150deg, #FF2B00 10%, #1A0400 70%)" } : undefined}
       >
         {/* Accent glow */}
         <div
@@ -176,7 +187,11 @@ function PricingCard({
         <div className="flex items-center gap-3">
           <span
             className="flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10"
-            style={{ background: `${plan.accent}1f`, color: plan.accent }}
+            style={
+              dark
+                ? { background: "#ffffff", color: plan.accent }
+                : { background: `${plan.accent}1f`, color: plan.accent }
+            }
           >
             <Icon className="h-5 w-5" />
           </span>
@@ -234,8 +249,8 @@ function PricingCard({
         </ul>
 
         {plan.note && (
-          <div className="mt-6 rounded-lg border border-emerald-100 bg-emerald-50 px-4 py-2.5">
-            <p className="text-[12px] italic text-emerald-700">{plan.note}</p>
+          <div className="mt-6 rounded-lg border border-orange-100 bg-orange-50 px-4 py-2.5">
+            <p className="text-[12px] italic text-orange-700">{plan.note}</p>
           </div>
         )}
 

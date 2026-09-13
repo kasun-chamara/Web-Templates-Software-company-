@@ -13,8 +13,8 @@ import {
   FaGlobe,
   FaAward,
   FaPalette,
-  FaUser,
 } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa6";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -162,9 +162,9 @@ export default function HeroVisual() {
       <div className="relative w-full max-w-7xl">
         {/* Ambient glow behind the frame */}
         <div className="pointer-events-none absolute -inset-x-10 -top-20 bottom-0 -z-10">
-          <div className="absolute left-[10%] top-0 h-72 w-72 rounded-full bg-blue-400/25 blur-[120px]" />
-          <div className="absolute right-[8%] top-24 h-80 w-80 rounded-full bg-cyan-300/20 blur-[120px]" />
-          <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-indigo-400/15 blur-[110px]" />
+          <div className="absolute left-[10%] top-0 h-72 w-72 rounded-full bg-orange-400/25 blur-[120px]" />
+          <div className="absolute right-[8%] top-24 h-80 w-80 rounded-full bg-amber-300/20 blur-[120px]" />
+          <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-orange-500/15 blur-[110px]" />
         </div>
 
         <motion.div
@@ -176,9 +176,9 @@ export default function HeroVisual() {
           {/* Browser Header */}
           <div className="flex h-12 items-center border-b border-slate-100 px-4 sm:h-14 sm:px-5">
             <div className="flex gap-2">
-              <div className="h-2.5 w-2.5 rounded-full bg-slate-200 sm:h-3 sm:w-3" />
-              <div className="h-2.5 w-2.5 rounded-full bg-slate-200 sm:h-3 sm:w-3" />
-              <div className="h-2.5 w-2.5 rounded-full bg-slate-200 sm:h-3 sm:w-3" />
+              <div className="h-2.5 w-2.5 rounded-full sm:h-3 sm:w-3" style={{ background: "#FF2B00" }} />
+              <div className="h-2.5 w-2.5 rounded-full sm:h-3 sm:w-3" style={{ background: "#D12300" }} />
+              <div className="h-2.5 w-2.5 rounded-full sm:h-3 sm:w-3" style={{ background: "#751400" }} />
             </div>
             <div className="mx-auto flex items-center gap-2 rounded-full bg-slate-50 px-5 py-1.5 text-xs text-slate-400 ring-1 ring-slate-100 sm:px-8 sm:text-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
@@ -225,7 +225,7 @@ export default function HeroVisual() {
                           key={i}
                           className={`flex h-6 w-6 items-center justify-center rounded-full ${c} border-2 border-white text-white`}
                         >
-                          <FaUser className="h-3 w-3" />
+                          <FaRegUser className="h-3 w-3" />
                         </div>
                       )
                     )}

@@ -27,8 +27,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-body)", "DM Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Syne", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["var(--font-body)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "monospace"],
       },
       animation: {

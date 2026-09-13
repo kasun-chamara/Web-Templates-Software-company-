@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import MouseGlow from "./MouseGlow";
+import { useMouseGlow } from "./useMouseGlow";
 
 const features = [
   {
@@ -10,7 +12,7 @@ const features = [
       "We architect software that fits your exact workflow — not the other way around. Every system we build is designed with your team, your data, and your scale in mind.",
     tags: ["Web Apps", "APIs", "SaaS"],
     visual: "dashboard",
-    accent: "#22c55e",
+    accent: "#FF2B00",
   },
   {
     id: 2,
@@ -18,7 +20,7 @@ const features = [
     description:
       "From sprint planning to deployment, our process is transparent and fast. CI/CD pipelines, automated testing, and agile iteration keep your project moving.",
     visual: "pipeline",
-    accent: "#3b82f6",
+    accent: "#D12300",
   },
   {
     id: 3,
@@ -26,7 +28,7 @@ const features = [
     description:
       "Every line of code is reviewed, tested, and auditable. We follow best practices for security and compliance so you can ship with confidence.",
     visual: "shield",
-    accent: "#a855f7",
+    accent: "#751400",
   },
 ];
 
@@ -36,9 +38,9 @@ function DashboardVisual() {
   return (
     <div className="visual-dashboard">
       {[
-        { label: "UI/UX Design", time: "2d", color: "#22c55e" },
-        { label: "API Integration", time: "5d", color: "#f59e0b" },
-        { label: "Deployment", time: "1d", color: "#22c55e" },
+        { label: "UI/UX Design", time: "2d", color: "#FF2B00" },
+        { label: "API Integration", time: "5d", color: "#FF7A3D" },
+        { label: "Deployment", time: "1d", color: "#FF2B00" },
       ].map((item, i) => (
         <div key={i} className="dash-row" style={{ animationDelay: `${i * 0.15}s` }}>
           <span className="dash-dot" style={{ background: item.color }} />
@@ -76,13 +78,13 @@ function PipelineVisual() {
           <span
             className="pipe-icon"
             style={{
-              background: s.done ? "#22c55e" : s.active ? "#f59e0b" : "transparent",
+              background: s.done ? "#FF2B00" : s.active ? "#FF7A3D" : "transparent",
               border: s.done || s.active ? "none" : "1.5px solid #444",
             }}
           >
             {s.done ? "✓" : s.active ? "●" : ""}
           </span>
-          <span className="pipe-label" style={{ color: s.done ? "#d1fae5" : s.active ? "#fef08a" : "#555" }}>
+          <span className="pipe-label" style={{ color: s.done ? "#FFC9A8" : s.active ? "#FFD9BB" : "#555" }}>
             {s.label}
           </span>
           <span className="pipe-time">{`${(i + 1) * 10}s`}</span>
@@ -99,21 +101,21 @@ function ShieldVisual() {
         <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="shield-svg">
           <defs>
             <linearGradient id="shieldGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#a855f7" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.08" />
+              <stop offset="0%" stopColor="#FF2B00" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#751400" stopOpacity="0.08" />
             </linearGradient>
           </defs>
           <path
             d="M60 8 L108 28 L108 72 C108 98 86 118 60 130 C34 118 12 98 12 72 L12 28 Z"
             fill="url(#shieldGrad)"
-            stroke="#a855f7"
+            stroke="#FF2B00"
             strokeWidth="2"
             strokeOpacity="0.5"
           />
           <path
             d="M60 22 L96 38 L96 70 C96 90 80 106 60 116 C40 106 24 90 24 70 L24 38 Z"
             fill="none"
-            stroke="#a855f7"
+            stroke="#FF2B00"
             strokeWidth="1.5"
             strokeOpacity="0.3"
           />
@@ -124,13 +126,13 @@ function ShieldVisual() {
               cy="72"
               r={r - 20}
               fill="none"
-              stroke="#a855f7"
+              stroke="#FF2B00"
               strokeWidth="1.2"
               strokeOpacity={0.15 + i * 0.07}
               strokeDasharray={i % 2 === 0 ? "none" : "4 3"}
             />
           ))}
-          <circle cx="60" cy="72" r="6" fill="#a855f7" fillOpacity="0.6" />
+          <circle cx="60" cy="72" r="6" fill="#FF2B00" fillOpacity="0.6" />
         </svg>
         <div className="shield-label">SOC 2 Ready</div>
         <div className="shield-sublabel">Fully auditable · Zero trust architecture</div>
@@ -207,26 +209,45 @@ function AnimatedCard({
 
 export default function BuiltForTeams() {
   const [expanded, setExpanded] = useState<number | null>(null);
+  const { x, y, handleMove, handleLeave } = useMouseGlow();
 
   return (
     <>
-      <style>{`
-        /* ── Outer wrapper — provides the side padding so the black box floats ── */
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* Outer wrapper - provides the side padding so the dark box floats.
+           Background matches the dark sections above/below so the padding gaps
+           do not show the page background between them. */
         .bft-outer {
           padding: 0 42px;
+          background: #1A0400;
         }
 
-        /* ── The black section itself — now has border-radius ── */
+        /* ── The dark section itself — now has border-radius ── */
         .bft-section {
-          background: #0a0a0a;
+          position: relative;
+          overflow: hidden;
+          background: #0a0400;
           padding: 96px 48px;
           min-height: 100vh;
           color: #fff;
           border-radius: 40px;
         }
 
+        /* Dot-grid texture — distinct from Testimonials' line grid */
+        .bft-dots {
+          position: absolute;
+          inset: 0;
+          opacity: 0.12;
+          background-image: radial-gradient(circle, rgba(255,122,61,0.8) 1.4px, transparent 1.4px);
+          background-size: 26px 26px;
+          -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 90%);
+          mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 90%);
+        }
+
         /* Header */
         .bft-header {
+          position: relative;
+          z-index: 5;
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
@@ -259,6 +280,8 @@ export default function BuiltForTeams() {
 
         /* Grid */
         .bft-grid {
+          position: relative;
+          z-index: 5;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 20px;
@@ -473,22 +496,25 @@ export default function BuiltForTeams() {
 
         .shield-svg {
           width: 120px; height: 140px;
-          filter: drop-shadow(0 0 24px rgba(168,85,247,0.2));
+          filter: drop-shadow(0 0 24px rgba(255,43,0,0.25));
           animation: shieldPulse 3s ease-in-out infinite;
         }
 
         @keyframes shieldPulse {
-          0%, 100% { filter: drop-shadow(0 0 18px rgba(168,85,247,0.15)); }
-          50%       { filter: drop-shadow(0 0 32px rgba(168,85,247,0.35)); }
+          0%, 100% { filter: drop-shadow(0 0 18px rgba(255,43,0,0.18)); }
+          50%       { filter: drop-shadow(0 0 32px rgba(255,43,0,0.4)); }
         }
 
-        .shield-label { font-size: 0.85rem; font-weight: 600; color: #d8b4fe; letter-spacing: 0.02em; }
+        .shield-label { font-size: 0.85rem; font-weight: 600; color: #FFB088; letter-spacing: 0.02em; }
         .shield-sublabel { font-size: 0.72rem; color: #555; text-align: center; }
-      `}</style>
+      ` }} />
 
       {/* Outer wrapper adds side padding so black section floats with rounded corners */}
       <div className="bft-outer">
-        <section className="bft-section">
+        <section className="bft-section" onMouseMove={handleMove} onMouseLeave={handleLeave}>
+          <div className="bft-dots" />
+          <MouseGlow x={x} y={y} color="rgba(255,122,61,0.5)" midColor="rgba(255,43,0,0.18)" />
+
           {/* Header */}
           <div className="bft-header">
             <h2 className="bft-heading">

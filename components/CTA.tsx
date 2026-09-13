@@ -1,9 +1,66 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useRef } from "react";
-import { ArrowRight, Mail } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Mail, Check } from "lucide-react";
 import { motion } from "framer-motion";
+import MouseGlow from "./MouseGlow";
+import { useMouseGlow } from "./useMouseGlow";
+
+/* ── Email capture form ── */
+function EmailForm() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubmitted(true);
+  };
+
+  if (submitted) {
+    return (
+      <div
+        className="flex items-center gap-3 rounded-xl px-5 py-4 text-sm font-semibold"
+        style={{ background: "rgba(255,43,0,0.08)", border: "1px solid rgba(255,43,0,0.3)", color: "#751400" }}
+      >
+        <Check className="w-4 h-4 shrink-0" style={{ color: "#FF2B00" }} />
+        Thanks — we&apos;ll be in touch at {email} within 24 hours.
+      </div>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto lg:mx-0"
+    >
+      <div className="relative flex-1">
+        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@company.com"
+          className="w-full rounded-xl py-3.5 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 bg-white outline-none transition-colors duration-300 border focus:border-[#FF2B00]"
+          style={{ borderColor: "rgba(15,23,42,0.15)" }}
+        />
+      </div>
+      <button
+        type="submit"
+        className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white text-sm shrink-0 transition-transform duration-300 hover:-translate-y-0.5"
+        style={{
+          backgroundImage: "linear-gradient(90deg, #FF2B00)",
+          boxShadow: "0 4px 20px rgba(255,43,0,0.3)",
+        }}
+      >
+        Get Started
+        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+      </button>
+    </form>
+  );
+}
 
 /* ── Word-by-word reveal ── */
 function WordReveal({ line1, line2 }: { line1: string; line2: string }) {
@@ -75,13 +132,12 @@ function MeteorCanvas() {
       colorIdx: number;
     };
 
-    // Alternating blue tones for the meteors
+    // Alternating orange/black theme tones for the meteors
     const COLORS = [
-      { r: 30,  g: 64,  b: 175 },  // blue-800
-      { r: 37,  g: 99,  b: 235 },  // blue-600
-      { r: 14,  g: 165, b: 233 },  // sky-500
-      { r: 15,  g: 23,  b: 42  },  // slate-950 (near black)
-      { r: 59,  g: 130, b: 246 },  // blue-500
+      { r: 255, g: 43,  b: 0   },  // #FF2B00
+      { r: 209, g: 35,  b: 0   },  // #D12300
+      { r: 117, g: 20,  b: 0   },  // #751400
+      { r: 26,  g: 4,   b: 0   },  // #1A0400 (near black)
     ];
 
     const METEOR_COUNT = 22;
@@ -164,18 +220,25 @@ function MeteorCanvas() {
 }
 
 export default function CTA() {
+  const { x, y, handleMove, handleLeave } = useMouseGlow();
+
   return (
-    <section className="relative py-24 overflow-hidden bg-white sm:py-32 md:py-40">
+    <section
+      className="relative py-24 overflow-hidden bg-white sm:py-32 md:py-40"
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+    >
+      <MouseGlow x={x} y={y} color="rgba(255,43,0,0.3)" midColor="rgba(255,43,0,0.08)" />
 
       {/* Meteor shower */}
       <MeteorCanvas />
 
-      {/* Very light blue tint in centre so meteors pop */}
+      {/* Very light orange tint in centre so meteors pop */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 75% 65% at 50% 50%, rgba(219,234,254,0.55) 0%, transparent 70%)",
+            "radial-gradient(ellipse 75% 65% at 50% 50%, rgba(255,43,0,0.10) 0%, transparent 70%)",
         }}
       />
 
@@ -184,7 +247,7 @@ export default function CTA() {
         className="absolute top-0 left-1/2 -translate-x-1/2 h-px pointer-events-none"
         style={{
           width: "55%",
-          background: "linear-gradient(90deg, transparent, rgba(30,64,175,0.25), transparent)",
+          background: "linear-gradient(90deg, transparent, rgba(255,43,0,0.3), transparent)",
         }}
       />
 
@@ -193,7 +256,7 @@ export default function CTA() {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 h-px pointer-events-none"
         style={{
           width: "35%",
-          background: "linear-gradient(90deg, transparent, rgba(30,64,175,0.12), transparent)",
+          background: "linear-gradient(90deg, transparent, rgba(255,43,0,0.15), transparent)",
         }}
       />
 
@@ -201,78 +264,73 @@ export default function CTA() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(30,64,175,0.07) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(255,43,0,0.08) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-        {/* Badge — black text + black border */}
-        <div className="inline-flex items-center gap-2 mb-10">
-          <span
-            className="text-xs font-semibold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full text-slate-900"
-            style={{
-              background: "rgba(255,255,255,0.85)",
-              border: "1px solid rgba(15,23,42,0.25)",
-              backdropFilter: "blur(6px)",
-            }}
-          >
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mr-2 align-middle" />
-            Ready to Build
-          </span>
+          {/* Left — illustration */}
+          <div className="relative order-2 lg:order-1 flex justify-center">
+            <Image
+              src="/images/Email campaign-pana.svg"
+              alt="Email campaign illustration"
+              width={950}
+              height={500}
+              className="w-full max-w-md h-auto"
+              priority
+            />
+          </div>
+
+          {/* Right — copy + email form */}
+          <div className="order-1 lg:order-2 text-center lg:text-left">
+
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 mb-8">
+              <span
+                className="text-xs font-semibold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full text-slate-900"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  border: "1px solid rgba(15,23,42,0.25)",
+                  backdropFilter: "blur(6px)",
+                }}
+              >
+                <span className="inline-block w-1.5 h-1.5 rounded-full mr-2 align-middle" style={{ background: "#FF2B00" }} />
+                Ready to Build
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h2 className="text-[36px] sm:text-5xl md:text-6xl font-black leading-[1.05] tracking-tight mb-6">
+              <WordReveal line1="Let's Build Something" line2="That Lasts" />
+            </h2>
+
+            {/* Subtext */}
+            <p className="text-slate-500 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed mb-8">
+              Whether you&apos;re an early-stage startup or an enterprise team,
+              we&apos;re ready to engineer your next breakthrough.
+            </p>
+
+            {/* Email form */}
+            <EmailForm />
+
+            {/* Divider + footnote */}
+            <div className="mt-10 flex flex-col items-center lg:items-start gap-4">
+              <div
+                className="w-32 h-px"
+                style={{
+                  background: "linear-gradient(90deg, rgba(255,43,0,0.4), transparent)",
+                }}
+              />
+              <p className="text-slate-400 text-xs tracking-wide">
+                Response within 24 hours &nbsp;·&nbsp; No NDAs needed to start a conversation
+              </p>
+            </div>
+          </div>
+
         </div>
-
-        {/* Headline — all black */}
-        <h2 className="text-[40px] sm:text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6">
-          <WordReveal line1="Let's Build Something" line2="That Lasts" />
-        </h2>
-
-        {/* Subtext */}
-        <p className="text-slate-500 text-base sm:text-lg max-w-lg mx-auto leading-relaxed mb-10 sm:mb-14">
-          Whether you&apos;re an early-stage startup or an enterprise team,
-          we&apos;re ready to engineer your next breakthrough.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-
-          {/* Primary — solid black */}
-          <Link
-            href="/contact"
-            className="group relative inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl font-semibold text-white text-sm bg-slate-900 transition-all duration-300 hover:bg-slate-700"
-            style={{ boxShadow: "0 4px 20px rgba(15,23,42,0.22)" }}
-          >
-            <span className="relative z-10 flex items-center gap-2.5">
-              Start a Project
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </span>
-          </Link>
-
-          {/* Ghost — black border + black text */}
-          <a
-            href="mailto:hello@nexalab.io"
-            className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl font-semibold text-sm text-slate-900 bg-white transition-all duration-300 border border-slate-900 hover:bg-slate-50"
-            style={{ backdropFilter: "blur(6px)" }}
-          >
-            <Mail className="w-4 h-4 text-slate-900" />
-            hello@nexalab.io
-          </a>
-        </div>
-
-        {/* Divider + footnote */}
-        <div className="mt-14 sm:mt-20 flex flex-col items-center gap-4">
-          <div
-            className="w-32 h-px"
-            style={{
-              background: "linear-gradient(90deg, transparent, rgba(30,64,175,0.3), transparent)",
-            }}
-          />
-          <p className="text-slate-400 text-xs tracking-wide">
-            Response within 24 hours &nbsp;·&nbsp; No NDAs needed to start a conversation
-          </p>
-        </div>
-
       </div>
     </section>
   );
