@@ -125,6 +125,7 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   border: none;
   box-shadow: 0 4px 20px rgba(255, 43, 0, 0.3);
 }
@@ -132,6 +133,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: -1;
   background: linear-gradient(135deg, #FF5A33, #FF2B00);
   opacity: 0;
   transition: opacity 0.3s ease;

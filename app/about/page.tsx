@@ -35,9 +35,9 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {team.map((m, i) => (
               <div key={i} className="glass-card rounded-2xl p-6 text-center group">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-lg mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" style={{ fontFamily: "var(--font-display)" }}>{m.avatar}</div>
+                <div className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" style={{ fontFamily: "var(--font-display)", backgroundImage: "linear-gradient(135deg, #FF2B00, #1A0400)" }}>{m.avatar}</div>
                 <div className="text-slate-900 dark:text-white font-semibold text-sm" style={{ fontFamily: "var(--font-display)" }}>{m.name}</div>
-                <div className="text-blue-500 text-xs mt-1" style={{ fontFamily: "var(--font-display)" }}>{m.role}</div>
+                <div className="text-xs mt-1" style={{ fontFamily: "var(--font-display)", color: "#FF2B00" }}>{m.role}</div>
                 <div className="text-slate-400 dark:text-zinc-500 text-xs mt-2">{m.specialty}</div>
               </div>
             ))}
