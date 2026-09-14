@@ -16,36 +16,36 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="pt-32 sm:pt-40 pb-12 sm:pb-16 text-center bg-white">
+      <section className="pt-32 sm:pt-40 pb-12 sm:pb-16 text-center bg-white dark:bg-zinc-950">
         <div className="max-w-3xl mx-auto px-6">
           <span className="section-tag mb-6">Contact</span>
-          <h1 className="text-[38px] sm:text-5xl md:text-7xl font-extrabold text-slate-900 mt-4 leading-[1.08]">
+          <h1 className="text-[38px] sm:text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white mt-4 leading-[1.08]">
             Start a<span className="gradient-text block">Conversation</span>
           </h1>
-          <p className="text-slate-500 text-base sm:text-lg mt-6">No pitches, no NDAs required — just an honest conversation about your project.</p>
+          <p className="text-slate-500 dark:text-zinc-400 text-base sm:text-lg mt-6">No pitches, no NDAs required — just an honest conversation about your project.</p>
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 bg-slate-50">
+      <section className="py-16 sm:py-20 bg-slate-50 dark:bg-zinc-950">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12">
           <div className="lg:col-span-2 space-y-8">
             {info.map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-zinc-900 border border-orange-100 dark:border-zinc-800 flex items-center justify-center flex-shrink-0">
                   <Icon className="w-5 h-5 text-[#FF2B00]" />
                 </div>
                 <div>
-                  <div className="text-slate-400 text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "var(--font-display)" }}>{label}</div>
-                  <div className="text-slate-800 font-medium">{value}</div>
+                  <div className="text-slate-400 dark:text-zinc-500 text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "var(--font-display)" }}>{label}</div>
+                  <div className="text-slate-800 dark:text-white font-medium">{value}</div>
                 </div>
               </div>
             ))}
             <div className="glass-card rounded-2xl p-6 mt-8">
               <div className="text-[#FF2B00] font-bold mb-3" style={{ fontFamily: "var(--font-display)" }}>Our Process</div>
-              <ul className="space-y-3 text-slate-500 text-sm">
+              <ul className="space-y-3 text-slate-500 dark:text-zinc-400 text-sm">
                 {["Discovery call (30 min)", "Proposal & scope in 3 days", "Kickoff within 2 weeks", "Weekly progress updates"].map((step, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <span className="w-5 h-5 rounded-full bg-orange-50 text-[#FF2B00] text-xs flex items-center justify-center font-bold flex-shrink-0 border border-orange-100" style={{ fontFamily: "var(--font-display)" }}>{i + 1}</span>{step}
+                    <span className="w-5 h-5 rounded-full bg-orange-50 dark:bg-zinc-900 text-[#FF2B00] text-xs flex items-center justify-center font-bold flex-shrink-0 border border-orange-100 dark:border-zinc-800" style={{ fontFamily: "var(--font-display)" }}>{i + 1}</span>{step}
                   </li>
                 ))}
               </ul>
@@ -56,8 +56,8 @@ export default function ContactPage() {
             {sent ? (
               <div className="text-center py-16">
                 <div className="text-5xl mb-4">🚀</div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-3" style={{ fontFamily: "var(--font-display)" }}>Message Sent!</h3>
-                <p className="text-slate-500">We'll be in touch within 24 hours.</p>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3" style={{ fontFamily: "var(--font-display)" }}>Message Sent!</h3>
+                <p className="text-slate-500 dark:text-zinc-400">We'll be in touch within 24 hours.</p>
               </div>
             ) : (
               <form onSubmit={submit} className="space-y-5">
@@ -68,15 +68,15 @@ export default function ContactPage() {
                     { name: "company", label: "Company", placeholder: "Acme Inc.", type: "text" },
                   ].map((f) => (
                     <div key={f.name}>
-                      <label className="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-widest" style={{ fontFamily: "var(--font-display)" }}>{f.label}</label>
+                      <label className="block text-xs font-bold text-slate-500 dark:text-zinc-400 mb-2 uppercase tracking-widest" style={{ fontFamily: "var(--font-display)" }}>{f.label}</label>
                       <input type={f.type} name={f.name} value={(form as Record<string, string>)[f.name]} onChange={handle} placeholder={f.placeholder}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#FF2B00] focus:ring-2 focus:ring-orange-50 transition-all" />
+                        className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 text-sm focus:outline-none focus:border-[#FF2B00] focus:ring-2 focus:ring-orange-50 dark:focus:ring-orange-950 transition-all" />
                     </div>
                   ))}
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-widest" style={{ fontFamily: "var(--font-display)" }}>Budget Range</label>
+                    <label className="block text-xs font-bold text-slate-500 dark:text-zinc-400 mb-2 uppercase tracking-widest" style={{ fontFamily: "var(--font-display)" }}>Budget Range</label>
                     <select name="budget" value={form.budget} onChange={handle}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-[#FF2B00] focus:ring-2 focus:ring-orange-50 transition-all">
+                      className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 rounded-lg px-4 py-3 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-[#FF2B00] focus:ring-2 focus:ring-orange-50 dark:focus:ring-orange-950 transition-all">
                       <option value="">Select range...</option>
                       <option>$10k – $25k</option>
                       <option>$25k – $50k</option>
@@ -86,10 +86,10 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-widest" style={{ fontFamily: "var(--font-display)" }}>Tell us about your project</label>
+                  <label className="block text-xs font-bold text-slate-500 dark:text-zinc-400 mb-2 uppercase tracking-widest" style={{ fontFamily: "var(--font-display)" }}>Tell us about your project</label>
                   <textarea name="message" value={form.message} onChange={handle} required rows={5}
                     placeholder="What are you building? What's the challenge? What does success look like?"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#FF2B00] focus:ring-2 focus:ring-orange-50 transition-all resize-none" />
+                    className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 text-sm focus:outline-none focus:border-[#FF2B00] focus:ring-2 focus:ring-orange-50 dark:focus:ring-orange-950 transition-all resize-none" />
                 </div>
                 <button type="submit" className="btn-primary w-full justify-center">
                   Send Message <Send className="w-4 h-4" />

@@ -57,7 +57,14 @@ function WorldMapVisual() {
           src="/images/map.svg"
           alt="World map showing our client locations"
           fill
-          className="object-contain"
+          className="object-contain block dark:hidden"
+          priority
+        />
+        <Image
+          src="/images/mapdark.svg"
+          alt="World map showing our client locations"
+          fill
+          className="object-contain hidden dark:block"
           priority
         />
         {pins.map((p, i) => (
@@ -84,7 +91,7 @@ function WorldMapVisual() {
 
 export default function GlobalReach() {
   return (
-    <section className="relative overflow-hidden bg-white py-24 sm:py-28">
+    <section className="relative overflow-hidden bg-white dark:bg-zinc-950 py-24 sm:py-28">
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -101,12 +108,12 @@ export default function GlobalReach() {
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2 lg:px-10">
         {/* Left — copy */}
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-600 shadow-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-600 dark:text-zinc-400 shadow-sm">
             <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#FF2B00" }} />
             Global Reach
           </span>
 
-          <h2 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight text-slate-900 sm:text-5xl">
+          <h2 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight text-slate-900 dark:text-white sm:text-5xl">
             Trusted by{" "}
             <span
               className="bg-clip-text text-transparent"
@@ -118,7 +125,7 @@ export default function GlobalReach() {
             across the globe
           </h2>
 
-          <p className="mt-5 max-w-md text-base leading-relaxed text-slate-500">
+          <p className="mt-5 max-w-md text-base leading-relaxed text-slate-500 dark:text-zinc-400">
             From local startups to businesses overseas, we&apos;ve partnered with 250+
             clients in 10+ countries — delivering digital solutions that work no
             matter where you&apos;re based.
@@ -140,7 +147,7 @@ export default function GlobalReach() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition-all duration-200 hover:border-[#FF2B00]/40 hover:text-[#FF2B00]"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 transition-all duration-200 hover:border-[#FF2B00]/40 hover:text-[#FF2B00]"
                 >
                   <Icon className="h-4 w-4" />
                 </a>

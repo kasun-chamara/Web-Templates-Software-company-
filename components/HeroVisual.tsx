@@ -33,15 +33,15 @@ function Badge({
 }) {
   return (
     <div
-      className={`absolute z-10 flex items-center gap-2.5 rounded-full bg-white/80 py-1.5 pl-1.5 pr-4 shadow-[0_8px_24px_-8px_rgba(15,23,42,0.25)] ring-1 ring-black/5 backdrop-blur-md ${className}`}
+      className={`absolute z-10 flex items-center gap-2.5 rounded-full bg-white/80 py-1.5 pl-1.5 pr-4 shadow-[0_8px_24px_-8px_rgba(15,23,42,0.25)] ring-1 ring-black/5 backdrop-blur-md dark:bg-zinc-900/80 dark:shadow-black/30 dark:ring-white/10 ${className}`}
     >
-      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[11px] text-blue-600">
+      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-[11px] text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         {icon}
       </div>
       <div className="leading-tight">
-        <div className="text-[11px] font-semibold text-slate-800">{title}</div>
+        <div className="text-[11px] font-semibold text-slate-800 dark:text-white">{title}</div>
         {subtitle && (
-          <div className="-mt-0.5 text-[10px] text-slate-500">{subtitle}</div>
+          <div className="-mt-0.5 text-[10px] text-slate-500 dark:text-zinc-400">{subtitle}</div>
         )}
       </div>
     </div>
@@ -104,7 +104,7 @@ function Tile({
 }) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-2xl ring-1 ring-slate-200/60 ${className}`}
+      className={`group relative overflow-hidden rounded-2xl ring-1 ring-slate-200/60 dark:ring-white/10 ${className}`}
     >
       <Image
         src={src}
@@ -146,7 +146,7 @@ function Floater({
       <motion.div
         animate={animate}
         transition={{ duration, repeat: Infinity, ease: "easeInOut" }}
-        className="rounded-2xl bg-white/90 p-4 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70 backdrop-blur"
+        className="rounded-2xl bg-white/90 p-4 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70 backdrop-blur dark:bg-zinc-900/90 dark:shadow-black/30 dark:ring-zinc-800"
       >
         {children}
       </motion.div>
@@ -171,16 +171,16 @@ export default function HeroVisual() {
           initial={{ opacity: 0, y: 40, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="relative z-10 overflow-hidden rounded-[32px] border border-slate-200/70 bg-white shadow-[0_40px_120px_-30px_rgba(15,23,42,0.4)]"
+          className="relative z-10 overflow-hidden rounded-[32px] border border-slate-200/70 bg-white shadow-[0_40px_120px_-30px_rgba(15,23,42,0.4)] dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/30"
         >
           {/* Browser Header */}
-          <div className="flex h-12 items-center border-b border-slate-100 px-4 sm:h-14 sm:px-5">
+          <div className="flex h-12 items-center border-b border-slate-100 px-4 dark:border-zinc-800 sm:h-14 sm:px-5">
             <div className="flex gap-2">
               <div className="h-2.5 w-2.5 rounded-full sm:h-3 sm:w-3" style={{ background: "#FF2B00" }} />
               <div className="h-2.5 w-2.5 rounded-full sm:h-3 sm:w-3" style={{ background: "#D12300" }} />
               <div className="h-2.5 w-2.5 rounded-full sm:h-3 sm:w-3" style={{ background: "#751400" }} />
             </div>
-            <div className="mx-auto flex items-center gap-2 rounded-full bg-slate-50 px-5 py-1.5 text-xs text-slate-400 ring-1 ring-slate-100 sm:px-8 sm:text-sm">
+            <div className="mx-auto flex items-center gap-2 rounded-full bg-slate-50 px-5 py-1.5 text-xs text-slate-400 ring-1 ring-slate-100 dark:bg-zinc-800 dark:text-zinc-500 dark:ring-zinc-700 sm:px-8 sm:text-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               youragency.com
             </div>
@@ -217,13 +217,13 @@ export default function HeroVisual() {
                 />
 
                 {/* Floating avatar-stack badge */}
-                <div className="absolute -bottom-3 z-20 flex items-center gap-2 rounded-full bg-white/90 py-1.5 pl-1.5 pr-4 shadow-[0_12px_32px_-10px_rgba(15,23,42,0.3)] ring-1 ring-slate-200/70 backdrop-blur">
+                <div className="absolute -bottom-3 z-20 flex items-center gap-2 rounded-full bg-white/90 py-1.5 pl-1.5 pr-4 shadow-[0_12px_32px_-10px_rgba(15,23,42,0.3)] ring-1 ring-slate-200/70 backdrop-blur dark:bg-zinc-900/90 dark:shadow-black/30 dark:ring-zinc-800">
                   <div className="flex -space-x-2">
                     {["bg-slate-800", "bg-slate-600", "bg-blue-700", "bg-blue-500"].map(
                       (c, i) => (
                         <div
                           key={i}
-                          className={`flex h-6 w-6 items-center justify-center rounded-full ${c} border-2 border-white text-white`}
+                          className={`flex h-6 w-6 items-center justify-center rounded-full ${c} border-2 border-white text-white dark:border-zinc-900`}
                         >
                           <FaRegUser className="h-3 w-3" />
                         </div>
@@ -231,10 +231,10 @@ export default function HeroVisual() {
                     )}
                   </div>
                   <div className="leading-tight">
-                    <div className="text-[11px] font-semibold text-slate-800">
+                    <div className="text-[11px] font-semibold text-slate-800 dark:text-white">
                       100+ Team
                     </div>
-                    <div className="-mt-0.5 text-[10px] text-slate-500">Engineers</div>
+                    <div className="-mt-0.5 text-[10px] text-slate-500 dark:text-zinc-400">Engineers</div>
                   </div>
                 </div>
               </div>
@@ -272,11 +272,11 @@ export default function HeroVisual() {
                       label="Platforms Delivered"
                       className="bottom-3 left-4"
                     />
-                    <div className="absolute -right-3 bottom-8 z-10 flex items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2 pr-4 shadow-lg ring-1 ring-slate-200/70 backdrop-blur">
-                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-xs text-blue-600">
+                    <div className="absolute -right-3 bottom-8 z-10 flex items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2 pr-4 shadow-lg ring-1 ring-slate-200/70 backdrop-blur dark:bg-zinc-900/90 dark:shadow-black/30 dark:ring-zinc-800">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-xs text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
                         <FaShieldAlt />
                       </div>
-                      <span className="text-[11px] font-semibold text-slate-800">
+                      <span className="text-[11px] font-semibold text-slate-800 dark:text-white">
                         Trusted Since 2014
                       </span>
                     </div>
@@ -307,22 +307,22 @@ export default function HeroVisual() {
                 <div className="grid grid-cols-3 gap-3 sm:gap-4">
                   <Tile src="/images/laptop.jpg" alt="Laptop" className="h-28 sm:h-44" />
                   <Tile src="/images/programming.jpg" alt="Programming" className="h-28 sm:h-44" />
-                  <div className="relative h-28 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200/60 sm:h-44">
+                  <div className="relative h-28 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200/60 dark:bg-zinc-900 dark:ring-zinc-800 sm:h-44">
                     <Image
                       src="/images/server.jpg"
                       alt="Server"
                       fill
                       className="object-cover opacity-80"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
-                    <div className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-xs text-slate-600 ring-1 ring-slate-200/70">
+                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent dark:from-zinc-900 dark:via-zinc-900/40" />
+                    <div className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-xs text-slate-600 ring-1 ring-slate-200/70 dark:bg-zinc-800/90 dark:text-zinc-400 dark:ring-zinc-700">
                       <FaPalette />
                     </div>
                     <div className="absolute bottom-3 left-3 z-10">
-                      <div className="text-[10px] font-medium uppercase tracking-[0.12em] text-slate-500">
+                      <div className="text-[10px] font-medium uppercase tracking-[0.12em] text-slate-500 dark:text-zinc-400">
                         Design-first
                       </div>
-                      <div className="-mt-0.5 text-lg font-bold text-slate-900">
+                      <div className="-mt-0.5 text-lg font-bold text-slate-900 dark:text-white">
                         UI/UX
                       </div>
                     </div>
@@ -368,7 +368,7 @@ export default function HeroVisual() {
           duration={5.5}
           delay={0.5}
         >
-          <FaServer className="text-3xl text-slate-700" />
+          <FaServer className="text-3xl text-slate-700 dark:text-zinc-300" />
         </Floater>
 
         <Floater
@@ -377,7 +377,7 @@ export default function HeroVisual() {
           duration={4.5}
           delay={0.45}
         >
-          <FaCode className="text-3xl text-slate-900" />
+          <FaCode className="text-3xl text-slate-900 dark:text-white" />
         </Floater>
       </div>
     </div>

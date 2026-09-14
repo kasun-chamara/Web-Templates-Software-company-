@@ -89,7 +89,7 @@ function ServiceCard({ svc, index }: { svc: ServiceItem; index: number }) {
   const gradient = iconGradients[index % iconGradients.length];
   return (
     <div
-      className="reveal group relative isolate overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_4px_20px_-8px_rgba(15,23,42,0.12)] transition-all duration-500 hover:-translate-y-1 hover:border-[#FF2B00]/40 hover:shadow-[0_20px_40px_-16px_rgba(255,43,0,0.25)]"
+      className="reveal group relative isolate overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_4px_20px_-8px_rgba(15,23,42,0.12)] transition-all duration-500 hover:-translate-y-1 hover:border-[#FF2B00]/40 hover:shadow-[0_20px_40px_-16px_rgba(255,43,0,0.25)] dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/30"
       style={{ transitionDelay: `${index * 0.05}s` }}
     >
       <div
@@ -115,11 +115,11 @@ function ServiceCard({ svc, index }: { svc: ServiceItem; index: number }) {
         >
           <Icon className="h-5 w-5 text-white" />
         </div>
-        <ArrowUpRight className="h-4 w-4 text-slate-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#FF2B00]" />
+        <ArrowUpRight className="h-4 w-4 text-slate-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#FF2B00] dark:text-zinc-600" />
       </div>
 
-      <h3 className="mb-2 text-lg font-bold text-slate-900">{svc.title}</h3>
-      <p className="text-sm leading-relaxed text-slate-500">{svc.desc}</p>
+      <h3 className="mb-2 text-lg font-bold text-slate-900 dark:text-white">{svc.title}</h3>
+      <p className="text-sm leading-relaxed text-slate-500 dark:text-zinc-400">{svc.desc}</p>
 
       <div
         className="mt-5 h-px w-0 bg-gradient-to-r from-[#FF2B00] to-transparent transition-all duration-500 group-hover:w-full"
@@ -147,8 +147,7 @@ export default function Services() {
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="relative overflow-hidden py-32"
-      style={{ background: "#ffffff" }}
+      className="relative overflow-hidden bg-white py-32 dark:bg-zinc-950"
     >
       <MouseGlow x={x} y={y} color="rgba(255,43,0,0.35)" midColor="rgba(255,43,0,0.1)" />
       <div
@@ -200,8 +199,8 @@ export default function Services() {
         />
       </svg>
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-40 bg-gradient-to-b from-white to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-white to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-40 bg-gradient-to-b from-white to-transparent dark:from-zinc-950" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-white to-transparent dark:from-zinc-950" />
 
       <div className="relative z-20 mx-auto max-w-7xl px-6 lg:px-10">
         {/* Header */}
@@ -211,7 +210,7 @@ export default function Services() {
             <span className="text-[10px] font-medium uppercase tracking-[0.35em]" style={{ color: "#FF2B00" }}>What We Offer</span>
           </div>
           <div className="grid items-end gap-12 lg:grid-cols-2">
-            <h2 className="text-5xl font-bold leading-[1.05] tracking-tight text-slate-900 md:text-7xl">
+            <h2 className="text-5xl font-bold leading-[1.05] tracking-tight text-slate-900 dark:text-white md:text-7xl">
               Services Built
               <br />
               <span
@@ -222,7 +221,7 @@ export default function Services() {
               </span>
             </h2>
             <div className="space-y-6">
-              <p className="max-w-sm text-base leading-relaxed text-slate-500">
+              <p className="max-w-sm text-base leading-relaxed text-slate-500 dark:text-zinc-400">
                 A full-service digital team — from first line of code to the
                 campaign that brings customers through the door.
               </p>
@@ -233,8 +232,8 @@ export default function Services() {
                   { val: "99%", sub: "Client Satisfaction" },
                 ].map(({ val, sub }) => (
                   <div key={sub} className="flex flex-col gap-1">
-                    <span className="font-num text-2xl font-bold text-slate-900">{val}</span>
-                    <span className="text-[10px] uppercase tracking-widest text-slate-400">
+                    <span className="font-num text-2xl font-bold text-slate-900 dark:text-white">{val}</span>
+                    <span className="text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-500">
                       {sub}
                     </span>
                   </div>
@@ -256,7 +255,7 @@ export default function Services() {
           className="reveal mt-20 flex items-center justify-between border-t border-dashed pt-10"
           style={{ borderColor: "rgba(255,43,0,0.3)" }}
         >
-          <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400">All services available globally</p>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400 dark:text-zinc-500">All services available globally</p>
           <button
             className="group relative flex items-center gap-3 overflow-hidden rounded-full px-6 py-3 transition-transform duration-300 hover:-translate-y-0.5"
             style={{ background: "linear-gradient(90deg, #FF2B00)" }}

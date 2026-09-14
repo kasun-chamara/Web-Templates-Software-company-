@@ -60,8 +60,8 @@ function FloatingCard({ card: c }: { card: CardData }) {
       transition={{ duration: 0.7, ease: EASE, delay: c.delay }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className={`absolute min-h-[250px] rounded-3xl border bg-white p-6 transition-colors duration-300 ${
-        hovered ? "bg-orange-50/60" : ""
+      className={`absolute min-h-[250px] rounded-3xl border bg-white dark:bg-zinc-900 p-6 transition-colors duration-300 ${
+        hovered ? "bg-orange-50/60 dark:bg-orange-950/30" : ""
       } ${c.className}`}
       style={{ borderColor: hovered ? `${c.hex}80` : "rgb(226 232 240)" }}
     >
@@ -86,11 +86,11 @@ function FloatingCard({ card: c }: { card: CardData }) {
           <Icon className="h-6 w-6" />
         </span>
         <div className="mt-5 space-y-2">
-          <div className="h-2 w-full rounded-full bg-slate-100" />
-          <div className="h-2 w-4/5 rounded-full bg-slate-50" />
+          <div className="h-2 w-full rounded-full bg-slate-100 dark:bg-zinc-700" />
+          <div className="h-2 w-4/5 rounded-full bg-slate-50 dark:bg-zinc-800" />
         </div>
-        <div className="mt-4 text-sm font-semibold text-slate-800">{c.label}</div>
-        <div className="mt-0.5 text-xs text-slate-400">{c.sub}</div>
+        <div className="mt-4 text-sm font-semibold text-slate-800 dark:text-white">{c.label}</div>
+        <div className="mt-0.5 text-xs text-slate-400 dark:text-zinc-500">{c.sub}</div>
       </motion.div>
     </motion.div>
   );
@@ -101,7 +101,7 @@ export default function GrowthCTA() {
 
   return (
     <section
-      className="relative overflow-hidden bg-white py-24 sm:py-32"
+      className="relative overflow-hidden bg-white dark:bg-zinc-950 py-24 sm:py-32"
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
@@ -154,7 +154,7 @@ export default function GrowthCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: EASE }}
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600 shadow-sm"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600 dark:text-zinc-400 shadow-sm"
           >
             <Sparkles className="h-3.5 w-3.5" style={{ color: "#FF2B00" }} />
             Open for New Projects
@@ -165,7 +165,7 @@ export default function GrowthCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
-            className="mt-6 text-[40px] font-black leading-[1.05] tracking-tight text-slate-900 sm:text-6xl"
+            className="mt-6 text-[40px] font-black leading-[1.05] tracking-tight text-slate-900 dark:text-white sm:text-6xl"
           >
             Have an Idea Worth
             <br />
@@ -182,7 +182,7 @@ export default function GrowthCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
-            className="mt-6 max-w-md text-base leading-relaxed text-slate-500 sm:text-lg"
+            className="mt-6 max-w-md text-base leading-relaxed text-slate-500 dark:text-zinc-400 sm:text-lg"
           >
             We partner with ambitious teams to design, build, and ship digital
             products that scale — from first prototype to national launch.
@@ -221,13 +221,13 @@ export default function GrowthCTA() {
 
             <Link
               href="#work"
-              className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 px-8 py-3.5 text-sm font-semibold text-slate-900 transition-all duration-300 hover:border-[#FF2B00]/40 hover:bg-orange-50"
+              className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-slate-200 dark:border-zinc-800 px-8 py-3.5 text-sm font-semibold text-slate-900 dark:text-white transition-all duration-300 hover:border-[#FF2B00]/40 hover:bg-orange-50 dark:hover:bg-orange-950/20"
             >
               See Our Work
             </Link>
           </motion.div>
 
-          <div className="mt-14 h-px w-full max-w-md bg-gradient-to-r from-slate-200 via-slate-100 to-transparent" />
+          <div className="mt-14 h-px w-full max-w-md bg-gradient-to-r from-slate-200 dark:from-zinc-800 via-slate-100 dark:via-zinc-900 to-transparent" />
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -243,15 +243,15 @@ export default function GrowthCTA() {
                     className="h-[3px] w-6 rounded-full"
                     style={{ backgroundImage: "linear-gradient(90deg, #FF2B00, #1A0400)" }}
                   />
-                  <div className="font-num mt-2 text-2xl font-bold text-slate-900 transition-transform duration-300 group-hover:scale-110 sm:text-3xl">
+                  <div className="font-num mt-2 text-2xl font-bold text-slate-900 dark:text-white transition-transform duration-300 group-hover:scale-110 sm:text-3xl">
                     {s.value}
                   </div>
-                  <div className="mt-1 text-[11px] uppercase tracking-[0.12em] text-slate-400">
+                  <div className="mt-1 text-[11px] uppercase tracking-[0.12em] text-slate-400 dark:text-zinc-500">
                     {s.label}
                   </div>
                 </div>
                 {i < stats.length - 1 && (
-                  <div className="h-8 w-px bg-slate-200" />
+                  <div className="h-8 w-px bg-slate-200 dark:bg-zinc-800" />
                 )}
               </div>
             ))}
@@ -261,7 +261,7 @@ export default function GrowthCTA() {
         {/* Right — floating cards */}
         <div className="relative hidden h-[400px] lg:block">
           {/* Orbit ring for depth */}
-          <div className="absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-slate-200" />
+          <div className="absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-slate-200 dark:border-zinc-800" />
           <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-200/25 blur-[80px]" />
 
           {cards.map((c) => <FloatingCard key={c.label} card={c} />)}

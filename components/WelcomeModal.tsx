@@ -32,8 +32,7 @@ export default function WelcomeModal() {
           <motion.div
             role="dialog"
             aria-modal="true"
-            className="relative w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-2xl"
-            style={{ border: "1px solid rgba(15,23,42,0.08)" }}
+            className="relative w-full max-w-md rounded-3xl border border-slate-900/[0.08] bg-white p-8 text-center shadow-2xl dark:border-white/10 dark:bg-zinc-900 dark:shadow-black/30"
             initial={{ opacity: 0, scale: 0.92, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 16 }}
@@ -43,7 +42,7 @@ export default function WelcomeModal() {
               type="button"
               aria-label="Close"
               onClick={() => setOpen(false)}
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors duration-200 hover:bg-slate-100 hover:text-slate-700"
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors duration-200 hover:bg-slate-100 hover:text-slate-700 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
             >
               <X className="h-4 w-4" />
             </button>
@@ -55,10 +54,10 @@ export default function WelcomeModal() {
               <Rocket className="h-7 w-7" />
             </div>
 
-            <h2 className="mt-6 text-2xl font-extrabold leading-tight text-slate-900 sm:text-[28px]">
+            <h2 className="mt-6 text-2xl font-extrabold leading-tight text-slate-900 dark:text-white sm:text-[28px]">
               Engineers Who Give a Damn
             </h2>
-            <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-slate-500 sm:text-base">
+            <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-slate-500 dark:text-zinc-400 sm:text-base">
               That&apos;s what we build for you — a free consultation, no NDAs
               needed to start a conversation.
             </p>
@@ -76,7 +75,7 @@ export default function WelcomeModal() {
               <Rocket className="h-4 w-4" />
             </Link>
 
-            <p className="mt-4 text-xs tracking-wide text-slate-400">
+            <p className="mt-4 text-xs tracking-wide text-slate-400 dark:text-zinc-500">
               We&apos;ll scope your project and reply within 24 hours.
             </p>
           </motion.div>

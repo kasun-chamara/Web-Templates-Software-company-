@@ -11,7 +11,7 @@ const tools = [
 
 export default function RemoteSupport() {
   return (
-    <section className="relative overflow-hidden bg-white py-24 sm:py-28">
+    <section className="relative overflow-hidden bg-white dark:bg-zinc-950 py-24 sm:py-28">
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -26,7 +26,7 @@ export default function RemoteSupport() {
       />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-        <h2 className="text-4xl font-black leading-[1.08] tracking-tight text-slate-900 sm:text-5xl">
+        <h2 className="text-4xl font-black leading-[1.08] tracking-tight text-slate-900 dark:text-white sm:text-5xl">
           Remote{" "}
           <span
             className="bg-clip-text text-transparent"
@@ -35,7 +35,7 @@ export default function RemoteSupport() {
             Support
           </span>
         </h2>
-        <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-slate-500">
+        <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-slate-500 dark:text-zinc-400">
           Schedule meetings and get support via your preferred tool.
         </p>
 
@@ -45,7 +45,7 @@ export default function RemoteSupport() {
             return (
               <div
                 key={t.name}
-                className="group flex flex-col items-center gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_4px_20px_-8px_rgba(15,23,42,0.1)] transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col items-center gap-4 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 shadow-[0_4px_20px_-8px_rgba(15,23,42,0.1)] dark:shadow-[0_4px_20px_-8px_rgba(0,0,0,0.3)] transition-all duration-300 hover:-translate-y-1"
                 onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${t.color}66`)}
                 onMouseLeave={(e) => (e.currentTarget.style.borderColor = "")}
               >
@@ -56,8 +56,8 @@ export default function RemoteSupport() {
                   <Icon className="h-6 w-6" />
                 </span>
                 <div>
-                  <div className="text-base font-bold text-slate-900">{t.name}</div>
-                  <div className="mt-0.5 text-sm text-slate-500">{t.desc}</div>
+                  <div className="text-base font-bold text-slate-900 dark:text-white">{t.name}</div>
+                  <div className="mt-0.5 text-sm text-slate-500 dark:text-zinc-400">{t.desc}</div>
                 </div>
               </div>
             );

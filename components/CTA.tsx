@@ -36,15 +36,14 @@ function EmailForm() {
       className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto lg:mx-0"
     >
       <div className="relative flex-1">
-        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-zinc-500" />
         <input
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@company.com"
-          className="w-full rounded-xl py-3.5 pl-11 pr-4 text-sm text-slate-900 placeholder:text-slate-400 bg-white outline-none transition-colors duration-300 border focus:border-[#FF2B00]"
-          style={{ borderColor: "rgba(15,23,42,0.15)" }}
+          className="w-full rounded-xl py-3.5 pl-11 pr-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 bg-white dark:bg-zinc-900 outline-none transition-colors duration-300 border border-slate-900/15 dark:border-zinc-800 focus:border-[#FF2B00]"
         />
       </div>
       <button
@@ -89,14 +88,14 @@ function WordReveal({ line1, line2 }: { line1: string; line2: string }) {
     >
       <span className="block">
         {words1.map((w, i) => (
-          <motion.span key={i} variants={word} className="inline-block mr-[0.25em] text-slate-900">
+          <motion.span key={i} variants={word} className="inline-block mr-[0.25em] text-slate-900 dark:text-white">
             {w}
           </motion.span>
         ))}
       </span>
       <span className="block mt-1">
         {words2.map((w, i) => (
-          <motion.span key={i} variants={word} className="inline-block mr-[0.25em] text-slate-900">
+          <motion.span key={i} variants={word} className="inline-block mr-[0.25em] text-slate-900 dark:text-white">
             {w}
           </motion.span>
         ))}
@@ -224,7 +223,7 @@ export default function CTA() {
 
   return (
     <section
-      className="relative py-24 overflow-hidden bg-white sm:py-32 md:py-40"
+      className="relative py-24 overflow-hidden bg-white dark:bg-zinc-950 sm:py-32 md:py-40"
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
@@ -290,10 +289,8 @@ export default function CTA() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 mb-8">
               <span
-                className="text-xs font-semibold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full text-slate-900"
+                className="text-xs font-semibold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full text-slate-900 dark:text-white bg-white/85 dark:bg-zinc-900/85 border border-slate-900/25 dark:border-zinc-700"
                 style={{
-                  background: "rgba(255,255,255,0.85)",
-                  border: "1px solid rgba(15,23,42,0.25)",
                   backdropFilter: "blur(6px)",
                 }}
               >
@@ -308,7 +305,7 @@ export default function CTA() {
             </h2>
 
             {/* Subtext */}
-            <p className="text-slate-500 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed mb-8">
+            <p className="text-slate-500 dark:text-zinc-400 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed mb-8">
               Whether you&apos;re an early-stage startup or an enterprise team,
               we&apos;re ready to engineer your next breakthrough.
             </p>
@@ -324,7 +321,7 @@ export default function CTA() {
                   background: "linear-gradient(90deg, rgba(255,43,0,0.4), transparent)",
                 }}
               />
-              <p className="text-slate-400 text-xs tracking-wide">
+              <p className="text-slate-400 dark:text-zinc-500 text-xs tracking-wide">
                 Response within 24 hours &nbsp;·&nbsp; No NDAs needed to start a conversation
               </p>
             </div>

@@ -160,7 +160,11 @@ function PipelineVisual() {
           >
             {s.done ? "✓" : s.active ? "●" : ""}
           </span>
-          <span className="pipe-label" style={{ color: s.done ? "#0f172a" : s.active ? "#D12300" : "#94A3B8" }}>
+          <span
+            className={`pipe-label ${
+              s.done ? "pipe-label--done" : s.active ? "pipe-label--active" : "pipe-label--pending"
+            }`}
+          >
             {s.label}
           </span>
           <span className="pipe-time">{`${(i + 1) * 10}s`}</span>
@@ -221,7 +225,7 @@ function SupportVisual() {
   return (
     <div className="shield-wrap">
       <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="shield-svg">
-        <circle cx="60" cy="60" r={radius} stroke="#E2E8F0" strokeWidth="8" />
+        <circle className="support-track" cx="60" cy="60" r={radius} stroke="#E2E8F0" strokeWidth="8" />
         <circle
           cx="60"
           cy="60"
@@ -233,10 +237,10 @@ function SupportVisual() {
           strokeDashoffset={circumference * 0.02}
           transform="rotate(-90 60 60)"
         />
-        <text x="60" y="56" textAnchor="middle" fontSize="19" fontWeight="700" fill="#0f172a">
+        <text className="support-value" x="60" y="56" textAnchor="middle" fontSize="19" fontWeight="700" fill="#0f172a">
           99.98%
         </text>
-        <text x="60" y="74" textAnchor="middle" fontSize="9" fill="#94A3B8" letterSpacing="0.05em">
+        <text className="support-label-text" x="60" y="74" textAnchor="middle" fontSize="9" fill="#94A3B8" letterSpacing="0.05em">
           UPTIME
         </text>
       </svg>
@@ -690,6 +694,122 @@ export default function BuiltForTeams() {
 
         .shield-label { font-size: 0.85rem; font-weight: 600; color: #D12300; letter-spacing: 0.02em; }
         .shield-sublabel { font-size: 0.72rem; color: #94A3B8; text-align: center; }
+
+        .pipe-label--done { color: #0f172a; }
+        .pipe-label--active { color: #D12300; }
+        .pipe-label--pending { color: #94A3B8; }
+
+        /* ── Dark mode overrides ── */
+        .dark .bft-outer {
+          background: #09090b;
+        }
+
+        .dark .bft-section {
+          background: #09090b;
+          color: #fff;
+          border-color: #27272a;
+        }
+
+        .dark .bft-heading {
+          color: #fff;
+        }
+
+        .dark .bft-heading-accent {
+          color: #71717a;
+        }
+
+        .dark .bft-subtext {
+          color: #a1a1aa;
+        }
+
+        .dark .bft-card {
+          background: #18181b;
+          border-color: #27272a;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .dark .bft-card:hover {
+          box-shadow: 0 24px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        .dark .visual-frame {
+          border-color: #27272a;
+          background: #18181b;
+        }
+
+        .dark .visual-chrome {
+          background: #27272a;
+          border-bottom-color: #3f3f46;
+        }
+
+        .dark .chrome-title {
+          color: #71717a;
+        }
+
+        .dark .chrome-index {
+          color: #52525b;
+        }
+
+        .dark .bft-card-title {
+          color: #fff;
+        }
+
+        .dark .bft-card-desc {
+          color: #a1a1aa;
+        }
+
+        .dark .bft-plus {
+          background: #18181b;
+          border-color: #3f3f46;
+          color: #71717a;
+        }
+
+        .dark .dash-row {
+          background: #27272a;
+          border-color: #3f3f46;
+        }
+
+        .dark .dash-label {
+          color: #e4e4e7;
+        }
+
+        .dark .dash-desc {
+          color: #71717a;
+        }
+
+        .dark .dash-tag {
+          background: #27272a;
+          border-color: #3f3f46;
+          color: #a1a1aa;
+        }
+
+        .dark .pipe-time {
+          color: #71717a;
+        }
+
+        .dark .pipe-label--done {
+          color: #fff;
+        }
+
+        .dark .pipe-label--pending {
+          color: #71717a;
+        }
+
+        .dark .shield-sublabel {
+          color: #71717a;
+        }
+
+        .dark .support-track {
+          stroke: #3f3f46;
+        }
+
+        .dark .support-value {
+          fill: #fff;
+        }
+
+        .dark .support-label-text {
+          fill: #71717a;
+        }
       ` }} />
 
       {/* Outer wrapper adds side padding so black section floats with rounded corners */}

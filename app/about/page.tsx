@@ -16,29 +16,29 @@ const team = [
 export default function AboutPage() {
   return (
     <>
-      <section className="pt-32 sm:pt-40 pb-12 sm:pb-16 text-center bg-white">
+      <section className="pt-32 sm:pt-40 pb-12 sm:pb-16 text-center bg-white dark:bg-zinc-950">
         <div className="max-w-3xl mx-auto px-6">
           <span className="section-tag mb-6">About Us</span>
-          <h1 className="text-[38px] sm:text-5xl md:text-7xl font-extrabold text-slate-900 mt-4 leading-[1.08]">
+          <h1 className="text-[38px] sm:text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white mt-4 leading-[1.08]">
             Engineers Who<span className="gradient-text block">Give a Damn</span>
           </h1>
-          <p className="text-slate-500 text-base sm:text-lg mt-6 leading-relaxed">40+ engineers, designers, and strategists obsessed with building digital systems that stand the test of time.</p>
+          <p className="text-slate-500 dark:text-zinc-400 text-base sm:text-lg mt-6 leading-relaxed">40+ engineers, designers, and strategists obsessed with building digital systems that stand the test of time.</p>
         </div>
       </section>
       <About />
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-16 sm:py-20 bg-white dark:bg-zinc-950">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12 sm:mb-14">
             <span className="section-tag mb-4">The Team</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mt-4">People Behind the Code</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mt-4">People Behind the Code</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {team.map((m, i) => (
               <div key={i} className="glass-card rounded-2xl p-6 text-center group">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-lg mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" style={{ fontFamily: "var(--font-display)" }}>{m.avatar}</div>
-                <div className="text-slate-900 font-semibold text-sm" style={{ fontFamily: "var(--font-display)" }}>{m.name}</div>
+                <div className="text-slate-900 dark:text-white font-semibold text-sm" style={{ fontFamily: "var(--font-display)" }}>{m.name}</div>
                 <div className="text-blue-500 text-xs mt-1" style={{ fontFamily: "var(--font-display)" }}>{m.role}</div>
-                <div className="text-slate-400 text-xs mt-2">{m.specialty}</div>
+                <div className="text-slate-400 dark:text-zinc-500 text-xs mt-2">{m.specialty}</div>
               </div>
             ))}
           </div>

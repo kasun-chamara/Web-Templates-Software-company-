@@ -53,11 +53,18 @@ body {
   overflow-x: hidden;
 }
 
+.dark body {
+  background-color: #09090B;
+  color: #E4E4E7;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #F1F5F9; }
 ::-webkit-scrollbar-thumb { background: #FF2B00; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #D12300; }
+
+.dark ::-webkit-scrollbar-track { background: #18181B; }
 
 /* Selection */
 ::selection { background: rgba(255, 43, 0, 0.15); color: #D12300; }
@@ -68,12 +75,22 @@ body {
   background-size: 32px 32px;
 }
 
+.dark .grid-bg {
+  background-image: radial-gradient(circle, #3F3F46 1px, transparent 1px);
+}
+
 /* Light grid lines variant */
 .line-bg {
   background-image:
     linear-gradient(rgba(255, 43, 0, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 43, 0, 0.06) 1px, transparent 1px);
   background-size: 64px 64px;
+}
+
+.dark .line-bg {
+  background-image:
+    linear-gradient(rgba(255, 90, 51, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 90, 51, 0.1) 1px, transparent 1px);
 }
 
 /* Gradient text */
@@ -157,6 +174,16 @@ body {
   box-shadow: 0 20px 60px rgba(255, 43, 0, 0.12);
 }
 
+.dark .glass-card {
+  background: #18181B;
+  border: 1px solid #27272A;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.dark .glass-card:hover {
+  border-color: rgba(255, 43, 0, 0.4);
+  box-shadow: 0 20px 60px rgba(255, 43, 0, 0.18);
+}
+
 /* Orange card variant */
 .blue-card {
   background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
@@ -166,6 +193,14 @@ body {
 .blue-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 60px rgba(255, 43, 0, 0.2);
+}
+
+.dark .blue-card {
+  background: linear-gradient(135deg, #1F1410, #241512);
+  border: 1px solid #3A241A;
+}
+.dark .blue-card:hover {
+  box-shadow: 0 20px 60px rgba(255, 43, 0, 0.25);
 }
 
 /* Section tag */
@@ -183,6 +218,12 @@ body {
   border: 1px solid #FFC4B3;
   border-radius: 100px;
   background: #FFF7ED;
+}
+
+.dark .section-tag {
+  color: #FF6B45;
+  border-color: rgba(255, 43, 0, 0.35);
+  background: rgba(255, 43, 0, 0.08);
 }
 
 /* Animated underline */
@@ -215,10 +256,19 @@ body {
   background: linear-gradient(90deg, transparent, #FFC4B3, transparent);
 }
 
+.dark .divider {
+  background: linear-gradient(90deg, transparent, rgba(255, 43, 0, 0.35), transparent);
+}
+
 /* Glow border */
 .glow-border {
   border: 1.5px solid #FFC4B3;
   box-shadow: 0 0 30px rgba(255, 43, 0, 0.08);
+}
+
+.dark .glow-border {
+  border-color: rgba(255, 43, 0, 0.35);
+  box-shadow: 0 0 30px rgba(255, 43, 0, 0.15);
 }
 
 /* Reveal */

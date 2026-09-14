@@ -120,30 +120,30 @@ function ProjectCard({
 }) {
   return (
     <article
-      className="group relative grid w-full overflow-hidden rounded-3xl bg-white/85 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)] backdrop-blur-2xl lg:grid-cols-[1.05fr_1fr]"
+      className="group relative grid w-full overflow-hidden rounded-3xl bg-white/85 dark:bg-zinc-900/85 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)] dark:shadow-black/40 backdrop-blur-2xl lg:grid-cols-[1.05fr_1fr]"
     >
       {/* Text side */}
       <div className="relative z-10 flex flex-col justify-between gap-8 p-8 sm:p-10 lg:p-12">
         <div>
           <div className="mb-6 flex items-center gap-3">
-            <span className="font-num text-[11px] font-semibold tracking-[0.2em] text-slate-500">
+            <span className="font-num text-[11px] font-semibold tracking-[0.2em] text-slate-500 dark:text-zinc-400">
               {String(index + 1).padStart(2, "0")}
-              <span className="text-slate-400"> / {String(total).padStart(2, "0")}</span>
+              <span className="text-slate-400 dark:text-zinc-500"> / {String(total).padStart(2, "0")}</span>
             </span>
-            <span className="h-3 w-px bg-slate-300" />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+            <span className="h-3 w-px bg-slate-300 dark:bg-zinc-700" />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-zinc-400">
               {project.category}
             </span>
           </div>
 
-          <h3 className="text-3xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-4xl">
+          <h3 className="text-3xl font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             {project.title}
           </h3>
-          <p className="mt-2 text-[13px] font-medium text-slate-500">
+          <p className="mt-2 text-[13px] font-medium text-slate-500 dark:text-zinc-400">
             for {project.client}
           </p>
 
-          <p className="mt-5 max-w-md text-[14px] font-light leading-relaxed text-slate-600">
+          <p className="mt-5 max-w-md text-[14px] font-light leading-relaxed text-slate-600 dark:text-zinc-400">
             {project.desc}
           </p>
         </div>
@@ -153,20 +153,20 @@ function ProjectCard({
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-[11px] text-slate-600 backdrop-blur-sm"
+                className="rounded-full border border-slate-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-800/70 px-3 py-1 text-[11px] text-slate-600 dark:text-zinc-400 backdrop-blur-sm"
               >
                 {t}
               </span>
             ))}
           </div>
 
-          <div className="flex items-center justify-between border-t border-slate-200 pt-5">
-            <span className="rounded-full border border-slate-200 bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-slate-600 backdrop-blur-sm">
+          <div className="flex items-center justify-between border-t border-slate-200 dark:border-zinc-800 pt-5">
+            <span className="rounded-full border border-slate-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-800/70 px-3.5 py-1.5 text-[12px] font-semibold text-slate-600 dark:text-zinc-400 backdrop-blur-sm">
               {project.metric}
             </span>
             <a
               href="/work"
-              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-slate-900 transition-colors hover:text-slate-500"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-slate-900 dark:text-white transition-colors hover:text-slate-500 dark:hover:text-zinc-400"
             >
               View case study
               <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

@@ -75,7 +75,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative overflow-hidden bg-white py-28 md:py-32"
+      className="relative overflow-hidden bg-white py-28 dark:bg-zinc-950 md:py-32"
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
@@ -83,7 +83,7 @@ export default function Pricing() {
 
       {/* Ambient background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-zinc-950 dark:via-zinc-950 dark:to-zinc-950" />
         <div
           className="absolute inset-0"
           style={{
@@ -108,12 +108,12 @@ export default function Pricing() {
           transition={{ duration: 0.6, ease: EASE }}
           className="mx-auto mb-16 max-w-2xl text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-600 shadow-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-600 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
             <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#FF2B00" }} />
             Pricing
           </span>
 
-          <h2 className="mt-6 text-[40px] leading-[1.05] tracking-tight text-slate-900 sm:text-[54px]">
+          <h2 className="mt-6 text-[40px] leading-[1.05] tracking-tight text-slate-900 dark:text-white sm:text-[54px]">
             Choose your{" "}
             <span
               className="text-transparent [background-clip:text] [-webkit-background-clip:text]"
@@ -122,7 +122,7 @@ export default function Pricing() {
               growth plan
             </span>
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-[16px] font-light leading-relaxed text-slate-500">
+          <p className="mx-auto mt-4 max-w-lg text-[16px] font-light leading-relaxed text-slate-500 dark:text-zinc-400">
             Website solutions built to scale a local business from first booking
             to market leader.
           </p>
@@ -167,7 +167,7 @@ function PricingCard({
         className={`relative flex h-full flex-col overflow-hidden rounded-3xl border p-8 transition-transform duration-500 hover:-translate-y-1.5 ${
           dark
             ? "border-transparent text-white shadow-[0_40px_100px_-30px_rgba(26,4,0,0.6)] lg:p-9"
-            : "border-slate-200 bg-white shadow-[0_20px_50px_-24px_rgba(15,23,42,0.25)]"
+            : "border-slate-200 bg-white shadow-[0_20px_50px_-24px_rgba(15,23,42,0.25)] dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/30"
         }`}
         style={dark ? { background: "linear-gradient(150deg, #FF2B00 10%, #1A0400 70%)" } : undefined}
       >
@@ -197,7 +197,7 @@ function PricingCard({
           </span>
           <span
             className={`text-[13px] font-semibold uppercase tracking-[0.14em] ${
-              dark ? "text-white/70" : "text-slate-500"
+              dark ? "text-white/70" : "text-slate-500 dark:text-zinc-400"
             }`}
           >
             {plan.badge}
@@ -211,20 +211,20 @@ function PricingCard({
           </span>
           <span
             className={`text-[13px] font-medium ${
-              dark ? "text-white/50" : "text-slate-400"
+              dark ? "text-white/50" : "text-slate-400 dark:text-zinc-500"
             }`}
           >
             {plan.subPrice}
           </span>
         </div>
         <p
-          className={`mt-2 text-[13px] ${dark ? "text-white/60" : "text-slate-500"}`}
+          className={`mt-2 text-[13px] ${dark ? "text-white/60" : "text-slate-500 dark:text-zinc-400"}`}
         >
           {plan.tagline}
         </p>
 
         <div
-          className={`my-7 h-px w-full ${dark ? "bg-white/10" : "bg-slate-100"}`}
+          className={`my-7 h-px w-full ${dark ? "bg-white/10" : "bg-slate-100 dark:bg-zinc-800"}`}
         />
 
         {/* Features */}
@@ -239,7 +239,7 @@ function PricingCard({
               </span>
               <span
                 className={`text-[13.5px] leading-snug ${
-                  dark ? "text-white/75" : "text-slate-600"
+                  dark ? "text-white/75" : "text-slate-600 dark:text-zinc-400"
                 }`}
               >
                 {f}
@@ -249,8 +249,8 @@ function PricingCard({
         </ul>
 
         {plan.note && (
-          <div className="mt-6 rounded-lg border border-orange-100 bg-orange-50 px-4 py-2.5">
-            <p className="text-[12px] italic text-orange-700">{plan.note}</p>
+          <div className="mt-6 rounded-lg border border-orange-100 bg-orange-50 px-4 py-2.5 dark:border-orange-900/40 dark:bg-orange-950/20">
+            <p className="text-[12px] italic text-orange-700 dark:text-orange-400">{plan.note}</p>
           </div>
         )}
 
@@ -258,7 +258,7 @@ function PricingCard({
           className={`group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-[13px] font-semibold transition-all duration-300 ${
             dark
               ? "bg-white text-slate-900 hover:bg-slate-100"
-              : "bg-slate-900 text-white hover:bg-slate-700"
+              : "bg-slate-900 text-white hover:bg-slate-700 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
           }`}
         >
           {plan.cta}

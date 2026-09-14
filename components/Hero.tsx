@@ -32,28 +32,28 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
         <div className="text-center mb-10 sm:mb-14">
-          <span className="inline-flex items-center rounded-full border px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm bg-white shadow-sm">
+          <span className="inline-flex items-center rounded-full border dark:border-zinc-700 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm bg-white dark:bg-zinc-900 dark:text-zinc-300 shadow-sm">
             Now accepting projects
           </span>
 
-          <h1 className="mt-6 sm:mt-8 max-w-5xl mx-auto text-[46px] sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 leading-[1.08]">
+          <h1 className="mt-6 sm:mt-8 max-w-5xl mx-auto text-[46px] sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 dark:text-white leading-[1.08]">
             Building Digital
             <br />
             <span className="neon-text">Systems That Work</span>
           </h1>
 
-          <p className="max-w-2xl mx-auto mt-4 sm:mt-6 text-base sm:text-lg text-slate-500 px-2">
+          <p className="max-w-2xl mx-auto mt-4 sm:mt-6 text-base sm:text-lg text-slate-500 dark:text-zinc-400 px-2">
             We build enterprise platforms, SaaS products, AI solutions and
             scalable software for modern businesses.
           </p>
 
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 sm:px-0">
-            <button className="bg-black text-white px-6 py-3 rounded-xl flex items-center justify-center gap-2 w-full sm:w-auto">
+            <button className="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-xl flex items-center justify-center gap-2 w-full sm:w-auto">
               Start Project
               <ArrowRight size={18} />
             </button>
 
-            <button className="border border-[#FF2B00] px-6 py-3 rounded-xl bg-white text-[#FF2B00] w-full sm:w-auto font-semibold transition-colors duration-200 hover:bg-[#FF2B00] hover:text-white">
+            <button className="border border-[#FF2B00] px-6 py-3 rounded-xl bg-white dark:bg-transparent text-[#FF2B00] dark:text-[#FF5A33] w-full sm:w-auto font-semibold transition-colors duration-200 hover:bg-[#FF2B00] hover:text-white">
               View Work
             </button>
           </div>

@@ -288,17 +288,17 @@ export default function About() {
               ))}
 
               <ScrollRevealDiv delay={0.2}>
-                <div className="rounded-3xl border border-slate-200 bg-white p-7">
-                  <div className="mb-4 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                <div className="rounded-3xl border border-slate-200 bg-white p-7 dark:border-zinc-800 dark:bg-zinc-900">
+                  <div className="mb-4 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-400 dark:text-zinc-500">
                     Our Values
                   </div>
-                  <div className="divide-y divide-slate-100">
+                  <div className="divide-y divide-slate-100 dark:divide-zinc-800">
                     {values.map((v, i) => (
                       <div key={i} className="flex items-start gap-3 py-3.5 first:pt-0 last:pb-0">
-                        <span className="min-w-[24px] pt-0.5 font-num text-[11px] font-semibold text-slate-300">
+                        <span className="min-w-[24px] pt-0.5 font-num text-[11px] font-semibold text-slate-300 dark:text-zinc-600">
                           0{i + 1}
                         </span>
-                        <span className="text-[14px] leading-snug text-slate-600">
+                        <span className="text-[14px] leading-snug text-slate-600 dark:text-zinc-400">
                           {v}
                         </span>
                       </div>
@@ -401,7 +401,7 @@ function ProjectCard({
     <div
       className={`relative overflow-hidden rounded-3xl p-7 transition-all duration-500 sm:p-8 ${
         solid
-          ? "border border-slate-200 bg-white shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)]"
+          ? "border border-slate-200 bg-white shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)] dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/30"
           : "border border-white/10 bg-white/[0.04] backdrop-blur-xl hover:border-white/20"
       }`}
     >
@@ -416,14 +416,14 @@ function ProjectCard({
         <div>
           <span
             className={`block font-num text-[13px] transition-colors duration-500 ${
-              solid ? "text-slate-300" : "text-white/30"
+              solid ? "text-slate-300 dark:text-zinc-600" : "text-white/30"
             }`}
           >
             {item.number}
           </span>
           <h3
             className={`mt-2 text-[20px] font-bold leading-tight transition-colors duration-500 sm:text-[22px] ${
-              solid ? "text-slate-900" : "text-white"
+              solid ? "text-slate-900 dark:text-white" : "text-white"
             }`}
           >
             {item.title}
@@ -439,7 +439,7 @@ function ProjectCard({
 
       <p
         className={`mb-5 text-[14px] leading-[1.7] transition-colors duration-500 ${
-          solid ? "text-slate-600" : "text-slate-300"
+          solid ? "text-slate-600 dark:text-zinc-400" : "text-slate-300"
         }`}
       >
         {item.desc}
@@ -451,7 +451,7 @@ function ProjectCard({
             key={i}
             className={`rounded-full border px-3 py-1 text-[11px] font-medium transition-colors duration-500 ${
               solid
-                ? "border-slate-200 bg-slate-50 text-slate-600"
+                ? "border-slate-200 bg-slate-50 text-slate-600 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400"
                 : "border-white/15 bg-white/5 text-slate-200"
             }`}
           >
@@ -463,7 +463,7 @@ function ProjectCard({
       <a
         href="#"
         className={`inline-flex items-center gap-1.5 text-[13px] font-semibold transition-all hover:gap-2.5 ${
-          solid ? "text-slate-900" : "text-white"
+          solid ? "text-slate-900 dark:text-white" : "text-white"
         }`}
       >
         Learn more <ArrowRight className="h-4 w-4" />
