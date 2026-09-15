@@ -11,6 +11,7 @@ import {
   useScroll,
   useTransform,
   animate,
+  type MotionValue,
 } from "framer-motion";
 
 interface Project {
@@ -190,37 +191,88 @@ function ProjectCard({
   );
 }
 
-/* ─── Sticky stacking wrapper ─────────────────────────── */
+/* ─── Sticky stacking wrapper ─────────────────────────────
+   All cards share a single sticky box driven by one continuous
+   scroll progress. Each card owns a segment of that progress: it
+   slides up from below into its resting peek offset during its own
+   segment, then — because the box never un-sticks between segments —
+   it holds that exact position for the rest of the stack instead of
+   scrolling away once its own segment ends. */
 function StackCard({
   project,
   index,
   total,
+  progress,
+  travel,
 }: {
   project: Project;
   index: number;
   total: number;
+  progress: MotionValue<number>;
+  travel: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "start start"],
-  });
+  const segStart = index / total;
+  const segEnd = (index + 1) / total;
 
   // Cards further down the stack settle to a slightly smaller scale as they get buried.
   const targetScale = 1 - (total - 1 - index) * 0.04;
-  const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
+  const scale = useTransform(progress, [segStart, segEnd], [1, targetScale]);
+
+  const peekOffset = index * 24;
+  const y = useTransform(progress, [segStart, segEnd], [index === 0 ? 0 : travel, peekOffset]);
+
+  return (
+    <motion.div
+      style={{ scale, y, zIndex: index }}
+      className="absolute inset-x-0 top-0 origin-top"
+    >
+      <ProjectCard project={project} index={index} total={total} />
+    </motion.div>
+  );
+}
+
+function ProjectStack({ projects }: { projects: Project[] }) {
+  const total = projects.length;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [travel, setTravel] = useState(800);
+
+  useEffect(() => {
+    const measure = () => {
+      if (boxRef.current) setTravel(boxRef.current.offsetHeight);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
 
   return (
     <div
-      ref={ref}
-      className="sticky top-[120px] flex min-h-[66vh] items-start justify-center pt-3 md:min-h-[78vh] md:items-center md:pt-0"
+      ref={containerRef}
+      data-testid="work-stack-scroller"
+      className="relative"
+      style={{ height: `${total * 100}vh` }}
     >
-      <motion.div
-        style={{ scale, top: `${index * 24}px` }}
-        className="relative w-full origin-top"
+      <div
+        ref={boxRef}
+        className="sticky top-[120px] min-h-[66vh] overflow-hidden md:min-h-[78vh]"
       >
-        <ProjectCard project={project} index={index} total={total} />
-      </motion.div>
+        {projects.map((project, index) => (
+          <StackCard
+            key={project.title}
+            project={project}
+            index={index}
+            total={total}
+            progress={scrollYProgress}
+            travel={travel}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -348,9 +400,7 @@ export default function Work() {
 
           {/* ── Stacking project cards ── */}
           <div className="relative flex-1">
-            {projects.map((p, i) => (
-              <StackCard key={p.title} project={p} index={i} total={projects.length} />
-            ))}
+            <ProjectStack projects={projects} />
           </div>
         </div>
 
