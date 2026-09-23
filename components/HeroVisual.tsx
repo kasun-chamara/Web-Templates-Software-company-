@@ -200,10 +200,10 @@ export default function HeroVisual() {
                   />
                   <div className="absolute right-4 top-4 z-10 flex items-center gap-1.5 rounded-full bg-slate-950/40 px-3 py-1.5 text-xs text-white ring-1 ring-white/10 backdrop-blur">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                    Est. 2014
+                    Est. 2023
                   </div>
                   <StatOverlay
-                    value="10+"
+                    value="3+"
                     label="Years of Innovation"
                     className="bottom-4 left-4"
                   />
@@ -217,7 +217,7 @@ export default function HeroVisual() {
                 />
 
                 {/* Floating avatar-stack badge */}
-                <div className="absolute -bottom-3 z-20 flex items-center gap-2 rounded-full bg-white/90 py-1.5 pl-1.5 pr-4 shadow-[0_12px_32px_-10px_rgba(15,23,42,0.3)] ring-1 ring-slate-200/70 backdrop-blur dark:bg-zinc-900/90 dark:shadow-black/30 dark:ring-zinc-800">
+                <div className="absolute -bottom-3 z-20 flex items-center gap-2.5 rounded-full bg-white/80 py-1.5 pl-1.5 pr-4 shadow-[0_8px_24px_-8px_rgba(15,23,42,0.25)] ring-1 ring-black/5 backdrop-blur-md dark:bg-zinc-900/80 dark:shadow-black/30 dark:ring-white/10">
                   <div className="flex -space-x-2">
                     {["bg-slate-800", "bg-slate-600", "bg-blue-700", "bg-blue-500"].map(
                       (c, i) => (
@@ -232,7 +232,7 @@ export default function HeroVisual() {
                   </div>
                   <div className="leading-tight">
                     <div className="text-[11px] font-semibold text-slate-800 dark:text-white">
-                      100+ Team
+                      Team
                     </div>
                     <div className="-mt-0.5 text-[10px] text-slate-500 dark:text-zinc-400">Engineers</div>
                   </div>
@@ -249,8 +249,8 @@ export default function HeroVisual() {
                       className="left-4 top-4"
                     />
                     <StatOverlay
-                      value="30+"
-                      label="Gov & Health Partners"
+                      value="10+"
+                      label="Partners"
                       className="bottom-3 left-4"
                     />
                   </Tile>
@@ -268,16 +268,16 @@ export default function HeroVisual() {
                       className="right-4 top-4 bg-slate-800"
                     />
                     <StatOverlay
-                      value="50+"
+                      value="10+"
                       label="Platforms Delivered"
                       className="bottom-3 left-4"
                     />
-                    <div className="absolute -right-3 bottom-8 z-10 flex items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2 pr-4 shadow-lg ring-1 ring-slate-200/70 backdrop-blur dark:bg-zinc-900/90 dark:shadow-black/30 dark:ring-zinc-800">
+                    <div className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full bg-white/90 py-1.5 pl-2 pr-4 shadow-lg ring-1 ring-slate-200/70 backdrop-blur dark:bg-zinc-900/90 dark:shadow-black/30 dark:ring-zinc-800">
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-xs text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
                         <FaShieldAlt />
                       </div>
                       <span className="text-[11px] font-semibold text-slate-800 dark:text-white">
-                        Trusted Since 2014
+                        Trusted Since 2023
                       </span>
                     </div>
                   </div>
@@ -299,7 +299,7 @@ export default function HeroVisual() {
                   />
                   <StatOverlay
                     value="100+"
-                    label="Engineers"
+                    label="Tools"
                     className="bottom-3 right-4 text-right"
                   />
                 </div>

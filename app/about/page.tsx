@@ -2,8 +2,9 @@ import About from "@/components/About";
 import CTA from "@/components/CTA";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "About — NexaLab" };
+export const metadata: Metadata = { title: "About — Kapingar" };
 
+/* Team data — hidden with the team section below
 const team = [
   { name: "Alex Chen", role: "Co-Founder & CTO", avatar: "AC", specialty: "Systems Architecture" },
   { name: "Mara Osei", role: "Co-Founder & CEO", avatar: "MO", specialty: "Product Strategy" },
@@ -11,7 +12,7 @@ const team = [
   { name: "Sofia Reyes", role: "Head of Design", avatar: "SR", specialty: "Design Systems" },
   { name: "Kai Nambiar", role: "DevOps Lead", avatar: "KN", specialty: "Cloud & Infrastructure" },
   { name: "Yuki Tanaka", role: "Senior Engineer", avatar: "YT", specialty: "Frontend & Performance" },
-];
+]; */
 
 export default function AboutPage() {
   return (
@@ -20,12 +21,13 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-6">
           <span className="section-tag mb-6">About Us</span>
           <h1 className="text-[38px] sm:text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white mt-4 leading-[1.08]">
-            Engineers Who<span className="gradient-text block">Give a Damn</span>
+            A Team That<span className="gradient-text block">Cares About Your Success</span>
           </h1>
-          <p className="text-slate-500 dark:text-zinc-400 text-base sm:text-lg mt-6 leading-relaxed">40+ engineers, designers, and strategists obsessed with building digital systems that stand the test of time.</p>
+          <p className="text-slate-500 dark:text-zinc-400 text-base sm:text-lg mt-6 leading-relaxed">A dedicated team of engineers, designers, and strategists focused on building reliable digital solutions that help our clients grow.</p>
         </div>
       </section>
       <About />
+      {/* Team section hidden
       <section className="py-16 sm:py-20 bg-white dark:bg-zinc-950">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12 sm:mb-14">
@@ -43,7 +45,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
       <CTA />
     </>
   );

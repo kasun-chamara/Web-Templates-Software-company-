@@ -2,7 +2,7 @@ import Services from "@/components/Services";
 import CTA from "@/components/CTA";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Services — NexaLab" };
+export const metadata: Metadata = { title: "Services — Kapingar" };
 
 export default function ServicesPage() {
   return (

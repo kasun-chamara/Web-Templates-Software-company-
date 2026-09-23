@@ -12,9 +12,9 @@ import MouseGlow from "./MouseGlow";
 import { useMouseGlow } from "./useMouseGlow";
 
 const stats = [
-  { value: 6, suffix: "+", label: "YEARS ACTIVE" },
-  { value: 4, suffix: "", label: "SERVICES LIVE" },
-  { value: 50, suffix: "K+", label: "USERS SERVED" },
+  { value: 3, suffix: "+", label: "YEARS ACTIVE" },
+  { value: 5, suffix: "", label: "SERVICES LIVE" },
+  { value: 5, suffix: "K+", label: "USERS SERVED" },
 ];
 
 const tags = ["Food & Restaurants", "Driving Lessons", "Astrology", "Delivery Tracking"];
@@ -123,7 +123,7 @@ export default function WhoWeAre() {
             </p>
 
             <p className="mt-6 text-[15px] leading-relaxed text-white/60">
-              Founded in 2020,{" "}
+              Founded in 2023,{" "}
               <span className="text-[19px] font-bold" style={{ color: "#FF2B00" }}>
                 Kapingar
               </span>{" "}

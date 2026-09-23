@@ -359,13 +359,13 @@ export default function Work() {
             </span>
 
             <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
-              Building products
+              Trusted by clients
               <br />
-              <span className="font-normal text-white/40">that scale globally</span>
+              <span className="font-normal text-white/40">around the world</span>
             </h2>
 
             <p className="mt-4 max-w-sm text-[15px] font-light leading-relaxed text-white/55">
-              From government platforms to AI-powered enterprise systems —
+              From growing startups to AI-powered enterprise systems —
               trusted by millions worldwide.
             </p>
 

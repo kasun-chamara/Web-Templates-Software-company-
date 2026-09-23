@@ -22,7 +22,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-4 group w-fit">
 
               <span className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
-                LOGO
+                KAPINGAR
               </span>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
@@ -52,7 +52,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 mb-6 h-px" style={{ background: "#FF2B00" }} />
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-white/40 text-xs">
-          <span>© {new Date().getFullYear()} NexaLab. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Kapingar. All rights reserved.</span>
           <span style={{ fontFamily: "var(--font-display)" }}>Built with Next.js · Deployed on Vercel</span>
         </div>
       </div>

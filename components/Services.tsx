@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import MouseGlow from "./MouseGlow";
 import { useMouseGlow } from "./useMouseGlow";
@@ -228,8 +229,8 @@ export default function Services() {
               <div className="flex gap-8 pt-2">
                 {[
                   { val: "10", sub: "Core Services" },
-                  { val: "150+", sub: "Projects Delivered" },
-                  { val: "99%", sub: "Client Satisfaction" },
+                  { val: "10+", sub: "Projects Delivered" },
+                  { val: "100%", sub: "Client Satisfaction" },
                 ].map(({ val, sub }) => (
                   <div key={sub} className="flex flex-col gap-1">
                     <span className="font-num text-2xl font-bold text-slate-900 dark:text-white">{val}</span>
@@ -256,7 +257,8 @@ export default function Services() {
           style={{ borderColor: "rgba(255,43,0,0.3)" }}
         >
           <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400 dark:text-zinc-500">All services available globally</p>
-          <button
+          <Link
+            href="/services"
             className="group relative flex items-center gap-3 overflow-hidden rounded-full px-6 py-3 transition-transform duration-300 hover:-translate-y-0.5"
             style={{ background: "linear-gradient(90deg, #FF2B00)" }}
           >
@@ -277,7 +279,7 @@ export default function Services() {
               View all services
             </span>
             <ArrowUpRight className="relative z-10 h-3.5 w-3.5 text-white transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </button>
+          </Link>
         </div>
       </div>
 

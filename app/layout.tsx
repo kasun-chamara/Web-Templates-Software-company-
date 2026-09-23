@@ -7,7 +7,7 @@ import WelcomeModal from "@/components/WelcomeModal";
 import { ThemeProvider, themeInitScript } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "NexaLab — Building Digital Systems of Tomorrow",
+  title: "Kapingar AS — Building Digital Systems of Tomorrow",
   description: "We craft high-performance digital systems, web platforms, and AI-powered solutions for enterprises and startups.",
 };
 

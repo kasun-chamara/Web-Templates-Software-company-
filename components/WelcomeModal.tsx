@@ -55,11 +55,11 @@ export default function WelcomeModal() {
             </div>
 
             <h2 className="mt-6 text-2xl font-extrabold leading-tight text-slate-900 dark:text-white sm:text-[28px]">
-              Engineers Who Give a Damn
+              Let&apos;s Build Something Great
             </h2>
             <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-slate-500 dark:text-zinc-400 sm:text-base">
-              That&apos;s what we build for you — a free consultation, no NDAs
-              needed to start a conversation.
+              A motivated team ready to bring your vision to life — a free
+              consultation, no NDAs needed to start a conversation.
             </p>
 
             <Link

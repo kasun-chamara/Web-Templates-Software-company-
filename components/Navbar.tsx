@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Zap, ChevronDown } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
@@ -9,7 +10,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Work", href: "#work" },
+  { label: "Work", href: "/work" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -97,8 +98,24 @@ export default function Navbar() {
             <div className="absolute inset-1 bg-blue-500 rounded rotate-45 group-hover:rotate-90 transition-transform duration-500 delay-75" />
             <Zap className="absolute inset-0 m-auto w-4 h-4 text-white z-10" />
           </div> */}
+          <Image
+            src="/images/logo-light.png"
+            alt="Kapingar Software Solutions"
+            width={1030}
+            height={950}
+            priority
+            className="block dark:hidden h-12 w-auto mix-blend-multiply"
+          />
+          <Image
+            src="/images/logo-dark.png"
+            alt="Kapingar Software Solutions"
+            width={760}
+            height={680}
+            priority
+            className="hidden dark:block h-12 w-auto"
+          />
           <span className="text-2xl font-bold text-black dark:text-white" style={{ fontFamily: "var(--font-display)" }}>
-            LOGO
+            KAPINGAR
           </span>
         </Link>
 
