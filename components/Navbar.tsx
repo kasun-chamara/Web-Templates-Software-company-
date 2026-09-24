@@ -88,7 +88,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <div className={`md:hidden transition-all duration-300 overflow-hidden ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+      <div className={`md:hidden transition-all duration-300 overflow-hidden ${open ? "max-h-[calc(100dvh-80px)] overflow-y-auto opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="bg-white dark:bg-zinc-950 border-t border-slate-100 dark:border-zinc-800 px-6 py-6 flex flex-col gap-4 shadow-lg">
           {navLinks.map((link) => (
             <Link key={link.label} href={link.href} onClick={() => setOpen(false)}
