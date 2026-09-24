@@ -30,7 +30,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-16 sm:py-24">
         <div className="text-center mb-10 sm:mb-14">
           <span className="inline-flex items-center rounded-full border dark:border-zinc-700 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm bg-white dark:bg-zinc-900 dark:text-zinc-300 shadow-sm">
             Now accepting projects
