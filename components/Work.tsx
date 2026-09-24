@@ -177,7 +177,7 @@ function ProjectCard({
       </div>
 
       {/* Image side */}
-      <div className="relative min-h-[280px] overflow-hidden lg:min-h-[440px]">
+      <div className="relative hidden min-h-[280px] overflow-hidden sm:block lg:min-h-[440px]">
         <Image
           src={project.image}
           alt={`${project.title} — ${project.client}`}
