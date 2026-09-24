@@ -486,7 +486,7 @@ export default function Solutions() {
             <li key={id}>
               <a
                 href={`#${id}`}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:border-[#FF2B00]/40 hover:text-[#FF2B00] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:border-[#FF2B00]/40 hover:text-[#FF2B00] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-[#FF5A33]"
               >
                 <Icon className="h-4 w-4" />
                 {title}

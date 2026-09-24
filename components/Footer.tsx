@@ -12,6 +12,8 @@ const links: Record<string, { label: string; href: string }[]> = {
   Company: [
     { label: "About", href: "/about" },
     { label: "Work", href: "/work" },
+    { label: "Careers", href: "/careers" },
+    { label: "FAQ", href: "/#faq" },
     { label: "Contact", href: "/contact" },
   ],
   Legal: [

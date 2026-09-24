@@ -191,13 +191,7 @@ function ProjectCard({
   );
 }
 
-/* ─── Sticky stacking wrapper ─────────────────────────────
-   All cards share a single sticky box driven by one continuous
-   scroll progress. Each card owns a segment of that progress: it
-   slides up from below into its resting peek offset during its own
-   segment, then — because the box never un-sticks between segments —
-   it holds that exact position for the rest of the stack instead of
-   scrolling away once its own segment ends. */
+
 function StackCard({
   project,
   index,

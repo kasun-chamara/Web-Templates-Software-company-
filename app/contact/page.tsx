@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import FAQ from "@/components/FAQ";
 import { Send, MapPin, Mail, Clock, Phone } from "lucide-react";
 
 const info = [
@@ -38,7 +39,7 @@ export default function ContactPage() {
                 <div>
                   <div className="text-slate-400 dark:text-zinc-500 text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "var(--font-display)" }}>{label}</div>
                   {href ? (
-                    <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="text-slate-800 dark:text-white font-medium hover:text-[#FF2B00] transition-colors">{value}</a>
+                    <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="text-slate-800 dark:text-white font-medium hover:text-[#FF2B00] dark:hover:text-[#FF5A33] transition-colors">{value}</a>
                   ) : (
                     <div className="text-slate-800 dark:text-white font-medium">{value}</div>
                   )}
@@ -104,6 +105,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <FAQ />
     </>
   );
 }

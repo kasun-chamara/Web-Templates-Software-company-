@@ -154,7 +154,7 @@ function StageStrip() {
               <span className="font-num text-[10px] font-semibold tracking-[0.2em] text-slate-400 dark:text-zinc-500">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="-mt-2 text-sm font-semibold text-slate-800 transition-colors group-hover:text-[#FF2B00] dark:text-zinc-200">
+              <span className="-mt-2 text-sm font-semibold text-slate-800 transition-colors group-hover:text-[#FF2B00] dark:text-zinc-200 dark:group-hover:text-[#FF5A33]">
                 {phase}
               </span>
             </motion.a>

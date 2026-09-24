@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LegalNav from "@/components/LegalNav";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Legal — Kapingar" };
@@ -157,21 +158,8 @@ export default function LegalPage() {
 
       <section className="pb-20 sm:pb-24 bg-white dark:bg-zinc-950">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-10 lg:gap-16">
-          {/* In-page navigation */}
-          <nav className="lg:sticky lg:top-32 lg:self-start">
-            <ul className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
-              {sections.map((s) => (
-                <li key={s.id}>
-                  <a
-                    href={`#${s.id}`}
-                    className="block rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:border-[#FF2B00]/40 hover:text-[#FF2B00] dark:border-zinc-800 dark:text-zinc-400 lg:border-transparent"
-                  >
-                    {s.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {/* In-page navigation — highlights the section in view */}
+          <LegalNav items={sections.map(({ id, title }) => ({ id, title }))} />
 
           <div className="space-y-16">
             {sections.map((s) => (

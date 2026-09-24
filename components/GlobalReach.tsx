@@ -8,12 +8,8 @@ import { MdLocationPin } from "react-icons/md";
 // Pin positions as % of the map image (top/left), approximated from real
 // lat/lng for each hub against the map's equirectangular-style crop.
 const pins = [
-  { top: "24%", left: "16%", label: "Vancouver" },
-  { top: "57%", left: "29%", label: "Bogotá" },
-  { top: "17%", left: "53%", label: "Oslo" },
-  { top: "61%", left: "60%", label: "Nairobi" },
-  { top: "59%", left: "79%", label: "Singapore" },
-  { top: "85%", left: "92%", label: "Sydney" },
+  { top: "40%", left: "47%", label: "London & Sheffield, UK" },
+  { top: "59.5%", left: "70.2%", label: "Colombo, Sri Lanka" },
 ];
 
 const socials = [
@@ -126,9 +122,9 @@ export default function GlobalReach() {
           </h2>
 
           <p className="mt-5 max-w-md text-base leading-relaxed text-slate-500 dark:text-zinc-400">
-            From local startups to businesses overseas, we&apos;ve partnered with 250+
-            clients in 10+ countries — delivering digital solutions that work no
-            matter where you&apos;re based.
+            From Colombo to London and Sheffield, we partner with businesses in
+            Sri Lanka and the United Kingdom — delivering digital solutions that
+            work no matter where you&apos;re based.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -148,7 +144,7 @@ export default function GlobalReach() {
                   href={href}
                   aria-label={label}
                   {...(href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 transition-all duration-200 hover:border-[#FF2B00]/40 hover:text-[#FF2B00]"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 transition-all duration-200 hover:border-[#FF2B00]/40 hover:text-[#FF2B00] dark:hover:text-[#FF5A33]"
                 >
                   <Icon className="h-4 w-4" />
                 </a>

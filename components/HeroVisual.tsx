@@ -541,11 +541,11 @@ export default function HeroVisual() {
                 </ArtTile>
 
                 <div className="grid grid-cols-3 gap-3 sm:gap-4">
-                  <ArtTile delay={0.5} className="h-28 sm:h-44" bg="linear-gradient(135deg, #F97316 0%, #EC4899 100%)">
-                    <MobileArt />
-                  </ArtTile>
-                  <ArtTile delay={0.58} className="h-28 sm:h-44" bg="linear-gradient(135deg, #0F172A 0%, #1E293B 100%)">
+                  <ArtTile delay={0.5} className="h-28 sm:h-44" bg="linear-gradient(135deg, #0F172A 0%, #1E293B 100%)">
                     <ChartArt />
+                  </ArtTile>
+                  <ArtTile delay={0.58} className="h-28 sm:h-44" bg="linear-gradient(135deg, #F97316 0%, #EC4899 100%)">
+                    <MobileArt />
                   </ArtTile>
                   <ArtTile delay={0.66} dots="dark" className="h-28 bg-gradient-to-br from-amber-50 to-pink-50 dark:from-zinc-900 dark:to-zinc-800 sm:h-44">
                     <DesignArt />

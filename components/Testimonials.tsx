@@ -7,7 +7,6 @@ import { useMouseGlow } from "./useMouseGlow";
 const testimonials = [
   {
     name: "Sarah Mitchell",
-    role: "CTO, FinTrack",
     avatar: "SM",
     quote:
       "Kapingar didn't just build our platform — they fundamentally understood our business and made architectural decisions that saved us years of technical debt.",
@@ -15,7 +14,6 @@ const testimonials = [
   },
   {
     name: "James Okonkwo",
-    role: "Director of Digital, Ministry of Interior",
     avatar: "JO",
     quote:
       "Delivering a national-scale identity system on time and under budget seemed impossible. Kapingar made it look routine. Exceptional engineering culture.",
@@ -23,7 +21,6 @@ const testimonials = [
   },
   {
     name: "Priya Sundaram",
-    role: "Founder, HealthOS",
     avatar: "PS",
     quote:
       "We've worked with many agencies. Kapingar is different — they push back when needed, propose better solutions, and own the outcome like it's their own product.",
@@ -31,7 +28,6 @@ const testimonials = [
   },
   {
     name: "Carlos Reyes",
-    role: "VP Engineering, LogiChain",
     avatar: "CR",
     quote:
       "The code quality, documentation, and handoff process were impeccable. Six months after launch, our internal team had zero trouble maintaining the codebase.",
@@ -39,7 +35,6 @@ const testimonials = [
   },
   {
     name: "Aiko Tanaka",
-    role: "Head of Product, Skyline AI",
     avatar: "AT",
     quote:
       "From first brief to final delivery, Kapingar was the most communicative and technically sharp team we've ever hired. They simply get it.",
@@ -47,7 +42,6 @@ const testimonials = [
   },
   {
     name: "Lena Brandt",
-    role: "COO, TrustBridge",
     avatar: "LB",
     quote:
       "Our compliance requirements were complex and ever-changing. Kapingar adapted without blinking — flexible architecture, solid delivery.",
@@ -102,7 +96,6 @@ function TestimonialCard({
           <div className="font-display text-white font-bold text-sm">
             {t.name}
           </div>
-          <div className="text-slate-200 text-xs mt-0.5">{t.role}</div>
         </div>
       </div>
     </div>

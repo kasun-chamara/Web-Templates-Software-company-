@@ -109,9 +109,9 @@ export default function GrowthCTA() {
 
       {/* Ambient glows */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[8%] top-0 h-[26rem] w-[26rem] rounded-full bg-orange-200/30 blur-[140px]" />
-        <div className="absolute bottom-0 right-[6%] h-[28rem] w-[28rem] rounded-full bg-orange-100/50 blur-[150px]" />
-        <div className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-[#FF2B00]/[0.06] blur-[130px]" />
+        <div className="absolute left-[8%] top-0 h-[26rem] w-[26rem] rounded-full bg-orange-200/30 blur-[140px] dark:bg-[#FF2B00]/[0.12]" />
+        <div className="absolute bottom-0 right-[6%] h-[28rem] w-[28rem] rounded-full bg-orange-100/50 blur-[150px] dark:bg-[#7A1600]/25" />
+        <div className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-[#FF2B00]/[0.06] blur-[130px] dark:bg-[#FF2B00]/[0.08]" />
       </div>
 
       {/* Dot grid, faded toward the edges */}
@@ -262,7 +262,7 @@ export default function GrowthCTA() {
         <div className="relative hidden h-[400px] lg:block">
           {/* Orbit ring for depth */}
           <div className="absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-slate-200 dark:border-zinc-800" />
-          <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-200/25 blur-[80px]" />
+          <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-200/25 blur-[80px] dark:bg-[#FF2B00]/[0.14]" />
 
           {cards.map((c) => <FloatingCard key={c.label} card={c} />)}
         </div>

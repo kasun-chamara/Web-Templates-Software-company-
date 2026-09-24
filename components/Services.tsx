@@ -135,7 +135,7 @@ function ServiceCard({ svc, index }: { svc: ServiceItem; index: number }) {
           />
 
           {/* Watermark number */}
-          <span className="font-num pointer-events-none absolute right-5 top-4 text-4xl font-bold tracking-tight text-slate-100 transition-colors duration-500 group-hover:text-[#FF2B00]/15 dark:text-zinc-800">
+          <span className="font-num pointer-events-none absolute right-5 top-4 text-4xl font-bold tracking-tight text-slate-100 transition-colors duration-500 group-hover:text-[#FF2B00]/15 dark:text-zinc-800 dark:group-hover:text-[#FF2B00]/20">
             {String(index + 1).padStart(2, "0")}
           </span>
 

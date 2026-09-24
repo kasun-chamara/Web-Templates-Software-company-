@@ -54,7 +54,7 @@ export default function Hero() {
               <ArrowRight size={18} />
             </Link>
 
-            <Link href="/work" className="border border-[#FF2B00] px-6 py-3 rounded-xl bg-white dark:bg-transparent text-[#FF2B00] dark:text-[#FF5A33] w-full sm:w-auto text-center font-semibold transition-colors duration-200 hover:bg-[#FF2B00] hover:text-white">
+            <Link href="/work" className="border border-[#FF2B00] px-6 py-3 rounded-xl bg-white dark:bg-transparent text-[#FF2B00] dark:text-[#FF5A33] w-full sm:w-auto text-center font-semibold transition-colors duration-200 hover:bg-[#FF2B00] hover:text-white dark:hover:bg-[#FF2B00] dark:hover:text-white">
               View Work
             </Link>
           </div>
@@ -64,29 +64,51 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
-       .neon-text {
-    background: linear-gradient(
-      90deg,
-      #1A0400,
-      #FF2B00,
-      #7A1600,
-      #1A0400,
-      #FF2B00
-    );
+        .neon-text {
+          /* Light theme: deep brand reds on white */
+          background-image: linear-gradient(
+            90deg,
+            #ff2b00 0%,
+            #b91c1c 25%,
+            #ff7a45 50%,
+            #b91c1c 75%,
+            #ff2b00 100%
+          );
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          -webkit-text-fill-color: transparent;
+          filter: drop-shadow(0 6px 24px rgba(255, 43, 0, 0.18));
+          animation: neonMove 8s linear infinite;
+        }
 
-    background-size: 300% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-
-    animation: neonMove 30s linear infinite;
-
-    text-shadow: 0 0 20px rgba(255, 43, 0, 0.3);
-  }
+        /* Dark theme: bright orange -> peach highlight, never near-black */
+        :global(.dark) .neon-text {
+          background-image: linear-gradient(
+            90deg,
+            #ff2b00 0%,
+            #ff7a45 25%,
+            #ffd3bd 50%,
+            #ff7a45 75%,
+            #ff2b00 100%
+          );
+          filter: drop-shadow(0 0 28px rgba(255, 43, 0, 0.35));
+        }
 
         @keyframes neonMove {
-          0% { background-position: 0% 50%; }
-          100% { background-position: 300% 50%; }
+          from {
+            background-position: 0% 50%;
+          }
+          to {
+            background-position: -200% 50%;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .neon-text {
+            animation: none;
+          }
         }
       `}</style>
     </section>
