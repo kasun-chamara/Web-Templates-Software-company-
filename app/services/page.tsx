@@ -1,4 +1,6 @@
 import Services from "@/components/Services";
+import About from "@/components/About";
+import Solutions from "@/components/Solutions";
 import CTA from "@/components/CTA";
 import type { Metadata } from "next";
 
@@ -16,6 +18,8 @@ export default function ServicesPage() {
           <p className="text-slate-500 dark:text-zinc-400 text-base sm:text-lg mt-6 leading-relaxed">Every service is rooted in engineering discipline, design thinking, and a relentless focus on outcomes.</p>
         </div>
       </section>
+      <Solutions />
+      <About />
       <Services />
       <CTA />
     </>

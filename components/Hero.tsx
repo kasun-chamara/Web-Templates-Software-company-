@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import HeroVisual from "./HeroVisual";
 import MouseGlow from "./MouseGlow";
@@ -48,14 +49,14 @@ export default function Hero() {
           </p>
 
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 sm:px-0">
-            <button className="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-xl flex items-center justify-center gap-2 w-full sm:w-auto">
+            <Link href="/contact" className="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-xl flex items-center justify-center gap-2 w-full sm:w-auto">
               Start Project
               <ArrowRight size={18} />
-            </button>
+            </Link>
 
-            <button className="border border-[#FF2B00] px-6 py-3 rounded-xl bg-white dark:bg-transparent text-[#FF2B00] dark:text-[#FF5A33] w-full sm:w-auto font-semibold transition-colors duration-200 hover:bg-[#FF2B00] hover:text-white">
+            <Link href="/work" className="border border-[#FF2B00] px-6 py-3 rounded-xl bg-white dark:bg-transparent text-[#FF2B00] dark:text-[#FF5A33] w-full sm:w-auto text-center font-semibold transition-colors duration-200 hover:bg-[#FF2B00] hover:text-white">
               View Work
-            </button>
+            </Link>
           </div>
         </div>
 

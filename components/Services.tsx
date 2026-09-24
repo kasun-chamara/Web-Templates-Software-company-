@@ -77,54 +77,97 @@ const services: ServiceItem[] = [
   },
 ];
 
+// Brand-only icon gradients: orange → deep red → black
 const iconGradients = [
-  "linear-gradient(135deg, #3B82F6, #4F46E5)",
-  "linear-gradient(135deg, #8B5CF6, #7C3AED)",
-  "linear-gradient(135deg, #EC4899, #E11D48)",
-  "linear-gradient(135deg, #10B981, #0D9488)",
-  "linear-gradient(135deg, #F59E0B, #EA580C)",
+  "linear-gradient(135deg, #FF2B00, #B91C1C)",
+  "linear-gradient(135deg, #FF7A45, #FF2B00)",
+  "linear-gradient(135deg, #1A0400, #7A1600)",
+  "linear-gradient(135deg, #FF2B00, #1A0400)",
+  "linear-gradient(135deg, #FF9A6B, #FF4D1A)",
 ];
 
 function ServiceCard({ svc, index }: { svc: ServiceItem; index: number }) {
   const Icon = svc.icon;
   const gradient = iconGradients[index % iconGradients.length];
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Spotlight that follows the cursor inside the card
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
-    <div
-      className="reveal group relative isolate overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_4px_20px_-8px_rgba(15,23,42,0.12)] transition-all duration-500 hover:-translate-y-1 hover:border-[#FF2B00]/40 hover:shadow-[0_20px_40px_-16px_rgba(255,43,0,0.25)] dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/30"
-      style={{ transitionDelay: `${index * 0.05}s` }}
-    >
+    <div className="reveal h-full" style={{ transitionDelay: `${index * 0.05}s` }}>
       <div
-        className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-20"
-        style={{ background: "#FF2B00" }}
-      />
+        ref={cardRef}
+        onMouseMove={handleMove}
+        className="group relative isolate flex h-full flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-slate-200 to-slate-200 p-px shadow-[0_4px_20px_-8px_rgba(15,23,42,0.12)] transition-all duration-500 hover:-translate-y-1.5 hover:from-[#FF2B00] hover:to-[#1A0400] hover:shadow-[0_24px_48px_-18px_rgba(255,43,0,0.35)] dark:from-zinc-800 dark:to-zinc-800 dark:shadow-black/30"
+      >
+        <div className="relative flex h-full flex-col overflow-hidden rounded-[15px] bg-white p-6 dark:bg-zinc-900">
+          {/* Cursor spotlight */}
+          <div
+            className="pointer-events-none absolute inset-0 -z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{
+              background:
+                "radial-gradient(220px circle at var(--mx, 50%) var(--my, 0%), rgba(255,43,0,0.12), transparent 70%)",
+            }}
+          />
 
-      {/* Small dot texture */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(15,23,42,0.22) 1.2px, transparent 1.2px)",
-          backgroundSize: "12px 12px",
-          maskImage: "radial-gradient(ellipse 90% 90% at 100% 0%, black 0%, transparent 85%)",
-          WebkitMaskImage: "radial-gradient(ellipse 90% 90% at 100% 0%, black 0%, transparent 85%)",
-        }}
-      />
+          {/* Dot texture */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-100 dark:opacity-40"
+            style={{
+              backgroundImage: "radial-gradient(circle, rgba(15,23,42,0.18) 1.1px, transparent 1.2px)",
+              backgroundSize: "12px 12px",
+              maskImage: "radial-gradient(ellipse 80% 80% at 100% 0%, black 0%, transparent 75%)",
+              WebkitMaskImage: "radial-gradient(ellipse 80% 80% at 100% 0%, black 0%, transparent 75%)",
+            }}
+          />
 
-      <div className="mb-6 flex items-start justify-between">
-        <div
-          className="flex h-11 w-11 items-center justify-center rounded-xl shadow-lg ring-1 ring-white/20 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3"
-          style={{ backgroundImage: gradient }}
-        >
-          <Icon className="h-5 w-5 text-white" />
+          {/* Big faded icon that slides in on hover */}
+          <Icon
+            aria-hidden
+            className="pointer-events-none absolute -bottom-6 -right-6 h-28 w-28 rotate-12 text-[#FF2B00] opacity-[0.04] transition-all duration-700 ease-out group-hover:-bottom-3 group-hover:-right-3 group-hover:rotate-0 group-hover:opacity-[0.1] dark:opacity-[0.06]"
+          />
+
+          {/* Watermark number */}
+          <span className="font-num pointer-events-none absolute right-5 top-4 text-4xl font-bold tracking-tight text-slate-100 transition-colors duration-500 group-hover:text-[#FF2B00]/15 dark:text-zinc-800">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+
+          <div className="relative mb-6">
+            <div className="relative w-fit">
+              <div
+                className="absolute inset-0 rounded-xl opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-60"
+                style={{ backgroundImage: gradient }}
+              />
+              <div
+                className="relative flex h-12 w-12 items-center justify-center rounded-xl shadow-lg ring-1 ring-white/20 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110"
+                style={{ backgroundImage: gradient }}
+              >
+                <Icon className="h-5 w-5 text-white" />
+              </div>
+            </div>
+          </div>
+
+          <h3 className="relative mb-2 text-lg font-bold text-slate-900 transition-colors duration-300 group-hover:text-[#FF2B00] dark:text-white dark:group-hover:text-[#FF5A33]">
+            {svc.title}
+          </h3>
+          <p className="relative flex-1 text-sm leading-relaxed text-slate-500 dark:text-zinc-400">{svc.desc}</p>
+
+          <div className="relative mt-5 flex items-center justify-between">
+            <div className="h-px flex-1 bg-gradient-to-r from-[#FF2B00] to-transparent opacity-30 transition-opacity duration-500 group-hover:opacity-100" />
+            <span className="ml-3 inline-flex translate-x-2 items-center gap-1 text-[12px] font-semibold text-[#FF2B00] opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100">
+              Learn more
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </span>
+          </div>
         </div>
-        <ArrowUpRight className="h-4 w-4 text-slate-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#FF2B00] dark:text-zinc-600" />
       </div>
-
-      <h3 className="mb-2 text-lg font-bold text-slate-900 dark:text-white">{svc.title}</h3>
-      <p className="text-sm leading-relaxed text-slate-500 dark:text-zinc-400">{svc.desc}</p>
-
-      <div
-        className="mt-5 h-px w-0 bg-gradient-to-r from-[#FF2B00] to-transparent transition-all duration-500 group-hover:w-full"
-      />
     </div>
   );
 }

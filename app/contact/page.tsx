@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
-import { Send, MapPin, Mail, Clock } from "lucide-react";
+import { Send, MapPin, Mail, Clock, Phone } from "lucide-react";
 
 const info = [
-  { icon: Mail, label: "Email", value: "hello@nexalab.io" },
-  { icon: MapPin, label: "HQ", value: "San Francisco, CA · Remote-first" },
+  { icon: Mail, label: "Email", value: "info@kapingar.com", href: "mailto:info@kapingar.com" },
+  { icon: Phone, label: "Phone / WhatsApp", value: "+44 7751 981261", href: "https://wa.me/447751981261" },
+  { icon: MapPin, label: "Location", value: "Kapingar · View on Google Maps", href: "https://www.google.com/maps/place/Kapingar/@33.29865,36.62295,3z/data=!3m1!4b1!4m6!3m5!1s0x461eb2360565b035:0xe0eadff8282c0c9c!8m2!3d33.29865!4d36.62295!16s%2Fg%2F11xt2l_chz" },
   { icon: Clock, label: "Response", value: "Within 24 hours" },
 ];
 
@@ -29,14 +30,18 @@ export default function ContactPage() {
       <section className="py-16 sm:py-20 bg-slate-50 dark:bg-zinc-950">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12">
           <div className="lg:col-span-2 space-y-8">
-            {info.map(({ icon: Icon, label, value }) => (
+            {info.map(({ icon: Icon, label, value, href }) => (
               <div key={label} className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-zinc-900 border border-orange-100 dark:border-zinc-800 flex items-center justify-center flex-shrink-0">
                   <Icon className="w-5 h-5 text-[#FF2B00]" />
                 </div>
                 <div>
                   <div className="text-slate-400 dark:text-zinc-500 text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "var(--font-display)" }}>{label}</div>
-                  <div className="text-slate-800 dark:text-white font-medium">{value}</div>
+                  {href ? (
+                    <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="text-slate-800 dark:text-white font-medium hover:text-[#FF2B00] transition-colors">{value}</a>
+                  ) : (
+                    <div className="text-slate-800 dark:text-white font-medium">{value}</div>
+                  )}
                 </div>
               </div>
             ))}

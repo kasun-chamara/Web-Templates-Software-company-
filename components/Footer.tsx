@@ -1,16 +1,30 @@
 import Link from "next/link";
 import { Zap, Github, Twitter, Linkedin, Mail } from "lucide-react";
 
-const links = {
-  Services: ["Web Platforms", "AI Solutions", "Backend Systems", "Security & DevOps", "Design Systems"],
-  Company: ["About", "Work", "Blog", "Careers", "Contact"],
-  Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
+const links: Record<string, { label: string; href: string }[]> = {
+  Services: [
+    { label: "Web Platforms", href: "/services#web-platforms" },
+    { label: "AI Solutions", href: "/services#ai-solutions" },
+    { label: "Backend Systems", href: "/services#backend-systems" },
+    { label: "Security & DevOps", href: "/services#security-devops" },
+    { label: "Design Systems", href: "/services#design-systems" },
+  ],
+  Company: [
+    { label: "About", href: "/about" },
+    { label: "Work", href: "/work" },
+    { label: "Contact", href: "/contact" },
+  ],
+  Legal: [
+    { label: "Privacy Policy", href: "/legal#privacy" },
+    { label: "Terms of Service", href: "/legal#terms" },
+    { label: "Cookie Policy", href: "/legal#cookies" },
+  ],
 };
 const socials = [
   { Icon: Github, href: "#", label: "GitHub" },
   { Icon: Twitter, href: "#", label: "Twitter" },
-  { Icon: Linkedin, href: "#", label: "LinkedIn" },
-  { Icon: Mail, href: "mailto:hello@nexalab.io", label: "Email" },
+  { Icon: Linkedin, href: "https://www.linkedin.com/company/kapingar/posts/", label: "LinkedIn" },
+  { Icon: Mail, href: "mailto:info@kapingar.com", label: "Email" },
 ];
 
 export default function Footer() {
@@ -31,6 +45,7 @@ export default function Footer() {
             <div className="flex gap-3 mt-6">
               {socials.map(({ Icon, href, label }) => (
                 <a key={label} href={href} aria-label={label}
+                  {...(href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
                   className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-white/50 hover:text-[#FF2B00] hover:border-[#FF2B00]/40 transition-all duration-200 bg-white/5">
                   <Icon className="w-4 h-4" />
                 </a>
@@ -42,8 +57,8 @@ export default function Footer() {
               <h4 className="text-white font-bold text-sm mb-4 tracking-wide" style={{ fontFamily: "var(--font-display)" }}>{group}</h4>
               <ul className="space-y-2.5">
                 {items.map((item) => (
-                  <li key={item}>
-                    <Link href="#" className="text-white/50 text-sm hover:text-[#FF2B00] transition-colors animated-link">{item}</Link>
+                  <li key={item.label}>
+                    <Link href={item.href} className="text-white/50 text-sm hover:text-[#FF2B00] transition-colors animated-link">{item.label}</Link>
                   </li>
                 ))}
               </ul>

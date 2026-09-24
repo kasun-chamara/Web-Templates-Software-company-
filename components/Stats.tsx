@@ -122,8 +122,8 @@ export default function Stats() {
       {/* Edge fades */}
       <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
       <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent pointer-events-none z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
+      <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-32 bg-gradient-to-r from-black to-transparent pointer-events-none z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-32 bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
 
       {/* Content */}
       <div className="relative z-20">
@@ -144,18 +144,18 @@ export default function Stats() {
         {/* Marquee */}
         <div className="space-y-6">
           <div className="relative">
-            <div className="flex gap-6 whitespace-nowrap animate-marquee-reverse">
+            <div className="flex w-max whitespace-nowrap animate-marquee-reverse">
               {[...tools, ...tools].map((tool, i) => {
                 const Icon = tool.icon;
                 return (
                   <div
                     key={`${tool.name}-${i}`}
-                    className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300"
+                    className="group mr-3 sm:mr-6 flex items-center gap-2.5 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/25 hover:-translate-y-0.5 transition-all duration-300"
                   >
                     <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10 transition-transform duration-300 group-hover:scale-105">
                       <Icon className="h-4 w-4" style={{ color: "#FF2B00" }} />
                     </span>
-                    <span className="text-sm font-semibold text-white/85 uppercase tracking-wide group-hover:text-white transition-colors duration-300">
+                    <span className="text-xs sm:text-sm font-semibold text-white/85 uppercase tracking-wide group-hover:text-white transition-colors duration-300">
                       {tool.name}
                     </span>
                   </div>
@@ -196,6 +196,12 @@ export default function Stats() {
 
         .animate-marquee-reverse {
           animation: marquee-reverse 30s linear infinite;
+        }
+
+        @media (max-width: 639px) {
+          .animate-marquee-reverse {
+            animation-duration: 22s;
+          }
         }
       `}</style>
     </section>

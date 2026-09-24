@@ -18,7 +18,7 @@ const pins = [
 
 const socials = [
   { Icon: Facebook, href: "#", label: "Facebook" },
-  { Icon: Linkedin, href: "#", label: "LinkedIn" },
+  { Icon: Linkedin, href: "https://www.linkedin.com/company/kapingar/posts/", label: "LinkedIn" },
   { Icon: Instagram, href: "#", label: "Instagram" },
 ];
 
@@ -147,6 +147,7 @@ export default function GlobalReach() {
                   key={label}
                   href={href}
                   aria-label={label}
+                  {...(href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 transition-all duration-200 hover:border-[#FF2B00]/40 hover:text-[#FF2B00]"
                 >
                   <Icon className="h-4 w-4" />

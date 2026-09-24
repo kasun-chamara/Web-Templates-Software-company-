@@ -1,4 +1,5 @@
 import Work from "@/components/Work";
+import WorkShowcase from "@/components/WorkShowcase";
 import GrowthCTA from "@/components/GrowthCTA";
 import CTA from "@/components/CTA";
 import type { Metadata } from "next";
@@ -17,6 +18,7 @@ export default function WorkPage() {
           <p className="text-slate-500 dark:text-zinc-400 text-base sm:text-lg mt-6 leading-relaxed">A look at the platforms, products, and systems we&apos;ve designed and built for clients around the world.</p>
         </div>
       </section>
+      <WorkShowcase />
       <Work />
       <GrowthCTA />
       <CTA />

@@ -33,42 +33,42 @@ interface Metric {
 
 const projects: Project[] = [
   {
-    title: "Orbit Design System",
-    client: "Stripe",
+    title: "Design Systems",
+    client: "One consistent look across every screen",
     category: "Product · Design Systems",
-    desc: "A unified component library and design-token pipeline adopted across 14 product teams — cutting UI build time by 60% and eliminating visual drift at scale.",
+    desc: "We build reusable component libraries and design-token pipelines, so your team ships new screens faster and your product looks the same everywhere.",
     tech: ["React", "TypeScript", "Storybook", "Figma API"],
-    metric: "60% faster builds",
+    metric: "Faster UI builds",
     image: "/images/project-1.jpg",
     accent: "#FF2B00",
   },
   {
-    title: "Pulse Analytics",
-    client: "Shopify",
+    title: "Analytics Dashboards",
+    client: "Your numbers, live and easy to read",
     category: "Data · Dashboard",
-    desc: "Real-time merchant analytics surfacing revenue signals and inventory risk across 1M+ active stores.",
+    desc: "We build real-time dashboards that turn your sales, customer and inventory data into clear signals you can act on.",
     tech: ["Next.js", "D3.js", "Kafka"],
-    metric: "1M+ stores",
+    metric: "Real-time insights",
     image: "/images/project-2.jpg",
     accent: "#FF7A45",
   },
   {
-    title: "ClearPath AI",
-    client: "Waymo",
-    category: "AI · Mobility",
-    desc: "A reinforcement-learning route engine that shaved 40ms off autonomous-vehicle decision latency, keeping the fleet reactive in dense urban traffic.",
+    title: "AI Solutions",
+    client: "Smarter decisions, automated",
+    category: "AI · Automation",
+    desc: "We design and train machine-learning models that automate decisions, predict outcomes and remove repetitive work from your operations.",
     tech: ["Python", "PyTorch", "Rust"],
-    metric: "40ms faster",
+    metric: "Automated workflows",
     image: "/images/project-3.jpg",
     accent: "#B91C1C",
   },
   {
-    title: "Vault Security",
-    client: "Coinbase",
+    title: "Security & Blockchain",
+    client: "Protection built in from day one",
     category: "Crypto · Infrastructure",
-    desc: "Zero-knowledge custody with multi-party-computation signing, protecting $8B+ in digital assets without a single point of key compromise.",
+    desc: "We build secure infrastructure — from encrypted key management to blockchain smart contracts — with no single point of failure.",
     tech: ["Go", "Solidity", "AWS HSM"],
-    metric: "$8B+ secured",
+    metric: "Security-first",
     image: "/images/project-4.jpg",
     accent: "#7A1600",
   },
@@ -76,7 +76,7 @@ const projects: Project[] = [
 
 const metrics: Metric[] = [
   { value: 99.9, suffix: "%", label: "Uptime SLA" },
-  { value: 500, suffix: "M+", label: "Users served" },
+  { value: 10, suffix: "K+", label: "Users served" },
   { value: 50, suffix: "+", label: "Enterprise clients" },
 ];
 
@@ -124,9 +124,9 @@ function ProjectCard({
       className="group relative grid w-full overflow-hidden rounded-3xl bg-white/85 dark:bg-zinc-900/85 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)] dark:shadow-black/40 backdrop-blur-2xl lg:grid-cols-[1.05fr_1fr]"
     >
       {/* Text side */}
-      <div className="relative z-10 flex flex-col justify-between gap-8 p-8 sm:p-10 lg:p-12">
+      <div className="relative z-10 flex flex-col justify-between gap-5 p-6 sm:gap-8 sm:p-10 lg:p-12">
         <div>
-          <div className="mb-6 flex items-center gap-3">
+          <div className="mb-4 flex items-center gap-3 sm:mb-6">
             <span className="font-num text-[11px] font-semibold tracking-[0.2em] text-slate-500 dark:text-zinc-400">
               {String(index + 1).padStart(2, "0")}
               <span className="text-slate-400 dark:text-zinc-500"> / {String(total).padStart(2, "0")}</span>
@@ -137,19 +137,19 @@ function ProjectCard({
             </span>
           </div>
 
-          <h3 className="text-3xl font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          <h3 className="text-2xl font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             {project.title}
           </h3>
           <p className="mt-2 text-[13px] font-medium text-slate-500 dark:text-zinc-400">
-            for {project.client}
+            {project.client}
           </p>
 
-          <p className="mt-5 max-w-md text-[14px] font-light leading-relaxed text-slate-600 dark:text-zinc-400">
+          <p className="mt-3 line-clamp-3 max-w-md text-[13px] font-light leading-relaxed sm:mt-5 sm:line-clamp-none sm:text-[14px] text-slate-600 dark:text-zinc-400">
             {project.desc}
           </p>
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           <div className="flex flex-wrap gap-2">
             {project.tech.map((t) => (
               <span
@@ -161,13 +161,13 @@ function ProjectCard({
             ))}
           </div>
 
-          <div className="flex items-center justify-between border-t border-slate-200 dark:border-zinc-800 pt-5">
-            <span className="rounded-full border border-slate-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-800/70 px-3.5 py-1.5 text-[12px] font-semibold text-slate-600 dark:text-zinc-400 backdrop-blur-sm">
+          <div className="flex items-center justify-between gap-3 border-t border-slate-200 dark:border-zinc-800 pt-4 sm:pt-5">
+            <span className="rounded-full border border-slate-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-800/70 whitespace-nowrap px-3.5 py-1.5 text-[12px] font-semibold text-slate-600 dark:text-zinc-400 backdrop-blur-sm">
               {project.metric}
             </span>
             <a
               href="/work"
-              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-slate-900 dark:text-white transition-colors hover:text-slate-500 dark:hover:text-zinc-400"
+              className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-[13px] font-semibold text-slate-900 dark:text-white transition-colors hover:text-slate-500 dark:hover:text-zinc-400"
             >
               View case study
               <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -177,7 +177,7 @@ function ProjectCard({
       </div>
 
       {/* Image side */}
-      <div className="relative min-h-[280px] overflow-hidden lg:min-h-[440px]">
+      <div className="relative h-32 overflow-hidden sm:h-auto sm:min-h-[280px] lg:min-h-[440px]">
         <Image
           src={project.image}
           alt={`${project.title} — ${project.client}`}
@@ -204,12 +204,14 @@ function StackCard({
   total,
   progress,
   travel,
+  peek,
 }: {
   project: Project;
   index: number;
   total: number;
   progress: MotionValue<number>;
   travel: number;
+  peek: number;
 }) {
   const segStart = index / total;
   const segEnd = (index + 1) / total;
@@ -218,7 +220,7 @@ function StackCard({
   const targetScale = 1 - (total - 1 - index) * 0.04;
   const scale = useTransform(progress, [segStart, segEnd], [1, targetScale]);
 
-  const peekOffset = index * 24;
+  const peekOffset = index * peek;
   const y = useTransform(progress, [segStart, segEnd], [index === 0 ? 0 : travel, peekOffset]);
 
   return (
@@ -236,10 +238,12 @@ function ProjectStack({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   const [travel, setTravel] = useState(800);
+  const [peek, setPeek] = useState(24);
 
   useEffect(() => {
     const measure = () => {
       if (boxRef.current) setTravel(boxRef.current.offsetHeight);
+      setPeek(window.innerWidth < 640 ? 12 : 24);
     };
     measure();
     window.addEventListener("resize", measure);
@@ -260,7 +264,7 @@ function ProjectStack({ projects }: { projects: Project[] }) {
     >
       <div
         ref={boxRef}
-        className="sticky top-[120px] min-h-[66vh] overflow-hidden md:min-h-[78vh]"
+        className="sticky top-[96px] h-[calc(100svh-112px)] overflow-hidden sm:top-[120px] sm:h-auto sm:min-h-[66vh] md:min-h-[78vh]"
       >
         {projects.map((project, index) => (
           <StackCard
@@ -270,6 +274,7 @@ function ProjectStack({ projects }: { projects: Project[] }) {
             total={total}
             progress={scrollYProgress}
             travel={travel}
+            peek={peek}
           />
         ))}
       </div>

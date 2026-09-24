@@ -5,8 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
-// TODO: replace with the real business WhatsApp number (country code + number, no symbols)
-const WHATSAPP_NUMBER = "10000000000";
+const WHATSAPP_NUMBER = "447751981261";
 
 export default function FloatingActions() {
   const [showTop, setShowTop] = useState(false);

@@ -10,7 +10,7 @@ const testimonials = [
     role: "CTO, FinTrack",
     avatar: "SM",
     quote:
-      "NexaLab didn't just build our platform — they fundamentally understood our business and made architectural decisions that saved us years of technical debt.",
+      "Kapingar didn't just build our platform — they fundamentally understood our business and made architectural decisions that saved us years of technical debt.",
     stars: 5,
   },
   {
@@ -18,7 +18,7 @@ const testimonials = [
     role: "Director of Digital, Ministry of Interior",
     avatar: "JO",
     quote:
-      "Delivering a national-scale identity system on time and under budget seemed impossible. NexaLab made it look routine. Exceptional engineering culture.",
+      "Delivering a national-scale identity system on time and under budget seemed impossible. Kapingar made it look routine. Exceptional engineering culture.",
     stars: 5,
   },
   {
@@ -26,7 +26,7 @@ const testimonials = [
     role: "Founder, HealthOS",
     avatar: "PS",
     quote:
-      "We've worked with many agencies. NexaLab is different — they push back when needed, propose better solutions, and own the outcome like it's their own product.",
+      "We've worked with many agencies. Kapingar is different — they push back when needed, propose better solutions, and own the outcome like it's their own product.",
     stars: 5,
   },
   {
@@ -42,7 +42,7 @@ const testimonials = [
     role: "Head of Product, Skyline AI",
     avatar: "AT",
     quote:
-      "From first brief to final delivery, NexaLab was the most communicative and technically sharp team we've ever hired. They simply get it.",
+      "From first brief to final delivery, Kapingar was the most communicative and technically sharp team we've ever hired. They simply get it.",
     stars: 5,
   },
   {
@@ -50,7 +50,7 @@ const testimonials = [
     role: "COO, TrustBridge",
     avatar: "LB",
     quote:
-      "Our compliance requirements were complex and ever-changing. NexaLab adapted without blinking — flexible architecture, solid delivery.",
+      "Our compliance requirements were complex and ever-changing. Kapingar adapted without blinking — flexible architecture, solid delivery.",
     stars: 5,
   },
 ];
@@ -68,9 +68,9 @@ const avatarColors = [
 ];
 
 const stats = [
-  { value: "98%", label: "Client satisfaction", icon: "▲" },
-  { value: "200+", label: "Projects delivered", icon: "◈" },
-  { value: "5★", label: "Average rating", icon: "✦" },
+  { value: "100%", label: "Client satisfaction" },
+  { value: "10+", label: "Projects delivered" },
+  { value: "5.0", label: "Average rating" },
 ];
 
 function TestimonialCard({
@@ -176,94 +176,49 @@ export default function Testimonials() {
 
           {/* LEFT */}
           <div className="relative z-20 flex flex-col gap-8">
+            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#FF2B00" }} />
+              Testimonials
+            </span>
 
-            {/* Terminal badge */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-md" style={{ background: "rgba(255,43,0,0.1)", border: "1px solid rgba(255,43,0,0.2)" }}>
-                <span className="font-mono text-[10px] tracking-widest uppercase" style={{ color: "#FF7A45" }}>
-                  &gt;_ client.reviews
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#FF2B00" }} />
-                <span className="font-mono text-[10px]" style={{ color: "#FF7A45" }}>live</span>
-              </div>
-            </div>
-
-            {/* Heading */}
             <div>
-              <div className="flex items-start gap-4">
-                <div className="flex flex-col items-center pt-2 flex-shrink-0">
-                  <div className="w-[2px] h-6 bg-gradient-to-b from-[#FF2B00] to-transparent" />
-                  <div className="w-2.5 h-[2px]" style={{ background: "#FF2B00" }} />
-                </div>
-                <div>
-                  <p className="text-slate-200 font-mono text-xs tracking-widest uppercase mb-3">
-                    // trusted by industry leaders
-                  </p>
-                  <h2
-                    className="font-bold text-white leading-[1.08]"
-                    style={{ fontSize: "clamp(2.4rem, 4vw, 3.5rem)" }}
-                  >
-                    Built for Teams
-                    <br />
-                    <em
-                      className="not-italic"
-                      style={{
-                        background:
-                          "linear-gradient(120deg, #fff 0%, #fff 55%, #fff 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                      }}
-                    >
-                      Who Ship.
-                    </em>
-                  </h2>
-                </div>
-              </div>
+              <h2
+                className="font-bold leading-[1.08] tracking-tight text-white"
+                style={{ fontSize: "clamp(2.4rem, 4vw, 3.5rem)" }}
+              >
+                Built for Teams
+                <br />
+                <span className="text-white/40">Who Ship.</span>
+              </h2>
+              <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
+                From early-stage startups to growing businesses — teams that care about
+                quality, speed and reliable support choose Kapingar.
+              </p>
             </div>
 
-            {/* Subtext */}
-            <p className="text-slate-200 text-sm leading-relaxed max-w-[360px] pl-6 border-l border-white/10">
-              From seed-stage startups to national governments organizations that care deeply about engineering craft choose NexaLab.
-            </p>
-
-            {/* Stats cards */}
+            {/* Stats */}
             <div className="grid grid-cols-3 gap-3">
               {stats.map((s) => (
                 <div
                   key={s.label}
-                  className="relative rounded-xl border border-white/10 bg-white/[0.03] p-4 overflow-hidden group hover:border-[#FF2B00]/40 transition-colors duration-300"
+                  className="group rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition-colors duration-300 hover:border-[#FF2B00]/40 hover:bg-white/[0.06] sm:p-5"
                 >
-                  <div className="absolute top-0 right-0 w-6 h-6 rounded-tr-xl" style={{ borderTop: "1px solid rgba(255,43,0,0.3)", borderRight: "1px solid rgba(255,43,0,0.3)" }} />
-                  <div className="text-xs font-mono mb-2" style={{ color: "#FF2B00" }}>
-                    {s.icon}
+                  <div className="flex items-baseline gap-1">
+                    <span
+                      className="font-num font-bold leading-none tracking-tight text-white"
+                      style={{ fontSize: "clamp(1.5rem, 2.2vw, 2rem)" }}
+                    >
+                      {s.value}
+                    </span>
+                    {s.label === "Average rating" && (
+                      <Star className="h-4 w-4 fill-[#FF2B00] text-[#FF2B00]" />
+                    )}
                   </div>
-                  <div
-                    className="font-num font-bold tracking-tight bg-clip-text text-transparent leading-none mb-1"
-                    style={{
-                      fontSize: "clamp(1.5rem, 2.2vw, 2rem)",
-                      backgroundImage:
-                        "linear-gradient(135deg, #ffffff 30%, #FF2B00 100%)",
-                    }}
-                  >
-                    {s.value}
-                  </div>
-                  <div className="text-slate-200 text-[10px] font-mono uppercase tracking-widest leading-tight">
+                  <div className="mt-2 text-[10px] uppercase leading-tight tracking-[0.14em] text-white/50">
                     {s.label}
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#FF2B00]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               ))}
-            </div>
-
-            {/* Bottom separator */}
-            <div className="flex items-center gap-3 pt-2">
-              <div className="h-[1px] w-8 bg-gradient-to-r from-[#FF2B00] to-[#751400]" />
-              <span className="text-slate-200 font-mono text-[11px] tracking-widest uppercase">
-                scroll to explore
-              </span>
-              <div className="h-[1px] flex-1 bg-white/5" />
             </div>
           </div>
 

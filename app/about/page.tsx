@@ -1,4 +1,4 @@
-import About from "@/components/About";
+import WhoWeAre from "@/components/who-we-are";
 import CTA from "@/components/CTA";
 import type { Metadata } from "next";
 
@@ -26,7 +26,7 @@ export default function AboutPage() {
           <p className="text-slate-500 dark:text-zinc-400 text-base sm:text-lg mt-6 leading-relaxed">A dedicated team of engineers, designers, and strategists focused on building reliable digital solutions that help our clients grow.</p>
         </div>
       </section>
-      <About />
+      <WhoWeAre />
       {/* Team section hidden
       <section className="py-16 sm:py-20 bg-white dark:bg-zinc-950">
         <div className="max-w-7xl mx-auto px-6">

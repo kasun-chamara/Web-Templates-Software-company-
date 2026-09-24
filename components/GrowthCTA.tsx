@@ -10,9 +10,9 @@ import { useMouseGlow } from "./useMouseGlow";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const stats = [
-  { value: "120+", label: "Happy Clients" },
-  { value: "12+", label: "Years of Trust" },
-  { value: "99%", label: "Client Satisfaction" },
+  { value: "10+", label: "Happy Clients" },
+  { value: "3+", label: "Years of Trust" },
+  { value: "100%", label: "Client Satisfaction" },
 ];
 
 const cards = [
