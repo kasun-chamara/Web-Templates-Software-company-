@@ -38,18 +38,18 @@ export default function Navbar() {
             <Zap className="absolute inset-0 m-auto w-4 h-4 text-white z-10" />
           </div> */}
           <Image
-            src="/images/logo-light.png"
+            src="/images/Theme_2.png"
             alt="Kapingar Software Solutions"
-            width={1030}
-            height={950}
+            width={132}
+            height={139}
             priority
             className="block dark:hidden h-12 w-auto mix-blend-multiply"
           />
           <Image
-            src="/images/logo-dark.png"
+            src="/images/Theme_1.png"
             alt="Kapingar Software Solutions"
-            width={760}
-            height={680}
+            width={132}
+            height={139}
             priority
             className="hidden dark:block h-12 w-auto"
           />
@@ -99,7 +99,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/contact" className="btn-primary mt-2 w-fit">Get Started</Link>
+          <Link href="/contact" onClick={() => setOpen(false)} className="mt-2 flex w-full items-center justify-center rounded-xl bg-[#FF2B00] px-6 py-3 font-semibold text-white shadow-[0_10px_24px_-10px_rgba(255,43,0,0.7)] transition-colors hover:bg-[#e02600]">Get Started</Link>
         </div>
       </div>
     </header>
